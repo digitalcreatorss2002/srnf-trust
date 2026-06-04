@@ -49,17 +49,20 @@ const partnersData = [
     name: "Climate Action Fund",
     logo: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=400&h=300&fit=crop",
     link: "https://example.com/climateaction",
-  }
+  },
 ];
 
 const PartnersSection = () => {
   return (
-    <section className="w-full bg-[#75843a] py-14 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* 🎯 Centered Section Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-24">
+          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
+            Partners
+          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
-            Our Partners & Supporters
+            Our Supporters
           </h2>
           <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />
         </div>
@@ -91,7 +94,7 @@ const PartnersSection = () => {
 
               {/* 📝 TEXT INFORMATION AREA (Centered Heading at the bottom edge) */}
               <div className="p-4 text-center bg-white border-t border-gray-50 relative z-20 w-full">
-                <h4 className="text-sm font-bold text-gray-700 group-hover:text-[#75843a] tracking-tight transition-colors duration-300 text-center w-full block">
+                <h4 className="text-sm font-bold text-[#E56D37] group-hover:text-[#2d3748] tracking-tight transition-colors duration-300 text-center w-full block">
                   {partner.name}
                 </h4>
               </div>

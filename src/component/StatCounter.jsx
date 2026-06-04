@@ -89,18 +89,18 @@ const FocusAreas = () => {
 
   return (
     /* 🔥 Background color ko footer se match karne ke liye bg-[#75843a] lagaya aur text white kiya */
-    <section ref={sectionRef} className="w-full bg-[#75843a] text-white pt-[20px] pb-25 px-6 overflow-hidden">
+    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] text-white pt-[20px] pb-25 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Centered Top Heading */}
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-white/80 uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             What We Do
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2d3748] tracking-tight">
             Our Focus Areas
           </h2>
-          <div className="w-24 h-1 bg-white/40 mt-3 rounded-full mx-auto" />
+          <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
         </div>
 
         {/* 🌟 MAIN ZIGZAG GRID TIMELINE */}
@@ -109,7 +109,7 @@ const FocusAreas = () => {
           {/* SVG Connecting Line - Line stroke ko white kiya contrast ke liye */}
           <div className="hidden lg:block absolute top-[50%] left-[10%] right-[10%] h-[2px] pointer-events-none z-0">
             <svg className="w-full h-32 absolute -top-16 left-0" viewBox="0 0 1000 100" fill="none" preserveAspectRatio="none">
-              <path d="M 0,30 L 333,100 L 666,0 L 1000,70" stroke="#ffffff" strokeWidth="2" strokeDasharray="6,6" opacity="0.3" />
+              <path d="M 0,30 L 333,100 L 666,0 L 1000,70" stroke="#2b434d" strokeWidth="2" strokeDasharray="6,6" opacity="0.3" />
             </svg>
           </div>
 
@@ -121,7 +121,7 @@ const FocusAreas = () => {
               }`}
             >
               {/* ⚪ THE IMAGE IN CIRCLE */}
-              <div className="w-36 h-36 rounded-full p-1 border-4 border-dashed border-white/40 bg-white hover:border-solid hover:border-white hover:scale-110 transition-all duration-300 shadow-lg relative overflow-hidden group cursor-pointer">
+              <div className="w-36 h-36 rounded-full p-1 border-1 border-dashed border-[#2b434d] bg-[#2b434d] hover:border-solid hover:border-[#2b434d] hover:scale-130 transition-all duration-300 shadow-lg relative overflow-hidden group cursor-pointer">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-100">
                   <img
                     src={item.image}

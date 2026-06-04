@@ -41,17 +41,17 @@ const storiesData = [
 
 const StoriesImpact = () => {
   return (
-    <section className="w-full bg-[#75843a] py-10 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-[#fff] py-10 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto pt-[-20px]">
         {/* 🎯 Centered Section Heading (Wireframe Model) */}
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
             Stories and Impacts
           </h2>
-          <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />
+          <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
         </div>
 
         {/* 📦 WIREFRAME MATCHING 4-COLUMNS GRID */}
@@ -59,10 +59,10 @@ const StoriesImpact = () => {
           {storiesData.map((item) => (
             <div
               key={item.id}
-              className="w-full bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 pt-16 flex flex-col justify-between text-center relative border border-gray-100 transition-all duration-500 transform hover:-translate-y-3 group cursor-pointer"
+              className="w-full bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 pt-16 flex flex-col justify-between text-center relative border border-[#E56D37] transition-all duration-500 transform hover:-translate-y-3 group cursor-pointer"
             >
               {/* ⚪ TOP CENTER FLOATING IMAGE */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full p-1 bg-white shadow-md border-2 border-dashed border-[#75843a]/40 group-hover:border-solid group-hover:border-[#75843a] transition-all duration-500">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full p-1 bg-white shadow-md border-2 border-dashed border-[#E56D37]/40 group-hover:border-solid group-hover:border-[#E56D37] transition-all duration-500">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-100">
                   <img
                     src={item.image}
@@ -93,10 +93,10 @@ const StoriesImpact = () => {
 
                 {/* Identity Footer */}
                 <div className="pt-2 border-t border-gray-50">
-                  <h4 className="text-base font-bold text-gray-800 group-hover:text-[#75843a] transition-colors duration-300">
+                  <h4 className="text-base font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors duration-300">
                     {item.name}
                   </h4>
-                  <p className="text-xs font-semibold text-gray-400 mt-0.5">
+                  <p className="text-xs font-semibold text-black mt-0.5">
                     {item.role}
                   </p>
                 </div>

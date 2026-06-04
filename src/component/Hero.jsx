@@ -80,7 +80,7 @@ const Hero = () => {
               <div className="max-w-2xl space-y-6">
                 {/* Title Animation */}
                 <h1
-                  className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#e5b83b] transition-all duration-700 delay-300 transform ${
+                  className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#fff] transition-all duration-700 delay-300 transform ${
                     index === current
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0"
@@ -110,7 +110,7 @@ const Hero = () => {
                 >
                   <Link
                     to={slide.buttonLink}
-                    className="inline-flex items-center justify-center bg-[#75843a] hover:bg-[#5e6b2e] text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+                    className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
                   >
                     {slide.buttonText}
                     <span className="ml-2 transform group-hover:translate-x-1 transition-transform">
@@ -146,7 +146,7 @@ const Hero = () => {
             onClick={() => setCurrent(index)}
             className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
               index === current
-                ? "w-8 bg-[#e5b83b]"
+                ? "w-8 bg-[#E56D37]"
                 : "w-2.5 bg-white/50 hover:bg-white"
             }`}
           />

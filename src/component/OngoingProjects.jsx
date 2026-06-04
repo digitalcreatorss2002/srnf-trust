@@ -67,7 +67,7 @@ const OngoingProjects = () => {
       ))}
 
       {/* Dark Subtle Gradient Layer overlay (Text visibility maintain karne ke liye) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#E56D37]/60 via-[#2d3748]/40 to-black/70 z-0" />
 
       {/* 📦 FOREGROUND CONTAINER */}
       <div className="relative max-w-6xl w-full mx-auto z-10 flex flex-col items-center">
@@ -77,7 +77,7 @@ const OngoingProjects = () => {
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md">
             Our Impact Projects
           </h2>
-          <div className="w-20 h-1 bg-[#75843a] mt-3 rounded-full mx-auto" />
+          <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
         </div>
 
         {/* 🎴 LAYOUT CONTENT CARD (Screenshot Model Match) */}

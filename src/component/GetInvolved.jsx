@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const GetInvolved = () => {
   return (
-    <section className="w-full bg-[#f4f6f0] py-15 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] py-15 px-6 sm:px-10 lg:px-16 overflow-hidden">
       
       {/* Dynamic Keyframes injected globally for independent smooth up-down float loops */}
       <style>{`
@@ -26,14 +26,14 @@ const GetInvolved = () => {
         
         {/* 📝 LEFT COLUMN: WORDS AREA (5 Columns Block) */}
         <div className="lg:col-span-5 text-left space-y-4">
-          <span className="text-sm font-bold text-[#75843a] uppercase tracking-widest block">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block">
             Get Involved
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 leading-tight">
             Join Us in Making a Difference
           </h2>
-          <div className="w-16 h-1 bg-[#75843a] rounded-full pt-1" />
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed pt-2 max-w-[450px]">
+          <div className="w-16 h-1 bg-[#fff] rounded-full pt-1" />
+          <p className="text-white text-base sm:text-lg leading-relaxed pt-2 max-w-[450px]">
             Aapka ek chhota sa yogdaan kisi ki zindagi badal sakta hai. Humare sath judkar badlav ka hissa banein.
           </p>
         </div>
@@ -58,7 +58,7 @@ const GetInvolved = () => {
               
               {/* Bottom Label Text Strip */}
               <div className="p-4 text-center bg-white border-t border-gray-50">
-                <h4 className="font-bold text-gray-800 group-hover:text-[#75843a] transition-colors text-sm sm:text-base">
+                <h4 className="font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
                   Volunteer With Us
                 </h4>
               </div>
@@ -85,7 +85,7 @@ const GetInvolved = () => {
               
               {/* Bottom Label Text Strip */}
               <div className="p-4 text-center bg-white border-t border-gray-50">
-                <h4 className="font-bold text-gray-800 group-hover:text-[#75843a] transition-colors text-sm sm:text-base">
+                <h4 className="font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
                   Donate Now ❤️
                 </h4>
               </div>

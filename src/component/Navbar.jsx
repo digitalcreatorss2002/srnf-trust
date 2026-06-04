@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+// 1. Link ki jagah NavLink import karein
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState(null);
 
-  // Program IDs ko readable formatting dene ke liye static utility function
+  // Current URL check karne ke liye hook (taaki sub-items active hone par parent ko bhi active style de sakein)
+  const location = useLocation();
+
   const formatLabel = (label) => {
     if (!label) return "";
     let formatted = label
@@ -18,7 +21,6 @@ const Navbar = () => {
     setActiveMobileMenu(activeMobileMenu === menu ? null : menu);
   };
 
-  // Static Programs List
   const staticPrograms = [
     {
       label: "skill-development",
@@ -115,19 +117,14 @@ const Navbar = () => {
         },
       ],
     },
-    {
-      name: "Contact Us",
-      path: "/contact",
-    },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
     <nav className="bg-white backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8">
-        {/* Navbar ki height badhakar min-h-[110px] aur vertical items-center alignment apply ki hai */}
         <div className="flex justify-between items-center min-h-[110px] py-3">
-          
-          {/* Logo Section - Perfect spacing aur maximum visible area ke sath */}
+          {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center justify-center">
               <div className="h-24 w-auto flex items-center justify-center p-1">
@@ -142,46 +139,65 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {menuItems.map((item) => (
-              <div key={item.name} className="relative group px-2 py-6">
-                <Link
-                  to={item.path}
-                  className="text-text-primary hover:text-primary font-bold text-sm transition-colors flex items-center gap-1 whitespace-nowrap"
-                >
-                  {item.name}
-                  {item.hasDropdown && (
-                    <span className="text-[10px] text-gray-400 group-hover:rotate-180 transition-transform duration-300">
-                      ▼
-                    </span>
-                  )}
-                </Link>
+            {menuItems.map((item) => {
+              // Check karega ki kya dropdown ka koi sub-item ya main path active hai
+              const isParentActive = location.pathname.startsWith(item.path);
 
-                {item.hasDropdown && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-[90%] w-64 bg-white shadow-2xl border border-gray-100 rounded-xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-2 group-hover:pointer-events-auto transition-all duration-300 z-50">
-                    <div className="p-2">
-                      {item.dropdownItems.map((subItem) => (
-                        <Link
-                          key={subItem.label}
-                          to={subItem.path}
-                          className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors group/link"
-                        >
-                          <span className="text-xl group-hover/link:scale-110 transition-transform">
-                            {subItem.icon}
-                          </span>
-                          <span className="text-sm font-bold text-gray-700 group-hover/link:text-primary normal-case">
-                            {formatLabel(subItem.label)}
-                          </span>
-                        </Link>
-                      ))}
+              return (
+                <div key={item.name} className="relative group px-2 py-6">
+                  {/* NavLink use kiya active class toggle karne ke liye */}
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `font-bold text-md transition-colors flex items-center gap-1 whitespace-nowrap ${
+                        isActive || isParentActive
+                          ? "text-[#E56D37]"
+                          : "text-text-primary hover:text-[#2b434d]"
+                      }`
+                    }
+                  >
+                    {item.name}
+                    {item.hasDropdown && (
+                      <span className="text-[10px] text-gray-400 group-hover:rotate-180 transition-transform duration-300">
+                        ▼
+                      </span>
+                    )}
+                  </NavLink>
+
+                  {/* Dropdown Menu */}
+                  {item.hasDropdown && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-[90%] w-64 bg-white shadow-2xl border border-gray-100 rounded-xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-2 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                      <div className="p-2">
+                        {item.dropdownItems.map((subItem) => (
+                          <NavLink
+                            key={subItem.label}
+                            to={subItem.path}
+                            className={({ isActive }) =>
+                              `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors group/link hover:bg-gray-50 ${
+                                isActive
+                                  ? "bg-gray-50 text-[#E56D37]"
+                                  : "text-gray-700"
+                              }`
+                            }
+                          >
+                            <span className="text-xl group-hover/link:scale-110 transition-transform">
+                              {subItem.icon}
+                            </span>
+                            <span className="text-sm font-bold normal-case group-hover/link:text-[#2b434d]">
+                              {formatLabel(subItem.label)}
+                            </span>
+                          </NavLink>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
             <div className="pl-4">
               <Link
                 to="/donate"
-                className="inline-flex items-center justify-center bg-[#75843a] hover:bg-[#75843a]/90 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md ml-2"
+                className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md ml-2"
               >
                 Donate
               </Link>
@@ -202,68 +218,74 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-screen border-t border-gray-100" : "max-h-0"
-        }`}
+        className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-screen border-t border-gray-100" : "max-h-0"}`}
       >
         <div className="px-4 pt-2 pb-6 space-y-1 bg-white shadow-inner max-h-[calc(100vh-80px)] overflow-y-auto">
-          {menuItems.map((item) => (
-            <div
-              key={item.name}
-              className="border-b border-gray-50 last:border-0"
-            >
-              {item.hasDropdown ? (
-                <>
-                  <button
-                    onClick={() => toggleMobileMenu(item.name)}
-                    className="w-full flex items-center justify-between px-3 py-4 text-base font-bold text-text-primary focus:outline-none"
-                  >
-                    {item.name}
-                    <span
-                      className={`text-sm text-gray-400 transition-transform ${
-                        activeMobileMenu === item.name
-                          ? "rotate-180 text-primary"
-                          : ""
+          {menuItems.map((item) => {
+            const isParentActive = location.pathname.startsWith(item.path);
+
+            return (
+              <div
+                key={item.name}
+                className="border-b border-gray-50 last:border-0"
+              >
+                {item.hasDropdown ? (
+                  <>
+                    <button
+                      onClick={() => toggleMobileMenu(item.name)}
+                      className={`w-full flex items-center justify-between px-3 py-4 text-base font-bold focus:outline-none ${
+                        isParentActive ? "text-[#2b434d]" : "text-text-primary"
                       }`}
                     >
-                      ▼
-                    </span>
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 rounded-lg ${
-                      activeMobileMenu === item.name
-                        ? "max-h-96 mb-2 opacity-100"
-                        : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    {item.dropdownItems.map((subItem) => (
-                      <Link
-                        key={subItem.label}
-                        to={subItem.path}
-                        className="flex items-center gap-3 px-6 py-3 text-sm font-bold text-gray-600 hover:text-primary hover:bg-white transition-colors normal-case"
-                        onClick={() => setIsOpen(false)}
+                      {item.name}
+                      <span
+                        className={`text-sm text-gray-400 transition-transform ${activeMobileMenu === item.name || isParentActive ? "rotate-180 text-[#2b434d]" : ""}`}
                       >
-                        <span className="text-lg">{subItem.icon}</span>
-                        {formatLabel(subItem.label)}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link
-                  to={item.path}
-                  className="block px-3 py-4 text-base font-bold text-text-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              )}
-            </div>
-          ))}
+                        ▼
+                      </span>
+                    </button>
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 rounded-lg ${activeMobileMenu === item.name ? "max-h-96 mb-2 opacity-100" : "max-h-0 opacity-0"}`}
+                    >
+                      {item.dropdownItems.map((subItem) => (
+                        <NavLink
+                          key={subItem.label}
+                          to={subItem.path}
+                          className={({ isActive }) =>
+                            `flex items-center gap-3 px-6 py-3 text-sm font-bold transition-colors normal-case hover:bg-white ${
+                              isActive
+                                ? "text-[#2b434d] bg-white"
+                                : "text-gray-600"
+                            }`
+                          }
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <span className="text-lg">{subItem.icon}</span>
+                          {formatLabel(subItem.label)}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block px-3 py-4 text-base font-bold ${
+                        isActive ? "text-[#2b434d]" : "text-text-primary"
+                      }`
+                    }
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </NavLink>
+                )}
+              </div>
+            );
+          })}
           <div className="pt-6 pb-2">
             <Link
               to="/donate"
-              className="block w-full text-center bg-[#75843a] hover:bg-[#75843a]/90 text-white px-6 py-4 rounded-xl font-bold shadow-md"
+              className="block w-full text-center bg-[#E56D37] hover:bg-[#fff]/90 text-black px-6 py-4 rounded-xl font-bold shadow-md"
               onClick={() => setIsOpen(false)}
             >
               ❤️ Donate Now

@@ -15,8 +15,8 @@ export default function Home() {
       <Hero />
       <ProjectSlider />
       <FocusAreas />
-      <OngoingProjects/>
       <OurPrograms/>
+      <OngoingProjects/>
       <StoriesImpact/>
       <GetInvolved/>
       <PartnersSection/>
