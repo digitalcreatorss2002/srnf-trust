@@ -40,10 +40,20 @@ const ProjectSlider = () => {
   }, [isPaused]);
 
   return (
-    <section 
-      className="w-full bg-[#fff]/90 bg-cover bg-center bg-no-repeat bg-blend-overlay py-20 px-6 sm:px-10 lg:px-16 overflow-hidden relative"
-      // style={{ backgroundImage: "url('public/about/projectslider.png')" }}
-    >
+    /* 🌍 MAIN WRAPPER CONTAINER */
+    <section className="w-full bg-white py-20 px-6 sm:px-10 lg:px-16 overflow-hidden relative">
+      
+      {/* 🌪️ 50% LEFT SIDE FLOATING TOPOGRAPHY BACKGROUND LAYER */}
+      <div className="absolute left-0 top-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden z-0">
+        <div 
+          className="w-full h-full opacity-35 bg-cover bg-left bg-no-repeat animate-left-topo origin-left"
+          style={{ 
+            backgroundImage: "url('/about/bgillustrate.png')" 
+          }}
+        />
+      </div>
+
+      {/* 📦 FOREGROUND MAIN CONTENT */}
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* 🎯 HEADINGS CENTERED */}
@@ -51,7 +61,6 @@ const ProjectSlider = () => {
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             Our Organization
           </span>
-          {/* Text visibility ke liye text-gray-800 se text-white kiya hai */}
           <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">
             Ongoing Projects
           </h2>
@@ -61,8 +70,8 @@ const ProjectSlider = () => {
         {/* 🌟 MAIN SPLIT LAYOUT */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[420px]">
           
-          {/* 📝 LEFT SIDE: ANIMATED TEXT CONTENT */}
-          <div className="lg:col-span-5 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
+          {/* 📝 LEFT SIDE: ANIMATED TEXT CONTENT (Covers the 50% Topography Area) */}
+          <div className="lg:col-span-5 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1 relative z-10">
             {projectSlides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -75,7 +84,7 @@ const ProjectSlider = () => {
                 <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] mb-4 leading-tight">
                   {slide.title}
                 </h3>
-                <p className="text-black text-base sm:text-lg leading-relaxed mb-6 dropping-shadow">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6">
                   {slide.description}
                 </p>
                 
@@ -98,7 +107,7 @@ const ProjectSlider = () => {
                   key={index}
                   onClick={() => setCurrent(index)}
                   className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
-                    index === current ? "w-8 bg-[#E56D37]" : "w-2 bg-black/50 hover:bg-white"
+                    index === current ? "w-8 bg-[#E56D37]" : "w-2 bg-black/20 hover:bg-black/50"
                   }`}
                 />
               ))}
@@ -106,7 +115,7 @@ const ProjectSlider = () => {
           </div>
 
           {/* 🖼️ RIGHT SIDE: IMAGE SLIDER */}
-          <div className="lg:col-span-7 relative h-[350px] sm:h-[420px] w-full order-1 lg:order-2">
+          <div className="lg:col-span-7 relative h-[350px] sm:h-[420px] w-full order-1 lg:order-2 z-10">
             {projectSlides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -125,7 +134,7 @@ const ProjectSlider = () => {
                       src={slide.image}
                       alt={slide.title}
                       className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
-                    ></img>
+                    />
 
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                     

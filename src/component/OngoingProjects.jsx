@@ -93,7 +93,7 @@ const OngoingProjects = () => {
             {/* Animated content transition wrapper */}
             <div className="space-y-4">
               {/* Tag Block */}
-              <span className="inline-block bg-[#f4f6f0] text-[#75843a] text-xs font-bold tracking-widest px-3 py-1 rounded-md uppercase">
+              <span className="inline-block bg-[#E56D37] text-[#fff] text-xs font-bold tracking-widest px-3 py-1 rounded-md uppercase">
                 {projectsData[current].tag}
               </span>
               
@@ -118,7 +118,7 @@ const OngoingProjects = () => {
             <div className="pt-6">
               <Link
                 to={projectsData[current].link}
-                className="inline-flex items-center justify-center bg-[#75843a] hover:bg-[#5e6b2e] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md group"
+                className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2d2d2d] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md group"
               >
                 Explore Project
                 <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
@@ -157,7 +157,7 @@ const OngoingProjects = () => {
               key={index}
               onClick={() => setCurrent(index)}
               className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
-                index === current ? "w-8 bg-white" : "w-2.5 bg-white/40 hover:bg-white/70"
+                index === current ? "w-8 bg-white" : "w-2.5 bg-[#E56D37] hover:bg-white/70"
               }`}
             />
           ))}

@@ -27,11 +27,11 @@ const FaqAccordion = () => {
   };
 
   return (
-    <section className="bg-[#e0e0e0] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
+    <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
       
       {/* 2. FAQ Main Heading */}
       <h2 
-        className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-12 tracking-wide"
+        className="text-center font-bold text-3xl md:text-4xl text-[#2d2d2d] mb-12 tracking-wide"
         style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.6)' }}
       >
         Frequently Asked Questions
@@ -45,20 +45,17 @@ const FaqAccordion = () => {
           return (
             <div 
               key={index}
-              className="bg-[#4a4a4a] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-neutral-600/30 transition-all duration-300"
+              className="bg-[#4a4a4a] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#E56D37] transition-all duration-300"
             >
               {/* Question Row (Clickable) */}
               <button
                 onClick={() => handleToggle(index)}
-                className="w-full flex justify-between items-center p-5 md:p-6 text-left text-white font-semibold text-lg md:text-xl focus:outline-none transition-colors hover:text-[#75843a] group"
+                className="w-full flex justify-between items-center p-5 md:p-6 text-left text-white font-semibold text-lg md:text-xl focus:outline-none transition-colors hover:text-[#E56D37] group"
               >
                 <span>{faq.question}</span>
                 
-                {/* Plus/Minus Animated Icon */}
                 <span className="relative flex items-center justify-center w-6 h-6 ml-4 shrink-0">
-                  {/* Horizontal Line */}
                   <span className="absolute w-5 h-0.5 bg-current rounded transition-transform duration-300"></span>
-                  {/* Vertical Line (Rotates to hide when open) */}
                   <span className={`absolute w-5 h-0.5 bg-current rounded transition-transform duration-300 ${isOpen ? 'rotate-0 scale-0' : 'rotate-90'}`}></span>
                 </span>
               </button>
@@ -71,7 +68,7 @@ const FaqAccordion = () => {
               >
                 <div className="overflow-hidden">
                   {/* Inner text content wrapper */}
-                  <div className="p-5 md:p-6 pt-0 text-neutral-300 text-base md:text-lg font-light leading-relaxed border-t border-neutral-500/30 bg-[#444444]/50">
+                  <div className="p-5 md:p-6 pt-0 text-white text-base md:text-lg font-light leading-relaxed border-t border-neutral-500/30 bg-[#444444]/50">
                     {faq.answer}
                   </div>
                 </div>

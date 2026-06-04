@@ -65,7 +65,7 @@ const LeadershipGovernance = () => {
   };
 
   return (
-    <section className="bg-[#e0e0e0] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
+    <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
       
       {/* Page Main Header */}
       <h2 className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-20 tracking-wide"
@@ -82,10 +82,10 @@ const LeadershipGovernance = () => {
             className="relative group cursor-pointer"
           >
             {/* Dark/Grey Rounded Card Background with Inset shadow effect */}
-            <div className="bg-[#75843a] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_35px_-5px_rgba(0,0,0,0.4)] border border-neutral-600/30 transform transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_35px_-5px_rgba(0,0,0,0.4)] border border-[#E56D37] transform transition-all duration-300 hover:-translate-y-1">
               
               {/* Increased Size Circle Element Container */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-[#4a4a4a] rounded-full flex items-center justify-center -mt-12 p-1 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-4 border-[#e0e0e0] overflow-hidden z-10">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-[#4a4a4a] rounded-full flex items-center justify-center -mt-12 p-1 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#E56D37] overflow-hidden z-10">
                 <img 
                   src={card.circleImage} 
                   alt={card.title} 
@@ -94,10 +94,10 @@ const LeadershipGovernance = () => {
               </div>
 
               {/* Card Text Content */}
-              <h3 className="text-xl font-bold text-white mb-2 tracking-wide group-hover:text-[#000] transition-colors">
+              <h3 className="text-xl font-bold text-[#E56D37] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors">
                 {card.title}
               </h3>
-              <p className="text-sm text-white font-light max-w-sm px-2">
+              <p className="text-sm text-[#2d2d2d] font-light max-w-sm px-2">
                 {card.subtitle}
               </p>
               

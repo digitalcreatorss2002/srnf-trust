@@ -9,7 +9,7 @@ const About = () => {
     "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070";
   return (
     <>
-      <section className="relative w-full h-[300px] flex flex-col justify-center items-center overflow-hidden bg-[#75843a]">
+      <section className="relative w-full h-[300px] flex flex-col justify-center items-center overflow-hidden bg-[#2d2d2d]/50">
         {/* 1. Background Image Div */}
         <div
           className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80"
@@ -22,7 +22,7 @@ const About = () => {
         {/* Banner Content Container */}
         <div className="relative z-40 text-center px-5">
           <h1
-            className="text-4xl font-bold text-[#fff] mb-2 tracking-wide"
+            className="text-4xl font-bold text-[#E56D37] mb-2 tracking-wide"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)" }}
           >
             About Us

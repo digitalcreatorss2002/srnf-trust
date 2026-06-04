@@ -125,3 +125,22 @@ body {
   height: 100%;
   min-height: 400px; /* Ya jo bhi height aapko chahiye */
 }
+
+@keyframes customTopoFloat {
+  0% {
+    background-position: 0% 50%;
+    transform: scale(1) translate(0px, 0px);
+  }
+  50% {
+    background-position: 10% 30%;
+    transform: scale(1.06) translate(5px, -5px);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: scale(1) translate(0px, 0px);
+  }
+}
+
+.animate-left-topo {
+  animation: customTopoFloat 20s ease-in-out infinite;
+}
