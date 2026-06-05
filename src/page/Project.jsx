@@ -138,7 +138,7 @@ const Projects = () => {
           {(activeTab === "all" || activeTab === "completed" || activeTab === "planned") && uniqueCategories.length > 0 && (
             <div className="flex flex-wrap items-center justify-center gap-2 mt-2 pb-4 bg-white border-t pt-3 border-gray-50 animate-in fade-in duration-300">
               {uniqueCategories.map(cat => (
-                <button key={cat} onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedCategory === cat ? "bg-[#6a752b] text-white shadow" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`}>{formatTabLabel(cat)}</button>
+                <button key={cat} onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedCategory === cat ? "bg-[#E56D37] text-white shadow" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`}>{formatTabLabel(cat)}</button>
               ))}
             </div>
           )}
@@ -179,7 +179,7 @@ const Projects = () => {
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 mt-auto">
                       <span className="text-base">📍</span> {project.location}
                     </div>
-                    <Link to={`/projectdetails/${project.slug}`} className="inline-block bg-primary hover:bg-[#5a6425] text-white px-5 py-2 rounded font-medium text-sm transition-colors text-center self-start shadow-sm">
+                    <Link to={`/projectdetails/${project.slug}`} className="inline-block bg-primary hover:bg-[#2d2d2d] text-white px-5 py-2 rounded font-medium text-sm transition-colors text-center self-start shadow-sm">
                       View Details
                     </Link>
                   </div>

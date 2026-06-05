@@ -27,7 +27,7 @@ const FaqAccordion = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
+    <section className="bg-[#f8f8f8] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
       
       {/* 2. FAQ Main Heading */}
       <h2 
@@ -45,12 +45,12 @@ const FaqAccordion = () => {
           return (
             <div 
               key={index}
-              className="bg-[#4a4a4a] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#E56D37] transition-all duration-300"
+              className="bg-[#E56D37] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#E56D37] transition-all duration-300"
             >
               {/* Question Row (Clickable) */}
               <button
                 onClick={() => handleToggle(index)}
-                className="w-full flex justify-between items-center p-5 md:p-6 text-left text-white font-semibold text-lg md:text-xl focus:outline-none transition-colors hover:text-[#E56D37] group"
+                className="w-full flex justify-between items-center p-5 md:p-6 text-left text-white font-semibold text-lg md:text-xl focus:outline-none transition-colors hover:text-[#2d2d2d] group"
               >
                 <span>{faq.question}</span>
                 

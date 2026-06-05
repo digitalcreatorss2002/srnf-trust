@@ -13,46 +13,54 @@ const Programs = () => {
       id: 1,
       program_id: "education",
       title: "Smart Classroom Initiative",
-      description: "Equipping rural public schools with multimedia projectors, digital content packs, and fundamental teacher training modules to improve overall student engagement.",
-      image_url: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600",
+      description:
+        "Equipping rural public schools with multimedia projectors, digital content packs, and fundamental teacher training modules to improve overall student engagement.",
+      image_url:
+        "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600",
       slug: "smart-classroom-initiative",
       icon: "🎓",
       beneficiaries: "12,000+",
-      regions: "4 States"
+      regions: "4 States",
     },
     {
       id: 2,
       program_id: "education",
       title: "Scholarship for Excellence",
-      description: "Financial assistance and career mentoring paths for brilliant underprivileged students pursuing higher professional degrees in STEM branches.",
-      image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600",
+      description:
+        "Financial assistance and career mentoring paths for brilliant underprivileged students pursuing higher professional degrees in STEM branches.",
+      image_url:
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600",
       slug: "scholarship-for-excellence",
       icon: "📜",
       beneficiaries: "450+",
-      regions: "Pan-India"
+      regions: "Pan-India",
     },
     {
       id: 3,
       program_id: "healthcare",
       title: "Mobile Health Clinics",
-      description: "Bringing basic primary diagnostics, essential pediatric checkups, and free life-saving medicines directly to isolated remote tribal communities via equipped vans.",
-      image_url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600",
+      description:
+        "Bringing basic primary diagnostics, essential pediatric checkups, and free life-saving medicines directly to isolated remote tribal communities via equipped vans.",
+      image_url:
+        "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600",
       slug: "mobile-health-clinics",
       icon: "🏥",
       beneficiaries: "25,000+",
-      regions: "18 Districts"
+      regions: "18 Districts",
     },
     {
       id: 4,
       program_id: "livelihood",
       title: "Women Micro-Entrepreneurship",
-      description: "Providing vocational stitching skills, business management workshops, and low-interest seed capital access to rural women self-help collectives.",
-      image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600",
+      description:
+        "Providing vocational stitching skills, business management workshops, and low-interest seed capital access to rural women self-help collectives.",
+      image_url:
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600",
       slug: "women-micro-entrepreneurship",
       icon: "🧵",
       beneficiaries: "3,200+",
-      regions: "8 Regions"
-    }
+      regions: "8 Regions",
+    },
   ];
 
   // 🔥 2. EXTRACT UNIQUE CATEGORIES FOR TABS DYNAMICALLY FROM STATIC LIST
@@ -100,15 +108,16 @@ const Programs = () => {
 
   // 🔥 5. FILTER PROGRAMS BASED ON THE ACTIVE STATIC TAB
   const displayPrograms = staticProgramsList.filter(
-    (p) => (p.program_id || "").toLowerCase().trim() === activeTab.toLowerCase().trim(),
+    (p) =>
+      (p.program_id || "").toLowerCase().trim() ===
+      activeTab.toLowerCase().trim(),
   );
 
   return (
     <div className="bg-bg-color min-h-screen pb-20">
-      
       {/* HEADER SECTION WITH BACKGROUND IMAGE */}
-      <section className="bg-secondary text-white py-20 bg-opacity-90 relative">
-        <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000')] bg-cover bg-center"></div>
+      <section className="bg-[#E56D37] text-white py-20 bg-opacity-90 relative">
+        <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
             Our Programmes
@@ -123,7 +132,6 @@ const Programs = () => {
       {/* TABS SECTION WITH SMOOTH HORIZONTAL SCROLL ARROWS */}
       <section className="border-b sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
-          
           {/* Left Arrow Button */}
           <button
             onClick={() => scroll("left")}
@@ -168,7 +176,6 @@ const Programs = () => {
       {/* FILTERED CARDS CONTENT GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
           {displayPrograms.length === 0 && (
             <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded-xl shadow-sm border border-gray-100">
               No programs found for this category.
@@ -189,7 +196,8 @@ const Programs = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = "https://placehold.co/600x400?text=SDF+Program";
+                    e.currentTarget.src =
+                      "https://placehold.co/600x400?text=SDF+Program";
                   }}
                 />
               </div>

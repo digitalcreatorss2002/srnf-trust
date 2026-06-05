@@ -128,7 +128,7 @@ const Footer = () => {
           <span className="hidden sm:inline text-[#2d2d2d]/80">||</span>
           <p>
             <a
-              href="https://hrntechsolutions.com/digital_creators"
+              href="https://digitalcreatorss.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline font-bold text-[#2d2d2d]/95"

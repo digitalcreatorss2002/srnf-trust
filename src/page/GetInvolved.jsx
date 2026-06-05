@@ -62,7 +62,7 @@ const GetInvolved = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-24 relative">
       {/* Hero Section */}
-      <section className="bg-secondary text-white py-20">
+      <section className="bg-[#E56D37] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
             Get Involved

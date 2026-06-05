@@ -152,7 +152,7 @@ const Navbar = () => {
                       `font-bold text-md transition-colors flex items-center gap-1 whitespace-nowrap ${
                         isActive || isParentActive
                           ? "text-[#E56D37]"
-                          : "text-text-primary hover:text-[#2b434d]"
+                          : "text-[#2d2d2d] hover:text-[#2b434d]"
                       }`
                     }
                   >

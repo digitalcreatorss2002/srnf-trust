@@ -278,10 +278,10 @@ const ProjectDetails = () => {
                       📍
                     </div>
                     <div>
-                      <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                      <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         State
                       </p>
-                      <p className="font-bold text-gray-800 leading-tight">
+                      <p className="font-bold text-[#E56D37] leading-tight">
                         {project.location}
                       </p>
                     </div>
@@ -293,10 +293,10 @@ const ProjectDetails = () => {
                         🏙️
                       </div>
                       <div>
-                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                        <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           District
                         </p>
-                        <p className="font-bold text-gray-800 leading-tight">
+                        <p className="font-bold text-[#E56D37] leading-tight">
                           {project.district}
                         </p>
                       </div>
@@ -309,10 +309,10 @@ const ProjectDetails = () => {
                         🏘️
                       </div>
                       <div>
-                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                        <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           Block
                         </p>
-                        <p className="font-bold text-gray-800 leading-tight">
+                        <p className="font-bold text-[#E56D37] leading-tight">
                           {project.block}
                         </p>
                       </div>
@@ -325,10 +325,10 @@ const ProjectDetails = () => {
                         🏡
                       </div>
                       <div>
-                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                        <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           Village / Area
                         </p>
-                        <p className="font-bold text-gray-800 leading-tight">
+                        <p className="font-bold text-[#E56D37] leading-tight">
                           {project.village}
                         </p>
                       </div>
@@ -340,10 +340,10 @@ const ProjectDetails = () => {
                       👥
                     </div>
                     <div>
-                      <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                      <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         Target Base
                       </p>
-                      <p className="font-bold text-gray-800 leading-tight">
+                      <p className="font-bold text-[#E56D37] leading-tight">
                         {project.beneficiaries || "Community Wide"}
                       </p>
                     </div>
@@ -354,10 +354,10 @@ const ProjectDetails = () => {
                       💰
                     </div>
                     <div>
-                      <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">
+                      <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         Funding Support
                       </p>
-                      <p className="font-bold text-gray-800 leading-tight">
+                      <p className="font-bold text-[#E56D37] leading-tight">
                         {project.cost || "Grant Based"}
                       </p>
                     </div>
@@ -366,7 +366,7 @@ const ProjectDetails = () => {
               </div>
 
               {/* Donation Core CTA Box */}
-              <div className="bg-[#233520] rounded-3xl shadow-2xl p-10 text-center relative overflow-hidden text-white group">
+              <div className="bg-[#2d2d2d] rounded-3xl shadow-2xl p-10 text-center relative overflow-hidden text-white group">
                 <span className="text-5xl block mb-6">🤝</span>
                 <h3 className="text-2xl font-serif font-bold mb-4">
                   Empower Our Work
@@ -377,7 +377,7 @@ const ProjectDetails = () => {
                 </p>
                 <Link
                   to="/donate"
-                  className="block w-full bg-yellow-500 hover:bg-yellow-400 text-black font-black py-4 px-6 rounded-2xl shadow-xl transition-all hover:-translate-y-1 uppercase text-xs tracking-widest"
+                  className="block w-full bg-[#E56D37] hover:bg-[#2d2d2d] text-white font-black py-4 px-6 rounded-2xl shadow-xl transition-all hover:-translate-y-1 uppercase text-xs tracking-widest"
                 >
                   Contribute Now
                 </Link>

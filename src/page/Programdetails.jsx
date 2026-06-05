@@ -232,7 +232,7 @@ const ProgramDetails = () => {
 
             <Link
               to="/donate"
-              className="block w-full bg-secondary hover:bg-secondary/90 text-white text-center py-4 rounded-xl font-bold transition-all shadow-md"
+              className="block w-full bg-primary hover:bg-secondary/90 text-white text-center py-4 rounded-xl font-bold transition-all shadow-md"
             >
               Support This Program
             </Link>

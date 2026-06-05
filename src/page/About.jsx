@@ -3,6 +3,7 @@ import Whowe from "../component/Whowe";
 import LeadershipGovernance from "../component/LeadershipGovernance";
 import PartnersSection from "../component/PartnersSection";
 import FaqAccordion from "../component/FaqAccordion";
+import Newsletter from "../component/NewsLetter";
 
 const About = () => {
   const backgroundImageURL =
@@ -37,6 +38,7 @@ const About = () => {
       <LeadershipGovernance />
       <PartnersSection />
       <FaqAccordion />
+      <Newsletter />
     </>
   );
 };

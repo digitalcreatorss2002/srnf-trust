@@ -138,7 +138,7 @@ export default function DonationForm() {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-3xl shadow-2xl border border-gray-100">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif font-bold text-[#6a752b] mb-2">Support SDF Trust</h2>
+        <h2 className="text-3xl font-serif font-bold text-[#E56D37] mb-2">Support SDF Trust</h2>
         <p className="text-gray-500 italic">"Your contribution makes a direct impact on underprivileged lives."</p>
       </div>
 
@@ -172,7 +172,7 @@ export default function DonationForm() {
           <input type="text" name="address" placeholder="Residential Address" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#6a752b] outline-none" value={formData.address} onChange={handleChange} required />
 
           <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
-            <input type="checkbox" name="wants_80g" id="80g" className="w-5 h-5 accent-[#6a752b]" checked={formData.wants_80g} onChange={handleChange} />
+            <input type="checkbox" name="wants_80g" id="80g" className="w-5 h-5 accent-[#E56D37]" checked={formData.wants_80g} onChange={handleChange} />
             <label htmlFor="80g" className="text-sm font-semibold text-gray-700 cursor-pointer">I want an 80G Tax Exemption Receipt</label>
           </div>
 
@@ -180,7 +180,7 @@ export default function DonationForm() {
             <input type="text" name="pan_number" placeholder="Enter 10-digit PAN Number" maxLength={10} className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#6a752b] outline-none font-mono" value={formData.pan_number} onChange={handleChange} required />
           )}
 
-          <button type="submit" disabled={isCreatingDonation} className="w-full bg-[#6a752b] hover:bg-[#5a6425] text-white font-bold py-4 rounded-full transition shadow-lg text-lg cursor-pointer">
+          <button type="submit" disabled={isCreatingDonation} className="w-full bg-[#E56D37] hover:bg-[#C05621] text-white font-bold py-4 rounded-full transition shadow-lg text-lg cursor-pointer">
             {isCreatingDonation ? "Initializing Payment QR..." : "Generate Payment QR →"}
           </button>
         </form>
