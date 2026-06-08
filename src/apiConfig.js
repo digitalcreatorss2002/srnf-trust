@@ -1,5 +1,5 @@
-export const API_BASE_URL = "http://hrntechsolutions.com/srnf_data/api";
-export const ADMIN_BASE_URL = "http://hrntechsolutions.com/srnf_data/admin";
+export const API_BASE_URL = "https://hrntechsolutions.com/srnf_data/api";
+export const ADMIN_BASE_URL = "https://hrntechsolutions.com/srnf_data/admin";
 
 export const getImageUrl = (url) => {
   if (!url) return "";

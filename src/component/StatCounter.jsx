@@ -79,7 +79,7 @@ const FocusAreas = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     if (sectionRef.current) {
@@ -93,7 +93,11 @@ const FocusAreas = () => {
     fetch(`${API_BASE_URL}/focus_areas.php`)
       .then((res) => res.json())
       .then((resData) => {
-        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+        if (
+          resData.status === "success" &&
+          resData.data &&
+          resData.data.length > 0
+        ) {
           const defaultImages = {
             1: "hero/banner3.png",
             2: "hero/banner1.png",
@@ -107,7 +111,7 @@ const FocusAreas = () => {
             4: "Environment & Forest",
           };
           const formatted = resData.data.map((item, index) => {
-            const idVal = parseInt(item.id) || (index + 1);
+            const idVal = parseInt(item.id) || index + 1;
             const targetVal = parseInt(item.number_text) || 0;
             const suffixVal = item.number_text.replace(/[0-9]/g, "");
             return {
@@ -132,9 +136,11 @@ const FocusAreas = () => {
 
   return (
     /* 🔥 Background color ko footer se match karne ke liye bg-[#75843a] lagaya aur text white kiya */
-    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] text-white pt-[20px] pb-25 px-6 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] text-white pt-[20px] pb-25 px-6 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
-        
         {/* Centered Top Heading */}
         <div className="text-center mb-24">
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
@@ -148,11 +154,21 @@ const FocusAreas = () => {
 
         {/* 🌟 MAIN ZIGZAG GRID TIMELINE */}
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-24 gap-x-8 items-center pt-6">
-          
           {/* SVG Connecting Line - Line stroke ko white kiya contrast ke liye */}
           <div className="hidden lg:block absolute top-[50%] left-[10%] right-[10%] h-[2px] pointer-events-none z-0">
-            <svg className="w-full h-32 absolute -top-16 left-0" viewBox="0 0 1000 100" fill="none" preserveAspectRatio="none">
-              <path d="M 0,30 L 333,100 L 666,0 L 1000,70" stroke="#2b434d" strokeWidth="2" strokeDasharray="6,6" opacity="0.3" />
+            <svg
+              className="w-full h-32 absolute -top-16 left-0"
+              viewBox="0 0 1000 100"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M 0,30 L 333,100 L 666,0 L 1000,70"
+                stroke="#2b434d"
+                strokeWidth="2"
+                strokeDasharray="6,6"
+                opacity="0.3"
+              />
             </svg>
           </div>
 
@@ -179,23 +195,23 @@ const FocusAreas = () => {
                 <h3 className="text-lg font-bold text-white tracking-tight">
                   {item.title}
                 </h3>
-                
+
                 {/* 🔥 Stats color aur label text color ab cleanly white hain */}
                 <div className="text-2xl font-black text-white flex items-center justify-center tracking-wide">
-                  <StatCounter target={item.targetNumber} trigger={hasIntersected} />
+                  <StatCounter
+                    target={item.targetNumber}
+                    trigger={hasIntersected}
+                  />
                   <span>{item.suffix}</span>
                 </div>
-                
+
                 <p className="text-xs font-semibold text-white/75 uppercase tracking-wider">
                   {item.label}
                 </p>
               </div>
-
             </div>
           ))}
-
         </div>
-
       </div>
     </section>
   );
