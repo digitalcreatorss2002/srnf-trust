@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-const programsData = [
+const defaultPrograms = [
   {
     id: 1,
     title: "Skill Development",
     description:
       "Providing industry-relevant technical skills and vocational training to empower rural youth for sustainable employment.",
     image: "hero/banner1.png",
-    link: "/programs?filter=skill-development",
+    link: "/programs#education",
   },
   {
     id: 2,
@@ -16,7 +17,7 @@ const programsData = [
     description:
       "Fostering financial independence and leadership among women through entrepreneurship and self-help group mentorship.",
     image: "hero/banner2.png",
-    link: "/programs?filter=women-empowerment",
+    link: "/programs#livelihood",
   },
   {
     id: 3,
@@ -24,7 +25,7 @@ const programsData = [
     description:
       "Setting up modern digital learning classrooms and comprehensive educational resources for underprivileged children.",
     image: "hero/banner3.png",
-    link: "/programs?filter=rural-education",
+    link: "/programs#education",
   },
   {
     id: 4,
@@ -32,21 +33,42 @@ const programsData = [
     description:
       "Educating small farmers on multi-cropping, organic fertilizers, and climate-resilient farming methodologies.",
     image: "hero/banner1.png",
-    link: "/programs?filter=agriculture-climate",
+    link: "/programs#agriculture-climate",
   },
 ];
 
 const OurPrograms = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [programsList, setProgramsList] = useState([]);
 
   useEffect(() => {
-    if (isPaused) return;
+    fetch(`${API_BASE_URL}/programs.php`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+          const formatted = resData.data.map((program) => ({
+            id: program.id,
+            title: program.title,
+            description: program.description,
+            image: getImageUrl(program.image_url),
+            link: `/programdetails/${program.slug}`,
+          }));
+          setProgramsList(formatted);
+        }
+      })
+      .catch((err) => console.error("Error fetching programs:", err));
+  }, []);
+
+  const programsData = programsList.length > 0 ? programsList : defaultPrograms;
+
+  useEffect(() => {
+    if (isPaused || programsData.length <= 1) return;
     const timer = setInterval(() => {
       handleNext();
     }, 5000);
     return () => clearInterval(timer);
-  }, [currentIndex, isPaused]);
+  }, [currentIndex, isPaused, programsData.length]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % programsData.length);
@@ -54,12 +76,15 @@ const OurPrograms = () => {
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prev) => (prev - 1 + programsData.length) % programsData.length,
+      (prev) => (prev - 1 + programsData.length) % programsData.length
     );
   };
 
   const getVisibleCards = () => {
     const total = programsData.length;
+    if (total === 0) return [];
+    if (total === 1) return [programsData[0]];
+    if (total === 2) return [programsData[0], programsData[1]];
     return [
       programsData[currentIndex % total],
       programsData[(currentIndex + 1) % total],
@@ -70,8 +95,22 @@ const OurPrograms = () => {
   const visibleCards = getVisibleCards();
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto relative">
+    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden relative z-10">
+      
+      {/* 🌪️ 100% PERFECT CONTINUOUS WIDE CONTOUR LINES LAYER */}
+      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[260px] pointer-events-none z-0 overflow-hidden">
+        <div 
+          className="w-full h-full opacity-30 bg-cover bg-right-top bg-no-repeat"
+          style={{ 
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' width='100%25' height='100%25'%3E%3Cpath d='M100 50C250-20 400 120 600 30C700-10 750 80 850 40M50 120C220 30 380 200 580 90C680 40 760 160 880 110M0 200C180 90 320 280 550 160C650 110 720 250 850 190M-50 290C120 160 280 370 500 240C620 170 700 320 820 260M-100 380C50 240 220 450 450 310C580 230 650 400 800 320' fill='none' stroke='%23ffffff' stroke-width='2' stroke-opacity='0.6' stroke-linecap='round'/%3E%3C/svg%3E\")",
+            animation: "pulse 7s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+          }}
+        />
+      </div>
+
+      {/* 📦 FOREGROUND CONTENT CONTAINER */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        
         {/* 🎯 Centered Section Heading */}
         <div className="text-center mb-24">
           <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
@@ -93,12 +132,9 @@ const OurPrograms = () => {
             return (
               <div
                 key={`${program.id}-${index}`}
-                /* 1. scale-125 hata diya taaki container width equal rahe.
-                  2. hover:translate-y-4 lagaya jisse hover karne par card smooth bottom transition karega.
-                */
                 className="w-full bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 transform hover:translate-y-10 group flex flex-col justify-between min-h-[420px] border border-gray-100"
               >
-                {/* 🖼️ CARD IMAGE WITH HOVER ZOOM & OVERLAY */}
+                {/* 🖼️ CARD IMAGE */}
                 <div className="relative h-56 w-full overflow-hidden bg-gray-100">
                   <img
                     src={program.image}
@@ -138,35 +174,39 @@ const OurPrograms = () => {
         </div>
 
         {/* 🧭 NAVIGATION CONTROLS */}
-        <div className="absolute top-[50%] -left-4 -right-4 md:-left-10 md:-right-10 lg:-left-16 lg:-right-16 transform -translate-y-1/2 flex justify-between pointer-events-none z-20">
-          <button
-            onClick={handlePrev}
-            className="w-12 h-12 rounded-full bg-white hover:bg-[#E56D37] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
-          >
-            <span className="text-lg font-bold">❮</span>
-          </button>
-          <button
-            onClick={handleNext}
-            className="w-12 h-12 rounded-full bg-[#E56D37] hover:bg-[#2d3748] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
-          >
-            <span className="text-lg font-bold">❯</span>
-          </button>
-        </div>
+        {programsData.length > 3 && (
+          <div className="absolute top-[50%] -left-4 -right-4 md:-left-10 md:-right-10 lg:-left-16 lg:-right-16 transform -translate-y-1/2 flex justify-between pointer-events-none z-20">
+            <button
+              onClick={handlePrev}
+              className="w-12 h-12 rounded-full bg-white hover:bg-[#E56D37] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
+            >
+              <span className="text-lg font-bold">❮</span>
+            </button>
+            <button
+              onClick={handleNext}
+              className="w-12 h-12 rounded-full bg-[#E56D37] hover:bg-[#2d3748] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
+            >
+              <span className="text-lg font-bold">❯</span>
+            </button>
+          </div>
+        )}
 
         {/* 📍 BOTTOM DOT INDICATORS */}
-        <div className="flex justify-center space-x-2 mt-16 md:mt-24">
-          {programsData.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
-                index === currentIndex
-                  ? "w-8 bg-[#E56D37]"
-                  : "w-2 bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          ))}
-        </div>
+        {programsData.length > 1 && (
+          <div className="flex justify-center space-x-2 mt-16 md:mt-24">
+            {programsData.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
+                  index === currentIndex
+                    ? "w-8 bg-[#E56D37]"
+                    : "w-2 bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

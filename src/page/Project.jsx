@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // Video Checker Helper
 const isVideoFile = (url) => {
@@ -14,49 +15,35 @@ const Projects = () => {
 
   const [activeTab, setActiveTab] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [projectsList, setProjectsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔥 1. STATIC PROJECTS CENTRAL DATABASE
-  const staticProjects = [
-    {
-      id: 1,
-      title: "Smart Classroom Installation",
-      category: "Education",
-      status: "Ongoing",
-      description: "Deploying dynamic multimedia smart classrooms across rural public school systems to boost engagement.",
-      image_url: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600",
-      location: "Haryana, Uttar Pradesh",
-      slug: "smart-classroom-installation"
-    },
-    {
-      id: 2,
-      title: "Mobile Primary Healthcare Units",
-      category: "Healthcare",
-      status: "Completed",
-      description: "Delivering free diagnostic checkups and life-saving medicines directly to remote village blocks.",
-      image_url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600",
-      location: "Gujarat",
-      slug: "mobile-primary-healthcare-units"
-    },
-    {
-      id: 3,
-      title: "Women Micro-Finance Framework",
-      category: "Livelihood",
-      status: "Planned",
-      description: "Setting up small business seed capitals and skill training centers for rural women collectives.",
-      image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600",
-      location: "Uttar Pradesh",
-      slug: "women-micro-finance-framework"
-    }
-  ];
+  // Fetch projects from backend API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/projects.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setProjectsList(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   // Helper formatting utility
   const formatTabLabel = (label) => {
     return label.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
 
-  // 🔥 2. EXTRACT DYNAMIC UNIQUE CATEGORIES FROM STATIC LIST
+  // 🔥 2. EXTRACT DYNAMIC UNIQUE CATEGORIES FROM LIST
   const uniqueCategories = [
-    ...new Set(staticProjects.map((p) => p.category?.trim()).filter(Boolean)),
+    ...new Set(projectsList.map((p) => p.category?.trim()).filter(Boolean)),
   ];
 
   // Handle URL Hash sync (Removed "listings" condition)
@@ -86,17 +73,17 @@ const Projects = () => {
   // 🔥 3. SIMPLIFIED TAB FILTERING LOGIC
   let displayProjects = [];
   if (activeTab === "all") {
-      displayProjects = staticProjects.filter((p) => p.status?.toLowerCase() === 'active' || p.status?.toLowerCase() === 'ongoing');
+      displayProjects = projectsList.filter((p) => p.status?.toLowerCase() === 'active' || p.status?.toLowerCase() === 'ongoing');
       if (selectedCategory) {
           displayProjects = displayProjects.filter((p) => p.category?.trim() === selectedCategory);
       }
   } else if (activeTab === "completed") {
-      displayProjects = staticProjects.filter((p) => p.status?.toLowerCase() === 'completed');
+      displayProjects = projectsList.filter((p) => p.status?.toLowerCase() === 'completed');
       if (selectedCategory) {
           displayProjects = displayProjects.filter((p) => p.category?.trim() === selectedCategory);
       }
   } else if (activeTab === "planned") {
-      displayProjects = staticProjects.filter((p) => p.status?.toLowerCase() === 'planned');
+      displayProjects = projectsList.filter((p) => p.status?.toLowerCase() === 'planned');
       if (selectedCategory) {
           displayProjects = displayProjects.filter((p) => p.category?.trim() === selectedCategory);
       }
@@ -156,15 +143,16 @@ const Projects = () => {
             <div className="col-span-2 py-12 text-center text-gray-500 bg-gray-50 rounded-xl border border-dashed border-gray-200">No projects found for this selection.</div>
           ) : (
             displayProjects.map((project) => {
-              const isVideo = isVideoFile(project.image_url);
+              const resolvedUrl = getImageUrl(project.image_url);
+              const isVideo = isVideoFile(resolvedUrl);
               
               return (
                 <div key={project.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row gap-6 hover:shadow-md transition-shadow">
                   <div className="w-full md:w-48 h-48 shrink-0 overflow-hidden rounded-lg bg-gray-50">
                     {isVideo ? (
-                      <video src={project.image_url} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+                      <video src={resolvedUrl} className="w-full h-full object-cover" autoPlay loop muted playsInline />
                     ) : (
-                      <img src={project.image_url} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                      <img src={resolvedUrl} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
                     )}
                   </div>
                   <div className="flex flex-col flex-1">

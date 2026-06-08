@@ -1,68 +1,167 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { API_BASE_URL, getImageUrl } from '../apiConfig';
+
+const defaultGovernanceData = {
+  founder: {
+    id: 'founder',
+    title: "Founder's Message",
+    subtitle: "A vision for transformation and sustainable growth.",
+    // Main card placeholder circle image
+    circleImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150", 
+    type: 'text-only',
+    details: {
+      heading: "Message From Our Founder",
+      text: "Welcome to our platform. From day one, our mission has been centered around transparency, impactful execution, and empowering professional networks. We strictly maintain our core metrics, such as our team discipline and automated tracking, ensuring that every project we deliver aligns with the highest quality standards. Thank you for being a part of our journey as we scale new heights together."
+    }
+  },
+  board: {
+    id: 'board',
+    title: "Board of Trustees",
+    subtitle: "Guiding our strategic decisions and compliance framework.",
+    circleImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150",
+    type: 'members-list',
+    details: [
+      { name: "Dr. Shivam Khare", role: "Chief Trustee & Medical Advisor", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200" },
+      { name: "Ananya Sharma", role: "Financial Operations Trustee", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200" }
+    ]
+  },
+  advisory: {
+    id: 'advisory',
+    title: "Advisory Committee",
+    subtitle: "Industry leaders steering our innovation paths.",
+    circleImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150",
+    type: 'members-list',
+    details: [
+      { name: "Rajesh Mehta", role: "Senior Brand Consultant", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200" },
+      { name: "Vikram Malhotra", role: "Technical Infrastructure Advisor", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200" }
+    ]
+  },
+  management: {
+    id: 'management',
+    title: "Management Team",
+    subtitle: "Executing operations and managing dynamic workflows.",
+    circleImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=150",
+    type: 'levels-list',
+    details: [
+      {
+        levelTitle: "Level 1: Executive Leadership",
+        members: [
+          { name: "Dharmendra Kumar", role: "Web Developer", img: "hero/banner1.png" },
+          { name: "Sweety Shrivastava", role: "Sales Associate", img: "hero/banner2.png" }
+        ]
+      },
+      {
+        levelTitle: "Level 2: Operations & Delivery",
+        members: [
+          { name: "Tiya Saini", role: "Head of Operations", img: "hero/banner3.png" },
+          { name: "Shashwat Mishra", role: "Technical Project Lead", img: "hero/banner1.png" }
+        ]
+      }
+    ]
+  }
+};
 
 const LeadershipGovernance = () => {
   const [activeModal, setActiveModal] = useState(null);
+  const [governanceList, setGovernanceList] = useState(null);
 
-  // 1. Data Structure for each card and its popup details
-  const governanceData = {
-    founder: {
-      id: 'founder',
-      title: "Founder's Message",
-      subtitle: "A vision for transformation and sustainable growth.",
-      // Main card placeholder circle image
-      circleImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150", 
-      type: 'text-only',
-      details: {
-        heading: "Message From Our Founder",
-        text: "Welcome to our platform. From day one, our mission has been centered around transparency, impactful execution, and empowering professional networks. We strictly maintain our core metrics, such as our team discipline and automated tracking, ensuring that every project we deliver aligns with the highest quality standards. Thank you for being a part of our journey as we scale new heights together."
-      }
-    },
-    board: {
-      id: 'board',
-      title: "Board of Trustees",
-      subtitle: "Guiding our strategic decisions and compliance framework.",
-      circleImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150",
-      type: 'members-list',
-      details: [
-        { name: "Dr. Shivam Khare", role: "Chief Trustee & Medical Advisor", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200" },
-        { name: "Ananya Sharma", role: "Financial Operations Trustee", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200" }
-      ]
-    },
-    advisory: {
-      id: 'advisory',
-      title: "Advisory Committee",
-      subtitle: "Industry leaders steering our innovation paths.",
-      circleImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150",
-      type: 'members-list',
-      details: [
-        { name: "Rajesh Mehta", role: "Senior Brand Consultant", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200" },
-        { name: "Vikram Malhotra", role: "Technical Infrastructure Advisor", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200" }
-      ]
-    },
-    management: {
-      id: 'management',
-      title: "Management Team",
-      subtitle: "Executing operations and managing dynamic workflows.",
-      circleImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=150",
-      type: 'levels-list',
-      details: [
-        {
-          levelTitle: "Level 1: Executive Leadership",
-          members: [
-            { name: "Dharmendra Kumar", role: "Web Developer", img: "hero/banner1.png" },
-            { name: "Sweety Shrivastava", role: "Sales Associate", img: "hero/banner2.png" }
-          ]
-        },
-        {
-          levelTitle: "Level 2: Operations & Delivery",
-          members: [
-            { name: "Tiya Saini", role: "Head of Operations", img: "hero/banner3.png" },
-            { name: "Shashwat Mishra", role: "Technical Project Lead", img: "hero/banner1.png" }
-          ]
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/leadership.php`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+          const sections = resData.data;
+          const mappedData = {};
+
+          // Helper to check and resolve circle images
+          const getCircleImage = (sec, defaultImg) => {
+            const memberWithImg = sec.members.find(m => m.image_url);
+            return memberWithImg ? getImageUrl(memberWithImg.image_url) : defaultImg;
+          };
+
+          sections.forEach((sec) => {
+            const titleLower = sec.title.toLowerCase();
+            if (titleLower.includes("founder")) {
+              const firstMember = sec.members[0];
+              mappedData.founder = {
+                id: 'founder',
+                title: sec.title,
+                subtitle: sec.description || "A vision for transformation and sustainable growth.",
+                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150"),
+                type: 'text-only',
+                details: {
+                  heading: "Message From Our Founder",
+                  text: firstMember ? firstMember.content : (sec.description || "")
+                }
+              };
+            } else if (titleLower.includes("board")) {
+              mappedData.board = {
+                id: 'board',
+                title: sec.title,
+                subtitle: sec.description || "Guiding our strategic decisions and compliance framework.",
+                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150"),
+                type: 'members-list',
+                details: sec.members.map((m) => ({
+                  name: m.name,
+                  role: m.role,
+                  img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
+                }))
+              };
+            } else if (titleLower.includes("advisory")) {
+              mappedData.advisory = {
+                id: 'advisory',
+                title: sec.title,
+                subtitle: sec.description || "Industry leaders steering our innovation paths.",
+                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150"),
+                type: 'members-list',
+                details: sec.members.map((m) => ({
+                  name: m.name,
+                  role: m.role,
+                  img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
+                }))
+              };
+            } else if (titleLower.includes("management") || titleLower.includes("team")) {
+              // Group by M1, M2, M3
+              const levelsMap = {
+                'M1': { levelTitle: "Level 1: Executive Leadership", members: [] },
+                'M2': { levelTitle: "Level 2: Operations & Delivery", members: [] },
+                'M3': { levelTitle: "Level 3: Administration & Support", members: [] },
+                'General': { levelTitle: "General Management", members: [] }
+              };
+
+              sec.members.forEach((m) => {
+                const levelKey = m.staff_level || 'General';
+                if (levelsMap[levelKey]) {
+                  levelsMap[levelKey].members.push({
+                    name: m.name,
+                    role: m.role,
+                    img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
+                  });
+                }
+              });
+
+              const details = Object.values(levelsMap).filter(lvl => lvl.members.length > 0);
+
+              mappedData.management = {
+                id: 'management',
+                title: sec.title,
+                subtitle: sec.description || "Executing operations and managing dynamic workflows.",
+                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=150"),
+                type: 'levels-list',
+                details: details
+              };
+            }
+          });
+
+          // Fill in missing sections from defaults to ensure layout safety
+          const combined = { ...defaultGovernanceData, ...mappedData };
+          setGovernanceList(combined);
         }
-      ]
-    }
-  };
+      })
+      .catch((err) => console.error("Error fetching leadership:", err));
+  }, []);
+
+  const governanceData = governanceList || defaultGovernanceData;
 
   return (
     <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
@@ -146,7 +245,7 @@ const LeadershipGovernance = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {activeModal.details.map((member, idx) => (
                     <div key={idx} className="flex items-center space-x-4 bg-neutral-50 p-4 rounded-xl border border-neutral-100">
-                      <img src={member.img} alt={member.name} className="w-16 h-16 rounded-full object-cover border-2 border-neutral-200 shadow-sm" />
+                      <img src={member.img} alt={member.name} className="w-16 h-16 rounded-full object-cover border-2 border-neutral-200 shadow-sm animate-fade-in" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
                       <div>
                         <h4 className="font-bold text-lg text-neutral-800">{member.name}</h4>
                         <p className="text-sm text-neutral-500 font-medium">{member.role}</p>
@@ -160,14 +259,14 @@ const LeadershipGovernance = () => {
               {activeModal.type === 'levels-list' && (
                 <div className="space-y-8">
                   {activeModal.details.map((level, idx) => (
-                    <div key={idx} className="border-l-4 border-blue-500 pl-4">
+                    <div key={idx} className="border-l-4 border-blue-500 pl-4 animate-fade-in">
                       <h4 className="text-md font-bold text-blue-600 uppercase tracking-wider mb-4">
                         {level.levelTitle}
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {level.members.map((member, mIdx) => (
                           <div key={mIdx} className="flex items-center space-x-4 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-                            <img src={member.img} alt={member.name} className="w-14 h-14 rounded-full object-cover border border-neutral-200" />
+                            <img src={member.img} alt={member.name} className="w-14 h-14 rounded-full object-cover border border-neutral-200" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
                             <div>
                               <h5 className="font-bold text-neutral-800">{member.name}</h5>
                               <p className="text-xs text-neutral-500">{member.role}</p>

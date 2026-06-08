@@ -1,45 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const GetInvolved = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("volunteer");
 
-  // 🔥 1. STATIC CAREERS DATABASE
-  const staticCareers = [
-    {
-      id: 1,
-      title: "Program Manager - Digital Education",
-      location: "Delhi NCR (Head Office)",
-      pdf_url: "#",
-      apply_link: "mailto:careers@sdfoundation.org?subject=Application for Program Manager"
-    },
-    {
-      id: 2,
-      title: "Field Coordinator - Healthcare Initiatives",
-      location: "Haryana & Uttar Pradesh Blocks",
-      pdf_url: "#",
-      apply_link: "mailto:careers@sdfoundation.org?subject=Application for Field Coordinator"
-    }
-  ];
+  const [careers, setCareers] = useState([]);
+  const [funds, setFunds] = useState([]);
+  const [loadingCareers, setLoadingCareers] = useState(true);
+  const [loadingFunds, setLoadingFunds] = useState(true);
 
-  // 🔥 2. STATIC FUNDS / PARTNERS OPPORTUNITIES DATABASE
-  const staticFunds = [
-    {
-      id: 1,
-      title: "Expression of Interest (EOI) - Smart Lab Hardware Supply",
-      location: "Rural School Clusters",
-      description: "Inviting sealed bids and compliance structures from certified hardware distributors for procuring and deploying customized multimedia Android projectors across block-level primary setups.",
-      donate_link: "mailto:partner@sdfoundation.org?subject=EOI - Smart Lab Hardware"
-    },
-    {
-      id: 2,
-      title: "Request for Quotation (RFQ) - Generic Medicine Distribution",
-      location: "Mobile Health Camp Units",
-      description: "Procurement setup requests for high-volume generic drug lines, multi-vitamin syrups, and primary pediatric diagnostic kits to support upcoming winter healthcare operations.",
-      donate_link: "mailto:partner@sdfoundation.org?subject=RFQ - Medicine Distribution"
-    }
-  ];
+  useEffect(() => {
+    const fetchCareers = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/careers.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setCareers(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching careers:", error);
+      } finally {
+        setLoadingCareers(false);
+      }
+    };
+
+    const fetchFunds = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/funds.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setFunds(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching funds:", error);
+      } finally {
+        setLoadingFunds(false);
+      }
+    };
+
+    fetchCareers();
+    fetchFunds();
+  }, []);
 
   // Handle URL hash navigation (e.g., /get-involved#funds)
   useEffect(() => {
@@ -149,22 +152,26 @@ const GetInvolved = () => {
             </div>
 
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-              {staticCareers.length > 0 ? (
-                staticCareers.map((career) => (
+              {loadingCareers ? (
+                <div className="p-10 text-center text-gray-500">Loading careers...</div>
+              ) : careers.length > 0 ? (
+                careers.map((career) => (
                   <div key={career.id} className="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-gray-50 transition-colors">
                     <div>
                       <h3 className="text-xl font-bold text-primary mb-1">{career.title}</h3>
                       <p className="text-gray-500 text-sm flex items-center gap-2">📍 {career.location}</p>
-                      {career.pdf_url && (
+                      {career.pdf_url && career.pdf_url !== "#" && (
                         <a 
-                          href={career.pdf_url} 
+                          href={getImageUrl(career.pdf_url)} 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="text-blue-600 hover:underline text-xs mt-2 inline-block font-bold"
                         >
                           📄 View Job Description
                         </a>
                       )}
                     </div>
-                    <a href={career.apply_link} className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 rounded-full font-bold transition-all">
+                    <a href={career.apply_link || `mailto:careers@sdfoundation.org?subject=Application for ${encodeURIComponent(career.title)}`} className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 rounded-full font-bold transition-all">
                       Apply Now
                     </a>
                   </div>
@@ -186,8 +193,10 @@ const GetInvolved = () => {
             </div>
 
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-              {staticFunds.length > 0 ? (
-                staticFunds.map((fund) => (
+              {loadingFunds ? (
+                <div className="p-10 text-center text-gray-500">Loading opportunities...</div>
+              ) : funds.length > 0 ? (
+                funds.map((fund) => (
                   <div key={fund.id} className="p-8 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-gray-50 transition-colors">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-primary mb-1">{fund.title}</h3>
@@ -195,7 +204,7 @@ const GetInvolved = () => {
                       <p className="text-gray-600 text-sm leading-relaxed">{fund.description}</p>
                     </div>
                     <a
-                      href={fund.donate_link}
+                      href={fund.donate_link || `mailto:partner@sdfoundation.org?subject=${encodeURIComponent("EOI/RFQ - " + fund.title)}`}
                       className="shrink-0 border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full font-bold transition-all hover:shadow-md"
                     >
                       Submit Quote

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../apiConfig";
 
 const Contact = () => {
   // फॉर्म डेटा को ट्रैक करने के लिए स्टेट
@@ -15,21 +16,41 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  // 🔥 STATIC SUBMIT LOGIC: बिना किसी API Fetch के फ्रंटएंड पर काम करेगा
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // सबमिशन सक्सेस का अलर्ट दिखाना
-    alert(`Thank you, ${formData.firstName}! Your message regarding "${formData.subject}" has been received (Static Demo).`);
-    
-    // फॉर्म फील्ड्स को वापस खाली (Reset) करना
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}/submit-contact.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+      
+      const data = await response.json();
+      if (data.status === "success") {
+        alert(data.message);
+        // फॉर्म फील्ड्स को वापस खाली (Reset) करना
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(data.message || "Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Failed to connect to the server. Please try again later.");
+    }
   };
 
   return (

@@ -1,87 +1,55 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const Programs = () => {
   const location = useLocation();
   const scrollRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState("");
+  const [programsList, setProgramsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔥 1. STATIC PROGRAMS DATA ARRAY (आप यहाँ अपने सारे प्रोग्राम्स ऐड कर सकते हैं)
-  const staticProgramsList = [
-    {
-      id: 1,
-      program_id: "education",
-      title: "Smart Classroom Initiative",
-      description:
-        "Equipping rural public schools with multimedia projectors, digital content packs, and fundamental teacher training modules to improve overall student engagement.",
-      image_url:
-        "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600",
-      slug: "smart-classroom-initiative",
-      icon: "🎓",
-      beneficiaries: "12,000+",
-      regions: "4 States",
-    },
-    {
-      id: 2,
-      program_id: "education",
-      title: "Scholarship for Excellence",
-      description:
-        "Financial assistance and career mentoring paths for brilliant underprivileged students pursuing higher professional degrees in STEM branches.",
-      image_url:
-        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600",
-      slug: "scholarship-for-excellence",
-      icon: "📜",
-      beneficiaries: "450+",
-      regions: "Pan-India",
-    },
-    {
-      id: 3,
-      program_id: "healthcare",
-      title: "Mobile Health Clinics",
-      description:
-        "Bringing basic primary diagnostics, essential pediatric checkups, and free life-saving medicines directly to isolated remote tribal communities via equipped vans.",
-      image_url:
-        "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600",
-      slug: "mobile-health-clinics",
-      icon: "🏥",
-      beneficiaries: "25,000+",
-      regions: "18 Districts",
-    },
-    {
-      id: 4,
-      program_id: "livelihood",
-      title: "Women Micro-Entrepreneurship",
-      description:
-        "Providing vocational stitching skills, business management workshops, and low-interest seed capital access to rural women self-help collectives.",
-      image_url:
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600",
-      slug: "women-micro-entrepreneurship",
-      icon: "🧵",
-      beneficiaries: "3,200+",
-      regions: "8 Regions",
-    },
-  ];
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/programs.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          setProgramsList(result.data);
+          
+          const categories = [
+            ...new Set(
+              result.data
+                .map((p) => p.program_id?.trim().toLowerCase())
+                .filter(Boolean),
+            ),
+          ];
+          
+          if (location.hash) {
+            const hashTab = location.hash.replace("#", "").toLowerCase().trim();
+            setActiveTab(hashTab);
+          } else if (categories.length > 0) {
+            setActiveTab(categories[0]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPrograms();
+  }, [location.hash]);
 
-  // 🔥 2. EXTRACT UNIQUE CATEGORIES FOR TABS DYNAMICALLY FROM STATIC LIST
+  // 🔥 2. EXTRACT UNIQUE CATEGORIES FOR TABS DYNAMICALLY
   const uniqueCategories = [
     ...new Set(
-      staticProgramsList
+      programsList
         .map((p) => p.program_id?.trim().toLowerCase())
         .filter(Boolean),
     ),
   ];
-
-  // 🔥 3. HANDLE HASH FOR TABS & DEFAULT ACTIVE TAB CONFIGURATION
-  useEffect(() => {
-    if (location.hash) {
-      const tab = location.hash.replace("#", "");
-      setActiveTab(tab);
-    } else if (uniqueCategories.length > 0) {
-      // डिफ़ॉल्ट रूप से पहले कैटेगरी के टैब को ओपन रखेगा
-      setActiveTab(uniqueCategories[0]);
-    }
-  }, [location, uniqueCategories.length]);
 
   // 🔥 4. SCROLL LOGIC FOR TAB NAVIGATION ARROWS
   const scroll = (direction) => {
@@ -106,8 +74,8 @@ const Programs = () => {
     return id.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
 
-  // 🔥 5. FILTER PROGRAMS BASED ON THE ACTIVE STATIC TAB
-  const displayPrograms = staticProgramsList.filter(
+  // 🔥 5. FILTER PROGRAMS BASED ON THE ACTIVE TAB
+  const displayPrograms = programsList.filter(
     (p) =>
       (p.program_id || "").toLowerCase().trim() ===
       activeTab.toLowerCase().trim(),
@@ -191,7 +159,7 @@ const Programs = () => {
               {/* Card Image Block */}
               <div className="h-48 overflow-hidden">
                 <img
-                  src={program.image_url}
+                  src={getImageUrl(program.image_url)}
                   alt={program.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {

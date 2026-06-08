@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { API_BASE_URL } from "../apiConfig";
 
-const focusData = [
+const defaultFocusData = [
   {
     id: 1,
     title: "Health & Nutrition",
@@ -67,6 +68,7 @@ const StatCounter = ({ target, duration = 2000, trigger }) => {
 // 2. Main Focus Areas Component
 const FocusAreas = () => {
   const [hasIntersected, setHasIntersected] = useState(false);
+  const [focusList, setFocusList] = useState([]);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -87,6 +89,47 @@ const FocusAreas = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/focus_areas.php`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+          const defaultImages = {
+            1: "hero/banner3.png",
+            2: "hero/banner1.png",
+            3: "hero/banner2.png",
+            4: "hero/banner3.png",
+          };
+          const friendlyTitles = {
+            1: "Institution Building",
+            2: "Water Resources",
+            3: "Agriculture & Livelihood",
+            4: "Environment & Forest",
+          };
+          const formatted = resData.data.map((item, index) => {
+            const idVal = parseInt(item.id) || (index + 1);
+            const targetVal = parseInt(item.number_text) || 0;
+            const suffixVal = item.number_text.replace(/[0-9]/g, "");
+            return {
+              id: idVal,
+              title: friendlyTitles[idVal] || "Focus Area",
+              targetNumber: targetVal,
+              suffix: suffixVal,
+              label: item.title,
+              image: defaultImages[idVal] || "hero/banner1.png",
+              isUp: idVal % 2 !== 0,
+            };
+          });
+          setFocusList(formatted);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching focus areas:", err);
+      });
+  }, []);
+
+  const focusData = focusList.length > 0 ? focusList : defaultFocusData;
+
   return (
     /* 🔥 Background color ko footer se match karne ke liye bg-[#75843a] lagaya aur text white kiya */
     <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] text-white pt-[20px] pb-25 px-6 overflow-hidden">
@@ -97,7 +140,7 @@ const FocusAreas = () => {
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             What We Do
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#2d3748] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
             Our Focus Areas
           </h2>
           <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />

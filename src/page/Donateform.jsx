@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 // Named export का उपयोग करके इम्पोर्ट एरर को फिक्स किया गया है
 import { QRCode } from "react-qr-code";
+import { API_BASE_URL } from "../apiConfig";
 
 export default function DonationForm() {
   const initialFormData = {
@@ -47,6 +48,7 @@ export default function DonationForm() {
 
   const clearAllTimers = () => {
     if (timerRef.current) clearInterval(timerRef.current);
+    if (timerRef.currentPoll) clearInterval(timerRef.currentPoll);
     if (resetRef.current) clearTimeout(resetRef.current);
   };
 
@@ -63,7 +65,20 @@ export default function DonationForm() {
     setResponseMsg("");
   };
 
-  const backToFormOnly = () => {
+  const backToFormOnly = async () => {
+    if (transactionId) {
+      try {
+        await fetch(`${API_BASE_URL}/expire-payment.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ transaction_id: transactionId }),
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
     clearAllTimers();
     setShowPayment(false);
     setTransactionId("");
@@ -79,19 +94,68 @@ export default function DonationForm() {
     if (name === "wants_80g") setShowPan(checked);
   };
 
-  const simulatePaymentSuccess = () => {
-    clearAllTimers();
-    setPaymentSuccess(true);
-    setResponseMsg("✅ Donation Verified Successfully! (Static Demo)");
-    resetRef.current = setTimeout(resetToForm, RESET_DELAY);
+  const simulatePaymentSuccess = async () => {
+    if (!transactionId) return;
+    try {
+      const response = await fetch(`${API_BASE_URL}/mark-payment-success.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ transaction_id: transactionId }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        clearAllTimers();
+        setPaymentSuccess(true);
+        setResponseMsg("✅ Donation Verified Successfully!");
+        resetRef.current = setTimeout(resetToForm, RESET_DELAY);
+      } else {
+        alert(data.message || "Failed to verify donation.");
+      }
+    } catch (error) {
+      console.error("Error updating payment success:", error);
+      alert("Error connecting to backend.");
+    }
   };
 
-  const startStaticCountdown = () => {
+  const startStaticCountdown = (txnId) => {
     setTimeLeft(PAYMENT_TIME_LIMIT);
+
+    // Poll payment status every 4 seconds
+    const pollInterval = setInterval(async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/check-payment-status.php?transaction_id=${txnId}`);
+        const data = await response.json();
+        if (data.success && (data.status === "approved" || data.status === "success")) {
+          clearInterval(pollInterval);
+          clearAllTimers();
+          setPaymentSuccess(true);
+          setResponseMsg("✅ Donation Verified Successfully!");
+          resetRef.current = setTimeout(resetToForm, RESET_DELAY);
+        }
+      } catch (error) {
+        console.error("Error polling payment status:", error);
+      }
+    }, 4000);
+
+    timerRef.currentPoll = pollInterval;
+
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
+          clearInterval(pollInterval);
           clearAllTimers();
+          
+          // Expire on server
+          fetch(`${API_BASE_URL}/expire-payment.php`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ transaction_id: txnId }),
+          }).catch(console.error);
+
           setResponseMsg("❌ Time out. QR has expired.");
           resetRef.current = setTimeout(resetToForm, 3000);
           return 0;
@@ -101,21 +165,35 @@ export default function DonationForm() {
     }, 1000);
   };
 
-  const handleSaveInformation = (e) => {
+  const handleSaveInformation = async (e) => {
     e.preventDefault();
     setResponseMsg("");
     setIsCreatingDonation(true);
 
-    const mockTxnId = "TXN" + Math.floor(100000 + Math.random() * 900000);
-    
-    setSavedData({ ...formData });
-    setTransactionId(mockTxnId);
-
-    setTimeout(() => {
-      setShowPayment(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/create-donation.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSavedData({ ...formData });
+        setTransactionId(data.transaction_id);
+        setShowPayment(true);
+        setIsCreatingDonation(false);
+        startStaticCountdown(data.transaction_id);
+      } else {
+        setResponseMsg("❌ Failed to initiate donation: " + (data.message || "Unknown error"));
+        setIsCreatingDonation(false);
+      }
+    } catch (error) {
+      console.error("Error submitting donation form:", error);
+      setResponseMsg("❌ Connection failed. Please try again.");
       setIsCreatingDonation(false);
-      startStaticCountdown();
-    }, 400); 
+    }
   };
 
   const upiUrl = useMemo(() => {

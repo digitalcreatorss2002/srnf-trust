@@ -14,6 +14,7 @@ import GetInvolved from "./page/GetInvolved";
 import MediaAndStories from "./page/MediaAndStories";
 import PressCoverageDetails from "./page/PressCoverageDetails";
 import Publications from "./page/Publications";
+import VolunteerForm from "./page/VolunteerForm";
 
 // import Publications from "./page/Publications"; 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="donate" element={<Donate />} />
           <Route path="get-involved" element={<GetInvolved />} />
+          <Route path="volunteerform" element={<VolunteerForm />} />
           
           {/* Media Routes */}
           <Route path="media-and-stories" element={<MediaAndStories />} />

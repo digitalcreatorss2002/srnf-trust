@@ -25,17 +25,17 @@ const Navbar = () => {
     {
       label: "skill-development",
       path: "/programs?filter=skill-development",
-      icon: "🛠️",
+      // icon: "🛠️",
     },
     {
       label: "women-empowerment",
       path: "/programs?filter=women-empowerment",
-      icon: "👩",
+      // icon: "👩",
     },
     {
       label: "rural-education",
       path: "/programs?filter=rural-education",
-      icon: "📚",
+      // icon: "📚",
     },
   ];
 
@@ -45,11 +45,11 @@ const Navbar = () => {
       path: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Who We Are", path: "/about#who-we-are", icon: "💡" },
-        { label: "Leadership", path: "/about#leadership", icon: "👥" },
-        { label: "Our Approach", path: "/about#approach", icon: "🎯" },
-        { label: "Partners", path: "/about#partners", icon: "🤝" },
-        { label: "FAQ", path: "/about#fAq", icon: "🙋" },
+        { label: "Who We Are", path: "/about#who-we-are"},
+        { label: "Leadership", path: "/about#leadership" },
+        { label: "Our Approach", path: "/about#approach" },
+        { label: "Partners", path: "/about#partners" },
+        { label: "FAQ", path: "/about#fAq" },
       ],
     },
     {
@@ -63,8 +63,8 @@ const Navbar = () => {
       path: "/projects",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Ongoing Projects", path: "/projects#ongoing", icon: "🏢" },
-        { label: "Impact Snapshot", path: "/projects#impact", icon: "📊" },
+        { label: "Ongoing Projects", path: "/projects#ongoing" },
+        { label: "Impact Snapshot", path: "/projects#impact" },
       ],
     },
     {
@@ -75,17 +75,14 @@ const Navbar = () => {
         {
           label: "Annual Reports",
           path: "/publications#annual-reports",
-          icon: "📈",
         },
         {
           label: "Case Studies",
           path: "/publications#case-studies",
-          icon: "📝",
         },
         {
           label: "Our Publications",
           path: "/publications#in-publications",
-          icon: "📚",
         },
       ],
     },
@@ -94,9 +91,9 @@ const Navbar = () => {
       path: "/media",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Photo Gallery", path: "/media#photos", icon: "📸" },
-        { label: "Video Gallery", path: "/media#videos", icon: "🎥" },
-        { label: "Press Coverage", path: "/media#press", icon: "🗞️" },
+        { label: "Photo Gallery", path: "/media#photos"},
+        { label: "Video Gallery", path: "/media#videos"},
+        { label: "Press Coverage", path: "/media#press"},
       ],
     },
     {
@@ -107,13 +104,13 @@ const Navbar = () => {
         {
           label: "Volunteer With Us",
           path: "/get-involved#volunteer",
-          icon: "🤝",
+          // icon: "🤝",
         },
-        { label: "Careers", path: "/get-involved#careers", icon: "💼" },
+        { label: "Careers", path: "/get-involved#careers" },
         {
           label: "Partners (EOI/RFQ)",
           path: "/get-involved#funds",
-          icon: "🌱",
+          // icon: "🌱",
         },
       ],
     },

@@ -126,21 +126,21 @@ body {
   min-height: 400px; /* Ya jo bhi height aapko chahiye */
 }
 
-@keyframes customTopoFloat {
+@keyframes floatTopography {
   0% {
-    background-position: 0% 50%;
-    transform: scale(1) translate(0px, 0px);
+    background-position: 0% 0%;
+    transform: scale(1);
   }
   50% {
-    background-position: 10% 30%;
-    transform: scale(1.06) translate(5px, -5px);
+    background-position: 6% 3%;
+    transform: scale(1.04);
   }
   100% {
-    background-position: 0% 50%;
-    transform: scale(1) translate(0px, 0px);
+    background-position: 0% 0%;
+    transform: scale(1);
   }
 }
 
-.animate-left-topo {
-  animation: customTopoFloat 20s ease-in-out infinite;
+.animate-topo-float {
+  animation: floatTopography 24s ease-in-out infinite;
 }

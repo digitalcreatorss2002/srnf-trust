@@ -1,60 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const Publications = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("annual-reports");
+  
+  const [publications, setPublications] = useState([]);
+  const [inPublications, setInPublications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔥 1. STATIC CENTRAL DATABASE FOR REPORTS & CASE STUDIES
-  const staticPublications = [
-    {
-      id: 1,
-      type: "report",
-      title: "Annual Impact Report FY 2025-26",
-      file_size: "4.2 MB",
-      file_url: "#"
-    },
-    {
-      id: 2,
-      type: "report",
-      title: "Rural Education Assessment Policy Framework",
-      file_size: "2.8 MB",
-      file_url: "#"
-    },
-    {
-      id: 3,
-      type: "case_study",
-      category: "Education",
-      title: "Impact Analysis of Offline Multimedia Projectors in Block Classrooms",
-      image_url: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600",
-      file_url: "#"
-    },
-    {
-      id: 4,
-      type: "case_study",
-      category: "Healthcare",
-      title: "Overcoming Accessibility Barriers via Mobile Clinical Diagnostics",
-      image_url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600",
-      file_url: "#"
-    }
-  ];
-
-  // 🔥 2. STATIC CENTRAL DATABASE FOR BOOKS / EXTRA PUBLICATIONS
-  const staticInPublications = [
-    {
-      id: 1,
-      title: "Empowering Rural Collectives: A Guide to SHG Frameworks",
-      image_url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600",
-      pdf_url: "#"
-    },
-    {
-      id: 2,
-      title: "Sustainable Field Development Operations Manual",
-      image_url: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=600",
-      pdf_url: "#"
-    }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [pubRes, inPubRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/publications.php`),
+          fetch(`${API_BASE_URL}/in_publications.php`),
+        ]);
+        const pubData = await pubRes.json();
+        const inPubData = await inPubRes.json();
+        if (pubData.status === "success") {
+          setPublications(pubData.data);
+        }
+        if (inPubData.status === "success") {
+          setInPublications(inPubData.data);
+        }
+      } catch (error) {
+        console.error("Error fetching publications data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // URL Hash Synchronizer Logic
   useEffect(() => {
@@ -69,8 +48,8 @@ const Publications = () => {
   }, [location]);
 
   // Filters for structural tabs
-  const reports = staticPublications.filter((p) => p.type === "report");
-  const caseStudies = staticPublications.filter((p) => p.type === "case_study");
+  const reports = publications.filter((p) => p.type === "report");
+  const caseStudies = publications.filter((p) => p.type === "case_study");
 
   return (
     <div className="bg-bg-color min-h-screen">
@@ -127,7 +106,7 @@ const Publications = () => {
               {reports.map((r) => (
                 <a
                   key={r.id}
-                  href={r.file_url}
+                  href={getImageUrl(r.file_url)}
                   target="_blank"
                   rel="noreferrer"
                   className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-shadow group"
@@ -156,7 +135,7 @@ const Publications = () => {
                 <div key={c.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col group">
                   <div className="h-48 bg-gray-100 overflow-hidden">
                     <img
-                      src={c.image_url}
+                      src={getImageUrl(c.image_url)}
                       alt={c.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -167,7 +146,7 @@ const Publications = () => {
                       <h3 className="font-bold text-gray-900 text-lg mb-4 leading-tight line-clamp-2">{c.title}</h3>
                     </div>
                     {c.file_url && (
-                        <a href={c.file_url} target="_blank" rel="noreferrer" className="text-primary hover:text-[#5a6425] text-sm font-bold flex items-center gap-1 self-start mt-4">
+                        <a href={getImageUrl(c.file_url)} target="_blank" rel="noreferrer" className="text-primary hover:text-[#5a6425] text-sm font-bold flex items-center gap-1 self-start mt-4">
                           Read Study <span className="text-lg transition-transform group-hover:translate-x-1">&rarr;</span>
                         </a>
                     )}
@@ -182,13 +161,13 @@ const Publications = () => {
 
         {/* IN PUBLICATIONS / BOOKS VIEW */}
         {activeTab === "in-publications" && (
-          staticInPublications.length > 0 ? (
+          inPublications.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-in fade-in duration-300">
-              {staticInPublications.map((book) => (
+              {inPublications.map((book) => (
                 <div key={book.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
                     <div className="aspect-[3/4] bg-gray-100 relative overflow-hidden">
                       <img 
-                        src={book.image_url} 
+                        src={getImageUrl(book.image_url)} 
                         alt={book.title} 
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                         onError={(e) => e.currentTarget.src='https://via.placeholder.com/400x500?text=No+Cover'} 
@@ -197,7 +176,7 @@ const Publications = () => {
                     <div className="p-5 flex-1 flex flex-col justify-between items-center text-center">
                       <h3 className="font-bold text-md text-gray-900 mb-4 leading-snug line-clamp-2">{book.title}</h3>
                       {book.pdf_url && (
-                          <a href={book.pdf_url} target="_blank" rel="noreferrer" className="bg-[#6a752b] text-white hover:bg-[#5a6425] w-full py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors block mt-auto">
+                          <a href={getImageUrl(book.pdf_url)} target="_blank" rel="noreferrer" className="bg-[#6a752b] text-white hover:bg-[#5a6425] w-full py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors block mt-auto">
                               Read PDF
                           </a>
                       )}

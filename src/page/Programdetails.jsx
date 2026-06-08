@@ -1,45 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
-// 🔥 1. STATIC CENTRAL DATABASE (यहाँ आप अपने सारे प्रोग्राम्स की पूरी डिटेल्स मैनेज कर सकते हैं)
-const STATIC_PROGRAMS_DATA = [
-  {
-    slug: "smart-classroom-initiative",
-    title: "Smart Classroom Initiative",
-    icon: "🎓",
-    status: "active",
-    beneficiaries: "12,000+",
-    regions: "4 States",
-    location: "Rural Schools",
-    cost: "₹15,00,000",
-    description: "Equipping rural public schools with multimedia projectors, digital content packs, and fundamental teacher training modules to improve overall student engagement.\nOur primary goal is to bridge the massive digital divide that exists between urban private academies and village public schools. By embedding modern technology directly into daily pedagogical setups, we keep school dropouts at an all-time low.",
-    activities: "Installation of Android-based Smart Projectors.\nDistribution of localized K-12 multimedia curriculum content offline.\nConducting quarterly digital teaching capability workshops for rural staff.\nContinuous operational monitoring and hardware maintenance cycles.",
-    achievements: "Successfully transformed 150+ traditional classrooms into active smart hubs.\nRecorded a measurable 35% spike in daily class attendance ratios.\nEmpowered over 400+ village school teachers with standard digital tooling.",
-    goal: "We aim to expand our digital footprint and ensure that the modern tech setups of this initiative reach every block-level public school by late 2027.",
-    images: [
-      "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200",
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1200"
-    ]
-  },
-  {
-    slug: "advanced-web-development",
-    title: "Advanced Web Development",
-    icon: "💻",
-    status: "active",
-    beneficiaries: "1,500+",
-    regions: "Online/Offline",
-    location: "Tech Centers",
-    cost: "Free Bootcamp",
-    description: "Master modern frontend and backend frameworks including React, Node.js, and cloud deployments with hands-on real-world production projects.\nThis comprehensive program focuses heavily on industrial engineering standards, ensuring that trainees from non-traditional academic streams transition smoothly into high-paying engineering roles within short timeframes.",
-    activities: "Daily active code review sessions under senior developer guidance.\nBuilding and hosting fullstack projects to production-grade cloud services.\nWeekly automated engineering assessment runs and structural tracking.",
-    achievements: "Over 85% of graduates landed core software roles within 90 days.\nPartnered with 40+ high-growth tech companies for direct hiring tracks.",
-    goal: "To transform promising learners into absolute production-ready tech resources globally.",
-    images: [
-      "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1200",
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
-    ]
-  }
-];
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const ProgramDetails = () => {
   const { slug } = useParams();
@@ -53,17 +14,37 @@ const ProgramDetails = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // 🔥 2. STATIC LOGIC FOR FINDING MATCHING DATA VIA SLUG
+  // Fetch from backend API
   useEffect(() => {
-    setLoading(true);
-    const foundProgram = STATIC_PROGRAMS_DATA.find((item) => item.slug === slug);
-    
-    if (foundProgram) {
-      setProgram(foundProgram);
-    } else {
-      setProgram(null);
-    }
-    setLoading(false);
+    const fetchProgramDetails = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/programs.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          const found = result.data.find((item) => item.slug === slug);
+          if (found) {
+            // Map single image_url to images array for slideshow compatibility
+            const mappedImages = found.image_url
+              ? [getImageUrl(found.image_url)]
+              : ["https://placehold.co/1200x800?text=SDF+Program"];
+            
+            setProgram({
+              ...found,
+              images: mappedImages
+            });
+          } else {
+            setProgram(null);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching program details:", error);
+        setProgram(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProgramDetails();
   }, [slug]);
 
   // 🔥 3. AUTOMATIC SLIDESHOW TIMER CAROUSEL

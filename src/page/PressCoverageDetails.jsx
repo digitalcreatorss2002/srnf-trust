@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-
-const STATIC_PRESS_DATABASE = [
-  {
-    slug: "bridging-digital-divide-rural-schools",
-    tag: "National News",
-    datee: "May 14, 2026",
-    title: "SDF Trust Transforms 150+ Block Classrooms Into Smart Multimedia Hubs",
-    para: "In a major stride toward educational equity, the Sustainable Development Foundation (SDF) has successfully modernized over 150 classrooms in rural blocks.\nBy integrating completely offline K-12 interactive multimedia projectors, village public schools have recorded an unprecedented drop in student absenteeism.\nLocal teachers have undergone extensive training modules, enabling them to confidently navigate digital content packs, visual charts, and interactive quiz tools without requiring active internet setups.",
-    images: [
-      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200",
-      "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200",
-      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1200"
-    ]
-  },
-  {
-    slug: "mobile-healthcare-impact-report",
-    tag: "Regional Spectrum",
-    datee: "April 28, 2026",
-    title: "Mobile Health Clinics Deliver Free Primary Care Across Tribal Belts",
-    para: "Access to life-saving diagnostics is no longer a distant dream for remote tribal communities.\nSDF Trust's custom health vans have seamlessly conducted thousands of pediatric evaluations and primary blood panels over the last quarter alone.\nEquipped with built-in generic medicine dispensaries and clinical evaluation setups, these mobile units ensure that essential drugs are handed over immediately to families without travel blockades.",
-    images: [
-      "https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?q=80&w=1200",
-      "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200"
-    ]
-  }
-];
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const PressCoverageDetails = () => {
   const { slug } = useParams();
@@ -44,16 +19,37 @@ const PressCoverageDetails = () => {
   }, [slug]);
 
   useEffect(() => {
-    setLoading(true);
-    const foundCoverage = STATIC_PRESS_DATABASE.find((item) => item.slug === slug);
+    const fetchPressDetails = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/press_coverage.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          const found = result.data.find((item) => item.slug === slug);
+          if (found) {
+            const mappedImages = found.image
+              ? [getImageUrl(found.image)]
+              : found.image_url
+              ? [getImageUrl(found.image_url)]
+              : ["https://via.placeholder.com/1200x800?text=No+Image"];
 
-    if (foundCoverage) {
-      setCoverage(foundCoverage);
-      setActivePreviewImage(foundCoverage.images[0] || "https://via.placeholder.com/1200x800?text=No+Image");
-    } else {
-      setCoverage(null);
-    }
-    setLoading(false);
+            setCoverage({
+              ...found,
+              images: mappedImages
+            });
+            setActivePreviewImage(mappedImages[0]);
+          } else {
+            setCoverage(null);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching press coverage details:", error);
+        setCoverage(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPressDetails();
   }, [slug]);
 
   const openModal = (img, index) => {

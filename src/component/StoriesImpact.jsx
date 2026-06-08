@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-const storiesData = [
+const defaultStories = [
   {
     id: 1,
     name: "Dharmendra Kumar",
@@ -40,6 +41,31 @@ const storiesData = [
 ];
 
 const StoriesImpact = () => {
+  const [storiesList, setStoriesList] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/testimonial.php`)
+      .then((res) => res.json())
+      .then((resData) => {
+        // Since testimonial.php returns either raw array or object with error
+        const dataArray = Array.isArray(resData) ? resData : [];
+        if (dataArray.length > 0) {
+          const formatted = dataArray.map((item, idx) => ({
+            id: idx + 1,
+            name: item.name,
+            role: item.title,
+            story: item.message,
+            rating: 5,
+            image: getImageUrl(item.image),
+          }));
+          setStoriesList(formatted);
+        }
+      })
+      .catch((err) => console.error("Error fetching testimonials:", err));
+  }, []);
+
+  const storiesData = storiesList.length > 0 ? storiesList : defaultStories;
+
   return (
     <section className="w-full bg-[#fff] py-10 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto pt-[-20px]">

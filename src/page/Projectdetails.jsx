@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // Video Checker Helper
 const isVideoFile = (url) => {
@@ -7,52 +8,6 @@ const isVideoFile = (url) => {
   const cleanUrl = url.split("?")[0];
   return /\.(mp4|webm|ogg)$/i.test(cleanUrl);
 };
-
-// 🔥 1. STATIC CENTRAL DATABASE (यहाँ आप अपने सारे प्रोजेक्ट्स की पूरी डिटेल्स मैनेज कर सकते हैं)
-const STATIC_PROJECTS_DATABASE = [
-  {
-    slug: "smart-classroom-installation",
-    title: "Smart Classroom Installation",
-    category: "Education",
-    location: "Haryana, Uttar Pradesh",
-    district: "Ambala, Lucknow, Varanasi",
-    block: "Shahzadpur, Bakshi Ka Talab",
-    village: "Sarangpur, Malihabad Area",
-    beneficiaries: "15,000+ Students",
-    cost: "Corporate Grant Based",
-    status: "active",
-    image_url:
-      "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200",
-    description:
-      "Deploying dynamic multimedia smart classrooms across rural public school systems to boost engagement.\nOur primary goal is to bridge the massive digital divide that exists between urban private academies and village public schools. By embedding modern technology directly into daily pedagogical setups, we keep school dropouts at an all-time low.",
-    goal: "To modernize 500+ rural classrooms with high-end interactive systems by the end of next year.",
-    activities:
-      "Procurement and structural setup of interactive hardware tools.\nOffline storage provisioning for digital curriculum streaming batches.\nIn-depth technical software handling modules for school teachers.",
-    achievements:
-      "Deployed active smart frameworks across 120 block schools successfully.\nNoted a clear 40% increment in student evaluations and baseline attendance.",
-  },
-  {
-    slug: "mobile-primary-healthcare-units",
-    title: "Mobile Primary Healthcare Units",
-    category: "Healthcare",
-    location: "Gujarat",
-    district: "Anand, Kutch",
-    block: "Bhuj, Khambhat",
-    village: "Local Tribal Belts",
-    beneficiaries: "25,000+ Residents",
-    cost: "SDF Health Fund",
-    status: "completed",
-    image_url:
-      "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200",
-    description:
-      "Delivering free diagnostic checkups and life-saving medicines directly to remote village blocks.\nThis intervention operates via custom vans equipped with medical setups, lab testing kits, and generic pharmacies managed by certified clinical experts.",
-    goal: "To ensure regular medical reach inside areas lacking immediate government hospitals.",
-    activities:
-      "Organizing weekly mobile health inspection camps.\nFree distribution of high-quality prescriptions and basic multivitamin lines.\nMass healthcare awareness sessions regarding maternal sanitization codes.",
-    achievements:
-      "Treated over 25,000+ remote patience streams without setup delays.\nReduced localized critical viral outbreaks via active emergency screenings.",
-  },
-];
 
 const ProjectDetails = () => {
   const { slug } = useParams();
@@ -64,14 +19,29 @@ const ProjectDetails = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // 🔥 2. STATIC LOGIC FOR FINDING MATCHING DATA VIA SLUG
+  // Fetch project dynamically from API
   useEffect(() => {
-    setLoading(true);
-    const foundProject = STATIC_PROJECTS_DATABASE.find(
-      (item) => item.slug === slug,
-    );
-    setProject(foundProject || null);
-    setLoading(false);
+    const fetchProjectDetails = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/projects.php`);
+        const result = await response.json();
+        if (result.status === "success") {
+          const foundProject = result.data.find(
+            (item) => item.slug === slug
+          );
+          setProject(foundProject || null);
+        } else {
+          setProject(null);
+        }
+      } catch (error) {
+        console.error("Error fetching project details:", error);
+        setProject(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjectDetails();
   }, [slug]);
 
   // LOADING STATE
@@ -147,9 +117,9 @@ const ProjectDetails = () => {
           <div className="lg:w-2/3 flex flex-col gap-8">
             {/* Media Rendering Block */}
             <div className="relative h-80 md:h-140 rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white bg-gray-100 group">
-              {isVideoFile(project.image_url) ? (
+              {isVideoFile(getImageUrl(project.image_url)) ? (
                 <video
-                  src={project.image_url}
+                  src={getImageUrl(project.image_url)}
                   className="w-full h-full object-cover"
                   autoPlay
                   loop
@@ -159,7 +129,7 @@ const ProjectDetails = () => {
                 />
               ) : (
                 <img
-                  src={project.image_url}
+                  src={getImageUrl(project.image_url)}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -172,14 +142,11 @@ const ProjectDetails = () => {
                 </span>
               </div>
             </div>
-
-            {/* Description and Operations Block */}
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 md:p-12">
               <h2 className="text-3xl font-serif text-text-primary mb-8 flex items-center gap-3">
                 <span className="text-primary text-3xl">🌱</span> Our
                 Intervention
               </h2>
-
               <div className="prose prose-lg text-gray-600 max-w-none mb-12 leading-relaxed">
                 {project.description?.split("\n").map((paragraph, index) => (
                   <p key={index} className="mb-6">
