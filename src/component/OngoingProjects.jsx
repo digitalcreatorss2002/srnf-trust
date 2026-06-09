@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // Screenshot base domain tracking url
-const BACKEND_BASE_URL = "http://localhost/srnf/srnf_data/admin/";
+const BACKEND_BASE_URL = "http://hrntechsolutions.com/srnf_data/admin/";
 
 const defaultProjects = [
   {

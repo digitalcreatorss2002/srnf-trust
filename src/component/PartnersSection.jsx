@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 // SCREENSHOT LOGIC MATCH: admin domain folder base path url
-const BACKEND_URL = "http://localhost/srnf/srnf_data/admin/";
-const API_URL = "http://localhost/srnf/srnf_data/api/partners.php";
+const BACKEND_URL = "http://hrntechsolutions.com/srnf_data/admin/";
+const API_URL = "http://hrntechsolutions.com/srnf_data/api/partners.php";
 
 const defaultPartners = [
   {
