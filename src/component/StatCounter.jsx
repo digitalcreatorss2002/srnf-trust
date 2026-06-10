@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const StatCounter = ({ target, duration = 1500, trigger }) => {
@@ -31,7 +31,7 @@ const FocusAreas = () => {
   const [loading, setLoading] = useState(true);
   const sectionRef = useRef(null);
 
-  // ✅ IMPROVED TIMELINE TRIGGER: Fallback timer auto-fires if observer response lags
+  // ✅ TIMELINE TRIGGER: Intersection Observer with Fallback
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -69,15 +69,35 @@ const FocusAreas = () => {
           const formatted = resData.data.map((item, index) => {
             const idVal = parseInt(item.id) || index + 1;
             
-            // ✅ SANITIZED REGEX PARSER: Removes hidden commas, dots, and characters
+            // SANITIZED REGEX PARSER: Extracts numbers vs strings
             const rawText = item.number_text ? String(item.number_text).trim() : "0";
             const numberMatch = rawText.match(/\d+/);
             const targetVal = numberMatch ? parseInt(numberMatch[0], 10) : 0;
             const suffixVal = rawText.replace(/[0-9]/g, "");
 
-            const finalImg = item.image_url && !item.image_url.includes("default.png")
-              ? getImageUrl(item.image_url)
-              : `https://placehold.co/150?text=${encodeURIComponent(item.title || 'Focus')}`;
+            // 🛠️ FIXED: Absolute boundary path verification structure
+            let finalImg;
+            if (item.image_url && !item.image_url.includes("default.png")) {
+              if (item.image_url.startsWith("http://") || item.image_url.startsWith("https://")) {
+                finalImg = item.image_url;
+              } else {
+                // Slashes and cleanup mapping
+                let cleanPath = item.image_url.startsWith("/") ? item.image_url.substring(1) : item.image_url;
+                
+                if (cleanPath.startsWith("admin/")) {
+                  cleanPath = cleanPath.substring(6);
+                }
+                
+                // Pure dynamic conditional routing matrix
+                if (!cleanPath.startsWith("uploads/")) {
+                  cleanPath = `uploads/focus_areas/${cleanPath}`;
+                }
+                
+                finalImg = getImageUrl(cleanPath);
+              }
+            } else {
+              finalImg = `https://placehold.co/150?text=${encodeURIComponent(item.title || 'Focus')}`;
+            }
 
             return {
               id: idVal,
@@ -101,7 +121,7 @@ const FocusAreas = () => {
   if (loading || focusData.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37] via-[#fdf4ee] to-[#fff] text-slate-800 pt-[40px] pb-28 px-6 overflow-hidden">
+    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37]/10 via-[#fdf4ee] to-[#fff] text-slate-800 pt-[40px] pb-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-24">

@@ -25,7 +25,7 @@ const Projects = () => {
         const response = await fetch(`${API_BASE_URL}/projects.php`);
         const result = await response.json();
         
-        // FIX: Deep validation for both direct array and wrapped nested data matrix formats
+        // Deep validation for both direct array and wrapped nested data matrix formats
         if (result) {
           if (Array.isArray(result)) {
             setProjectsList(result);
@@ -53,7 +53,7 @@ const Projects = () => {
   // Handle URL Hash sync & Layout Scroll Position Tracking
   useEffect(() => {
     if (location.hash) {
-      const tab = decodeURIComponent(location.hash.replace("#", ""));
+      const tab = decodeURIComponent(location.hash.replace("#", "")).trim().toLowerCase();
       if (["all", "completed", "planned"].includes(tab)) {
         setActiveTab(tab);
       } else {
@@ -80,14 +80,14 @@ const Projects = () => {
     }
   };
 
-  // 🔥 FIXED 1: ROBUST TRIMMING DATA CARD FILTER
+  // 🔥 FIXED 1: SUPER ROBUST CASING & EXTRA SPACE INSENSITIVE FILTER
   const displayProjects = projectsList.filter((p) => {
-    // Trim and lowerCase prevents data exclusion gaps from raw strings
     const projectStatus = p.status ? p.status.trim().toLowerCase() : "";
     
     let matchesTab = false;
     if (activeTab === "all") {
-      matchesTab = projectStatus === "active" || projectStatus === "ongoing";
+      // Isme database ki 'active', 'ongoing', ya khali (default) status sab cover ho jayenge
+      matchesTab = projectStatus === "active" || projectStatus === "ongoing" || projectStatus === "";
     } else if (activeTab === "completed") {
       matchesTab = projectStatus === "completed";
     } else if (activeTab === "planned") {
@@ -95,16 +95,16 @@ const Projects = () => {
     }
 
     const matchesCategory = selectedCategory 
-      ? p.category?.trim() === selectedCategory 
+      ? p.category?.trim().toLowerCase() === selectedCategory.toLowerCase() 
       : true;
 
     return matchesTab && matchesCategory;
   });
 
-  // 🔥 FIXED 2: SYNCHRONIZED COMPACT ACTIVE VIEWPORT SUBCATEGORIES
+  // 🔥 FIXED 2: SYNCHRONIZED COMPACT ACTIVE VIEWPORT SUBCATEGORIES 
   const currentTabProjects = projectsList.filter((p) => {
     const projectStatus = p.status ? p.status.trim().toLowerCase() : "";
-    if (activeTab === "all") return projectStatus === "active" || projectStatus === "ongoing";
+    if (activeTab === "all") return projectStatus === "active" || projectStatus === "ongoing" || projectStatus === "";
     if (activeTab === "completed") return projectStatus === "completed";
     if (activeTab === "planned") return projectStatus === "planned";
     return false;
@@ -117,7 +117,7 @@ const Projects = () => {
   if (loading) {
     return (
       <div className="w-full py-32 text-center bg-white text-gray-500 font-bold tracking-wider">
-        Loading Projects Matrix View尊 Portal...
+        Loading Projects Matrix View...
       </div>
     );
   }
@@ -144,32 +144,32 @@ const Projects = () => {
       {/* FILTER BUTTON TABS NAVIGATION */}
       <section className="border-b sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
-          <button onClick={() => scroll("left")} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
+          <button type="button" onClick={() => scroll("left")} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
             <span>❮</span>
           </button>
           
           <div ref={scrollRef} className="flex items-center justify-center space-x-8 overflow-x-auto no-scrollbar scroll-smooth px-12">
-            <button onClick={() => { window.location.hash = "all"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "all" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Ongoing Projects 🏢</button>
-            <button onClick={() => { window.location.hash = "completed"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "completed" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Completed Projects ✅</button>
-            <button onClick={() => { window.location.hash = "planned"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "planned" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Planned Projects 📋</button>
+            <button type="button" onClick={() => { window.location.hash = "all"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "all" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Ongoing Projects 🏢</button>
+            <button type="button" onClick={() => { window.location.hash = "completed"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "completed" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Completed Projects ✅</button>
+            <button type="button" onClick={() => { window.location.hash = "planned"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "planned" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Planned Projects 📋</button>
           </div>
 
           {/* Dynamic Categories Row under status updates */}
           {uniqueCategories.length > 0 && (
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-2 pb-4 bg-white border-t pt-3 border-gray-50 animate-in fade-in duration-300">
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-2 pb-4 bg-white border-t pt-3 border-gray-50">
               {uniqueCategories.map(cat => (
-                <button key={cat} onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedCategory === cat ? "bg-[#E56D37] text-white shadow" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`}>{formatTabLabel(cat)}</button>
+                <button type="button" key={cat} onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedCategory === cat ? "bg-[#E56D37] text-white shadow" : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"}`}>{formatTabLabel(cat)}</button>
               ))}
             </div>
           )}
           
-          <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
+          <button type="button" onClick={() => scroll("right")} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
             <span>❯</span>
           </button>
         </div>
       </section>
 
-      {/* STATIC CARDS CONTENT GRID RENDERING */}
+      {/* CARDS CONTENT GRID RENDERING */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {displayProjects.length === 0 ? (
