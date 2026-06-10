@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-// SCREENSHOT LOGIC MATCH: admin domain folder base path url
-const BACKEND_URL = "http://hrntechsolutions.com/srnf_data/admin/";
-const API_URL = "http://hrntechsolutions.com/srnf_data/api/partners.php";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const defaultPartners = [
   {
@@ -18,7 +15,7 @@ const PartnersSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(`${API_BASE_URL}/partners.php`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.status === "success" && Array.isArray(resData.data)) {
@@ -26,9 +23,7 @@ const PartnersSection = () => {
           // PartnersSection.jsx - Inside your useEffect fetch mapper block
           const formatted = resData.data.map((partner) => {
             // Safe condition check to join image_url with your exact admin domain folder URL structure
-            const finalLogo = partner.image_url.startsWith("http")
-              ? partner.image_url
-              : `${BACKEND_URL}${partner.image_url}`;
+            const finalLogo = getImageUrl(partner.image_url);
 
             return {
               id: partner.id,

@@ -1,36 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { API_BASE_URL } from "../apiConfig";
-
-// Screenshot base directory matching config url
-const BACKEND_BASE_URL = "http://hrntechsolutions.com/srnf_data/admin/";
-
-const defaultSlides = [
-  {
-    id: 1,
-    title: "Skill Development Initiative",
-    description:
-      "Empowering rural youth with modern technical skills and vocational training to build sustainable livelihoods and secure financial independence.",
-    image: "hero/banner1.png",
-    link: "/programs?filter=skill-development",
-  },
-  {
-    id: 2,
-    title: "Women Empowerment Centers",
-    description:
-      "Creating safe community spaces to support women through entrepreneurship mentorship, financial literacy, and self-help group networking.",
-    image: "hero/banner2.png",
-    link: "/programs?filter=women-empowerment",
-  },
-  {
-    id: 3,
-    title: "Rural Education Reach",
-    description:
-      "Setting up smart digital classrooms and library resources across distant villages to ensure quality education for under-resourced kids.",
-    image: "hero/banner3.png",
-    link: "/programs?filter=rural-education",
-  },
-];
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const ProjectSlider = () => {
   const [current, setCurrent] = useState(0);
@@ -40,7 +10,7 @@ const ProjectSlider = () => {
 
   // 1. Fetch live projects rows data straight from the REST endpoint
   useEffect(() => {
-    fetch(`${API_BASE_URL}/projects_slider.php`)
+    fetch(`${API_BASE_URL}/projects.php`)
       .then((res) => {
         if (!res.ok) throw new Error("API stream connection error response.");
         return res.json();
@@ -52,17 +22,14 @@ const ProjectSlider = () => {
           resData.data.length > 0
         ) {
           const formatted = resData.data.map((project) => {
-            // Check if uploaded path is absolute web string or absolute local pointer
-            const finalImg = project.image_url.startsWith("http")
-              ? project.image_url
-              : `${BACKEND_BASE_URL}${project.image_url}`;
+            const finalImg = getImageUrl(project.image_url) || "https://placehold.co/400x300?text=No+Image";
 
             return {
               id: project.id,
               title: project.title,
               description: project.description,
               image: finalImg,
-              link: `/projectdetails/${project.slug}`, // Sync dynamic slug detailing links cleanly
+              link: `/projectdetails/${project.slug}`,
             };
           });
           setSlidesList(formatted);
@@ -75,25 +42,29 @@ const ProjectSlider = () => {
       });
   }, []);
 
-  const projectSlides = slidesList.length > 0 ? slidesList : defaultSlides;
-
-  // 2. Continuous 5 seconds transition state loop configuration
+  // Continuous 5 seconds transition state loop configuration
   useEffect(() => {
-    if (isPaused || projectSlides.length <= 1) return;
+    if (isPaused || slidesList.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev === projectSlides.length - 1 ? 0 : prev + 1));
+      setCurrent((prev) => (prev === slidesList.length - 1 ? 0 : prev + 1));
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [isPaused, projectSlides.length]);
+  }, [isPaused, slidesList.length]);
 
+  // Show loading template until API finishes connection
   if (loading) {
     return (
       <div className="w-full py-24 text-center bg-white text-gray-500 font-bold tracking-wider">
         Loading Projects Presentation Deck...
       </div>
     );
+  }
+
+  // If database has no projects, do not render empty markup shell
+  if (slidesList.length === 0) {
+    return null;
   }
 
   return (
@@ -123,41 +94,43 @@ const ProjectSlider = () => {
         </div>
 
         {/* 🌟 MAIN SPLIT LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[420px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[450px]">
           {/* 📝 LEFT SIDE: ANIMATED TEXT CONTENT */}
-          <div className="lg:col-span-5 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1 relative z-10">
-            {projectSlides.map((slide, index) => (
+          <div className="lg:col-span-5 relative h-[320px] flex flex-col justify-center order-2 lg:order-1 z-10">
+            {slidesList.map((slide, index) => (
               <div
                 key={slide.id}
-                className={`transition-all duration-700 ease-in-out origin-left ${
+                className={`absolute inset-0 flex flex-col justify-center space-y-4 text-left transition-all duration-700 ease-in-out ${
                   index === current
-                    ? "opacity-100 translate-x-0 scale-100 block"
-                    : "opacity-0 -translate-x-8 scale-95 hidden"
+                    ? "opacity-100 translate-x-0 scale-100 pointer-events-auto z-10"
+                    : "opacity-0 -translate-x-8 scale-95 pointer-events-none z-0"
                 }`}
               >
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] mb-4 leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] leading-tight">
                   {slide.title}
                 </h3>
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6 line-clamp-5">
+                <p className="text-gray-700 text-base sm:text-lg leading-relaxed line-clamp-4">
                   {slide.description}
                 </p>
 
-                <Link
-                  to={slide.link}
-                  className="inline-flex items-center text-[#E56D37] hover:text-black font-bold text-base transition-colors group"
-                >
-                  Explore Project Details
-                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
-                    →
-                  </span>
-                </Link>
+                <div className="pt-2">
+                  <Link
+                    to={slide.link}
+                    className="inline-flex items-center text-[#E56D37] hover:text-black font-bold text-base transition-colors group"
+                  >
+                    Explore Project Details
+                    <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
+                      →
+                    </span>
+                  </Link>
+                </div>
               </div>
             ))}
 
-            {/* 📍 Pagination Indicators */}
-            {projectSlides.length > 1 && (
-              <div className="flex space-x-2 pt-4">
-                {projectSlides.map((_, index) => (
+            {/* 📍 Pagination Indicators absolute anchored down */}
+            {slidesList.length > 1 && (
+              <div className="flex space-x-2 absolute -bottom-6 left-0 z-20">
+                {slidesList.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrent(index)}
@@ -174,7 +147,7 @@ const ProjectSlider = () => {
 
           {/* 🖼️ RIGHT SIDE: IMAGE SLIDER */}
           <div className="lg:col-span-7 relative h-[350px] sm:h-[420px] w-full order-1 lg:order-2 z-10">
-            {projectSlides.map((slide, index) => (
+            {slidesList.map((slide, index) => (
               <div
                 key={slide.id}
                 className={`absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out ${

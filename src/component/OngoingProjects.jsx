@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-// Screenshot base domain tracking url
-const BACKEND_BASE_URL = "http://hrntechsolutions.com/srnf_data/admin/";
-
 const defaultProjects = [
   {
     id: 1,
@@ -29,9 +26,7 @@ const OngoingProjects = () => {
       .then((resData) => {
         if (resData.status === "success" && Array.isArray(resData.data)) {
           const formatted = resData.data.map((project) => {
-            const finalImg = project.image_url.startsWith("http")
-              ? project.image_url
-              : `${BACKEND_BASE_URL}${project.image_url}`;
+            const finalImg = getImageUrl(project.image_url);
 
             return {
               id: project.id,
@@ -111,9 +106,9 @@ const OngoingProjects = () => {
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                   {projectsData[current].description}
                 </p>
-                <div class="flex items-start gap-2 pt-2 text-xs font-semibold text-gray-500">
-                  <span class="text-sm select-none mt-0.5 text-red-500">📍</span>
-                  <p class="leading-relaxed">{projectsData[current].locations}</p>
+                <div className="flex items-start gap-2 pt-2 text-xs font-semibold text-gray-500">
+                  <span className="text-sm select-none mt-0.5 text-red-500">📍</span>
+                  <p className="leading-relaxed">{projectsData[current].locations}</p>
                 </div>
               </div>
             )}

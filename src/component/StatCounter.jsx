@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { API_BASE_URL } from "../apiConfig";
-
-// ✅ URL trailing boundary perfectly aligned
-const BACKEND_BASE_URL = "https://hrntechsolutions.com/srnf_data/";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const StatCounter = ({ target, duration = 1500, trigger }) => {
   const [count, setCount] = useState(0);
@@ -79,7 +76,7 @@ const FocusAreas = () => {
             const suffixVal = rawText.replace(/[0-9]/g, "");
 
             const finalImg = item.image_url && !item.image_url.includes("default.png")
-              ? (item.image_url.startsWith("http") ? item.image_url : `${BACKEND_BASE_URL}${item.image_url}`)
+              ? getImageUrl(item.image_url)
               : `https://placehold.co/150?text=${encodeURIComponent(item.title || 'Focus')}`;
 
             return {

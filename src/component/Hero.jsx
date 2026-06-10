@@ -98,10 +98,10 @@ const Hero = () => {
         >
           {/* Background Image with Zoom Effect */}
           <div
-            className={`absolute inset-0 bg-cover bg-center transition-transform duration-[5000ms] ease-out ${
+            className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[5000ms] ease-out ${
               index === current ? "scale-105" : "scale-100"
             }`}
-            style={{ backgroundImage: `url(${slide.image})` }}
+            style={{ backgroundImage: `url("${slide.image}")` }}
           />
 
           {/* Dark Overlay - Text Visibility ke liye */}

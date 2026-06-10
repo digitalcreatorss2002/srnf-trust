@@ -33,16 +33,16 @@ function App() {
           <Route path="donate" element={<Donate />} />
           <Route path="get-involved" element={<GetInvolved />} />
           <Route path="volunteerform" element={<VolunteerForm />} />
-          
+
           {/* Media Routes */}
           <Route path="media-and-stories" element={<MediaAndStories />} />
-          <Route path="media" element={<MediaAndStories />} /> 
+          <Route path="media" element={<MediaAndStories />} />
           <Route path="media-and-stories/:slug" element={<PressCoverageDetails />} />
           <Route path="press-coverage/:slug" element={<PressCoverageDetails />} />
 
           {/* Temporary Fallback for Publications */}
-          <Route path="publications" element={<Publications />} /> 
-          
+          <Route path="publications" element={<Publications />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
