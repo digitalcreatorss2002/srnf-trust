@@ -35,11 +35,11 @@ const Publications = () => {
     fetchData();
   }, []);
 
-  // URL Hash Synchronizer Logic
+  // URL Hash Synchronizer Logic (legal-documents को यहाँ भी शामिल किया गया है)
   useEffect(() => {
     if (location.hash) {
       const tab = location.hash.replace("#", "");
-      if (["annual-reports", "case-studies", "in-publications"].includes(tab)) {
+      if (["annual-reports", "case-studies", "in-publications", "legal-documents"].includes(tab)) {
         setActiveTab(tab);
       }
     } else {
@@ -50,6 +50,7 @@ const Publications = () => {
   // Filters for structural tabs
   const reports = publications.filter((p) => p.type === "report");
   const caseStudies = publications.filter((p) => p.type === "case_study");
+  const legalDocs = publications.filter((p) => p.type === "legal"); // नया फ़िल्टर: Legal Documents के लिए
 
   return (
     <div className="bg-bg-color min-h-screen">
@@ -64,7 +65,7 @@ const Publications = () => {
           Publications & Resources
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-primary-50 opacity-90">
-          Explore our reports, case studies, and books showcasing our impact-driven work.
+          Explore our reports, case studies, legal documents, and books showcasing our impact-driven work.
         </motion.p>
       </section>
 
@@ -76,6 +77,7 @@ const Publications = () => {
               { id: "annual-reports", label: "Reports 📊" },
               { id: "case-studies", label: "Case Studies 📝" },
               { id: "in-publications", label: "Our Publications 📚" },
+              { id: "legal-documents", label: "Legal Documents ⚖️" }, // नया टैब ऑप्शन जोड़ा गया
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -154,8 +156,8 @@ const Publications = () => {
                 </div>
               ))}
             </div>
-           ) : (
-             <p className="text-gray-500 text-center py-8">No case studies available.</p>
+             ) : (
+               <p className="text-gray-500 text-center py-8">No case studies available.</p>
           )
         )}
 
@@ -184,12 +186,42 @@ const Publications = () => {
                 </div>
               ))}
             </div>
-           ) : (
-             <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-dashed border-gray-300">
-                 <p className="text-gray-500 font-medium">No books available at the moment.</p>
-             </div>
+             ) : (
+               <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-dashed border-gray-300">
+                   <p className="text-gray-500 font-medium">No books available at the moment.</p>
+               </div>
           )
         )}
+
+        {/* LEGAL DOCUMENTS VIEW */}
+        {/* नया ब्लॉक: जब Legal Documents टैब एक्टिव होगा तब यह सेक्शन रेंडर होगा */}
+        {activeTab === "legal-documents" && (
+          legalDocs.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-6 animate-in fade-in duration-300">
+              {legalDocs.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={getImageUrl(doc.file_url)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-shadow group"
+                >
+                  <div className="flex items-center gap-4">
+                     <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded flex items-center justify-center font-bold shrink-0 text-xs">DOC</div>
+                     <div>
+                       <h3 className="font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors">{doc.title}</h3>
+                       {doc.file_size && <p className="text-xs text-gray-400 mt-1 block font-medium">{doc.file_size}</p>}
+                     </div>
+                  </div>
+                  <span className="text-primary font-bold text-xl ml-4 transition-transform group-hover:translate-y-0.5">↓</span>
+                </a>
+              ))}
+            </div>
+          ) : (
+             <p className="text-gray-500 text-center py-8">No legal documents available.</p>
+          )
+        )}
+
       </div>
     </div>
   );

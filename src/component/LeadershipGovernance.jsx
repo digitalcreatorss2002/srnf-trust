@@ -1,206 +1,202 @@
-import React, { useState, useEffect } from 'react';
-import { API_BASE_URL, getImageUrl } from '../apiConfig';
-
-const defaultGovernanceData = {
-  founder: {
-    id: 'founder',
-    title: "Founder's Message",
-    subtitle: "A vision for transformation and sustainable growth.",
-    // Main card placeholder circle image
-    circleImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150", 
-    type: 'text-only',
-    details: {
-      heading: "Message From Our Founder",
-      text: "Welcome to our platform. From day one, our mission has been centered around transparency, impactful execution, and empowering professional networks. We strictly maintain our core metrics, such as our team discipline and automated tracking, ensuring that every project we deliver aligns with the highest quality standards. Thank you for being a part of our journey as we scale new heights together."
-    }
-  },
-  board: {
-    id: 'board',
-    title: "Board of Trustees",
-    subtitle: "Guiding our strategic decisions and compliance framework.",
-    circleImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150",
-    type: 'members-list',
-    details: [
-      { name: "Dr. Shivam Khare", role: "Chief Trustee & Medical Advisor", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200" },
-      { name: "Ananya Sharma", role: "Financial Operations Trustee", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200" }
-    ]
-  },
-  advisory: {
-    id: 'advisory',
-    title: "Advisory Committee",
-    subtitle: "Industry leaders steering our innovation paths.",
-    circleImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150",
-    type: 'members-list',
-    details: [
-      { name: "Rajesh Mehta", role: "Senior Brand Consultant", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200" },
-      { name: "Vikram Malhotra", role: "Technical Infrastructure Advisor", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200" }
-    ]
-  },
-  management: {
-    id: 'management',
-    title: "Management Team",
-    subtitle: "Executing operations and managing dynamic workflows.",
-    circleImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=150",
-    type: 'levels-list',
-    details: [
-      {
-        levelTitle: "Level 1: Executive Leadership",
-        members: [
-          { name: "Dharmendra Kumar", role: "Web Developer", img: "hero/banner1.png" },
-          { name: "Sweety Shrivastava", role: "Sales Associate", img: "hero/banner2.png" }
-        ]
-      },
-      {
-        levelTitle: "Level 2: Operations & Delivery",
-        members: [
-          { name: "Tiya Saini", role: "Head of Operations", img: "hero/banner3.png" },
-          { name: "Shashwat Mishra", role: "Technical Project Lead", img: "hero/banner1.png" }
-        ]
-      }
-    ]
-  }
-};
+import React, { useState, useEffect } from "react";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const LeadershipGovernance = () => {
   const [activeModal, setActiveModal] = useState(null);
   const [governanceList, setGovernanceList] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const staticLogos = {
+    founder: "/icons/founder.png",
+    board: "/icons/boardDirector.png",
+    advisory: "/icons/community.png",
+    management: "/icons/team.png",
+  };
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/leadership.php`)
       .then((res) => res.json())
       .then((resData) => {
-        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+        if (
+          resData.status === "success" &&
+          resData.data &&
+          resData.data.length > 0
+        ) {
           const sections = resData.data;
           const mappedData = {};
 
-          // Helper to check and resolve circle images
-          const getCircleImage = (sec, defaultImg) => {
-            const memberWithImg = sec.members.find(m => m.image_url);
-            return memberWithImg ? getImageUrl(memberWithImg.image_url) : defaultImg;
-          };
-
           sections.forEach((sec) => {
             const titleLower = sec.title.toLowerCase();
+
             if (titleLower.includes("founder")) {
               const firstMember = sec.members[0];
               mappedData.founder = {
-                id: 'founder',
+                id: "founder",
                 title: sec.title,
-                subtitle: sec.description || "A vision for transformation and sustainable growth.",
-                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150"),
-                type: 'text-only',
+                subtitle:
+                  sec.description ||
+                  "A vision for transformation and sustainable growth.",
+                circleImage: staticLogos.founder,
+                type: "text-only",
                 details: {
                   heading: "Message From Our Founder",
-                  text: firstMember ? firstMember.content : (sec.description || "")
-                }
+                  text: firstMember
+                    ? firstMember.content
+                    : sec.description || "",
+                },
               };
             } else if (titleLower.includes("board")) {
               mappedData.board = {
-                id: 'board',
+                id: "board",
                 title: sec.title,
-                subtitle: sec.description || "Guiding our strategic decisions and compliance framework.",
-                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150"),
-                type: 'members-list',
+                subtitle:
+                  sec.description ||
+                  "Guiding our strategic decisions and compliance framework.",
+                circleImage: staticLogos.board,
+                type: "members-list",
                 details: sec.members.map((m) => ({
                   name: m.name,
                   role: m.role,
-                  img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
-                }))
+                  message: m.content || "",
+                  img:
+                    getImageUrl(m.image_url) ||
+                    "https://via.placeholder.com/150",
+                })),
               };
             } else if (titleLower.includes("advisory")) {
               mappedData.advisory = {
-                id: 'advisory',
+                id: "advisory",
                 title: sec.title,
-                subtitle: sec.description || "Industry leaders steering our innovation paths.",
-                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150"),
-                type: 'members-list',
+                subtitle:
+                  sec.description ||
+                  "Industry leaders steering our innovation paths.",
+                circleImage: staticLogos.advisory,
+                type: "members-list",
                 details: sec.members.map((m) => ({
                   name: m.name,
                   role: m.role,
-                  img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
-                }))
+                  message: m.content || "",
+                  img:
+                    getImageUrl(m.image_url) ||
+                    "https://via.placeholder.com/150",
+                })),
               };
-            } else if (titleLower.includes("management") || titleLower.includes("team")) {
-              // Group by M1, M2, M3
+            } else if (
+              titleLower.includes("management") ||
+              titleLower.includes("team")
+            ) {
               const levelsMap = {
-                'M1': { levelTitle: "Level 1: Executive Leadership", members: [] },
-                'M2': { levelTitle: "Level 2: Operations & Delivery", members: [] },
-                'M3': { levelTitle: "Level 3: Administration & Support", members: [] },
-                'General': { levelTitle: "General Management", members: [] }
+                M1: {
+                  levelTitle: "Level 1: Executive Leadership",
+                  members: [],
+                },
+                M2: {
+                  levelTitle: "Level 2: Operations & Delivery",
+                  members: [],
+                },
+                M3: {
+                  levelTitle: "Level 3: Administration & Support",
+                  members: [],
+                },
+                General: { levelTitle: "General Management", members: [] },
               };
 
               sec.members.forEach((m) => {
-                const levelKey = m.staff_level || 'General';
+                const levelKey = m.staff_level || "General";
                 if (levelsMap[levelKey]) {
                   levelsMap[levelKey].members.push({
                     name: m.name,
                     role: m.role,
-                    img: getImageUrl(m.image_url) || "https://via.placeholder.com/150"
+                    message: m.content || "",
+                    img:
+                      getImageUrl(m.image_url) ||
+                      "https://via.placeholder.com/150",
                   });
                 }
               });
 
-              const details = Object.values(levelsMap).filter(lvl => lvl.members.length > 0);
+              const details = Object.values(levelsMap).filter(
+                (lvl) => lvl.members.length > 0,
+              );
 
               mappedData.management = {
-                id: 'management',
+                id: "management",
                 title: sec.title,
-                subtitle: sec.description || "Executing operations and managing dynamic workflows.",
-                circleImage: getCircleImage(sec, "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=150"),
-                type: 'levels-list',
-                details: details
+                subtitle:
+                  sec.description ||
+                  "Executing operations and managing dynamic workflows.",
+                circleImage: staticLogos.management,
+                type: "levels-list",
+                details: details,
               };
             }
           });
 
-          // Fill in missing sections from defaults to ensure layout safety
-          const combined = { ...defaultGovernanceData, ...mappedData };
-          setGovernanceList(combined);
+          setGovernanceList(mappedData);
         }
+        setLoading(false);
       })
-      .catch((err) => console.error("Error fetching leadership:", err));
+      .catch((err) => {
+        console.error("Error fetching leadership:", err);
+        setLoading(false);
+      });
   }, []);
 
-  const governanceData = governanceList || defaultGovernanceData;
+  if (loading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 text-gray-600 font-bold text-lg">
+        Loading Leadership & Governance...
+      </div>
+    );
+  }
+
+  if (!governanceList || Object.keys(governanceList).length === 0) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 text-gray-500 text-lg">
+        No records found.
+      </div>
+    );
+  }
 
   return (
     <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
-      
-      {/* Page Main Header */}
-      <h2 className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-20 tracking-wide"
-          style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.6)' }}>
+      <h2
+        className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-20 tracking-wide"
+        style={{ textShadow: "1px 1px 2px rgba(255, 255, 255, 0.6)" }}
+      >
         Leadership & Governance
       </h2>
 
-      {/* Grid Container matching image layout */}
+      {/* Main Front Grid Container */}
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24 px-4 mt-8">
-        {Object.values(governanceData).map((card) => (
-          <div 
-            key={card.id} 
+        {Object.values(governanceList).map((card) => (
+          <div
+            key={card.id}
             onClick={() => setActiveModal(card)}
             className="relative group cursor-pointer"
           >
-            {/* Dark/Grey Rounded Card Background with Inset shadow effect */}
-            <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_35px_-5px_rgba(0,0,0,0.4)] border border-[#E56D37] transform transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] border border-[#E56D37] transform transition-all duration-300 hover:-translate-y-1">
               
-              {/* Increased Size Circle Element Container */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-[#4a4a4a] rounded-full flex items-center justify-center -mt-12 p-1 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#E56D37] overflow-hidden z-10">
-                <img 
-                  src={card.circleImage} 
-                  alt={card.title} 
-                  className="w-full h-full object-cover rounded-full filter grayscale contrast-125 mix-blend-luminosity group-hover:grayscale-0 transition-all duration-300"
+              {/* बदलाव: विड्थ/हाइट को परफेक्ट w-28 h-28 किया गया और पैडिंग को शून्य कर दिया गया */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-28 rounded-full flex items-center justify-center -mt-14 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#E56D37] bg-white overflow-hidden z-10">
+                <img
+                  src={card.circleImage}
+                  alt={card.title}
+                  /* बदलाव: object-cover और scale-110 लगाया ताकि खुद का खाली स्पेस काटकर इमेज सीधे मुख्य बॉर्डर से चिपक जाए */
+                  className="w-full h-full object-cover rounded-full transition-all duration-300 transform scale-110 group-hover:scale-115"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://via.placeholder.com/150";
+                  }}
                 />
               </div>
 
-              {/* Card Text Content */}
               <h3 className="text-xl font-bold text-[#E56D37] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors">
                 {card.title}
               </h3>
               <p className="text-sm text-[#2d2d2d] font-light max-w-sm px-2">
                 {card.subtitle}
               </p>
-              
-              {/* Click indicator */}
+
               <span className="text-[10px] text-[#000] mt-4 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                 View Details →
               </span>
@@ -212,14 +208,12 @@ const LeadershipGovernance = () => {
       {/* ==================== POPUP MODAL LOGIC ==================== */}
       {activeModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300">
-          
-          {/* Modal Container */}
-          <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200 animate-in fade-in zoom-in-95 duration-200">
-            
-            {/* Sticky Modal Close Header */}
-            <div className="sticky top-0 bg-white border-b border-neutral-100 px-6 py-4 flex justify-between items-center z-20">
-              <h3 className="text-2xl font-bold text-neutral-900">{activeModal.title}</h3>
-              <button 
+          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200">
+            <div className="sticky top-0 bg-white border-b border-neutral-100 px-6 py-4 flex justify-between items-center z-30">
+              <h3 className="text-2xl font-bold text-neutral-900">
+                {activeModal.title}
+              </h3>
+              <button
                 onClick={() => setActiveModal(null)}
                 className="text-neutral-400 hover:text-neutral-600 text-3xl font-light transition-colors p-1"
               >
@@ -227,58 +221,127 @@ const LeadershipGovernance = () => {
               </button>
             </div>
 
-            {/* Modal Body Based on Requirements */}
             <div className="p-6 md:p-8">
-              
-              {/* CONDITION 1: Founder's Message (Text Only) */}
-              {activeModal.type === 'text-only' && (
+              {/* CONDITION 1: Founder's Message */}
+              {activeModal.type === "text-only" && activeModal.details && (
                 <div className="prose max-w-none">
-                  <h4 className="text-xl font-semibold text-neutral-800 mb-4">{activeModal.details.heading}</h4>
-                  <p className="text-neutral-600 text-lg leading-relaxed whitespace-pre-line">
+                  <h4 className="text-xl font-semibold text-neutral-800 mb-4">
+                    {activeModal.details.heading}
+                  </h4>
+                  <p className="text-neutral-600 text-justify text-lg leading-relaxed whitespace-pre-line">
                     {activeModal.details.text}
                   </p>
                 </div>
               )}
 
-              {/* CONDITION 2: Board of Trustees & Advisory Committee (Cards Grid Layout) */}
-              {activeModal.type === 'members-list' && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {activeModal.details.map((member, idx) => (
-                    <div key={idx} className="flex items-center space-x-4 bg-neutral-50 p-4 rounded-xl border border-neutral-100">
-                      <img src={member.img} alt={member.name} className="w-16 h-16 rounded-full object-cover border-2 border-neutral-200 shadow-sm animate-fade-in" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
-                      <div>
-                        <h4 className="font-bold text-lg text-neutral-800">{member.name}</h4>
-                        <p className="text-sm text-neutral-500 font-medium">{member.role}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* CONDITION 3: Management Team (Level Wise Layout) */}
-              {activeModal.type === 'levels-list' && (
-                <div className="space-y-8">
-                  {activeModal.details.map((level, idx) => (
-                    <div key={idx} className="border-l-4 border-blue-500 pl-4 animate-fade-in">
-                      <h4 className="text-md font-bold text-blue-600 uppercase tracking-wider mb-4">
-                        {level.levelTitle}
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {level.members.map((member, mIdx) => (
-                          <div key={mIdx} className="flex items-center space-x-4 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-                            <img src={member.img} alt={member.name} className="w-14 h-14 rounded-full object-cover border border-neutral-200" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
-                            <div>
-                              <h5 className="font-bold text-neutral-800">{member.name}</h5>
-                              <p className="text-xs text-neutral-500">{member.role}</p>
-                            </div>
+              {/* CONDITION 2: Board & Advisory */}
+              {activeModal.type === "members-list" &&
+                Array.isArray(activeModal.details) && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
+                    {activeModal.details.map((member, idx) => (
+                      <div
+                        key={idx}
+                        className="w-40 h-40 relative group [perspective:1000px]"
+                      >
+                        <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
+                          {/* FRONT SIDE (गोल व्यक्तिगत फोटो) */}
+                          <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
+                            <img
+                              src={member.img}
+                              alt={member.name}
+                              className="w-full h-full rounded-full object-cover border-2 border-[#E56D37]"
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "https://via.placeholder.com/150";
+                              }}
+                            />
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
 
+                          {/* BACK SIDE (स्क्वायर टेक्स्ट बॉक्स) */}
+                          <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
+                            <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
+                              {member.name}
+                            </h4>
+                            <p className="text-[12px] text-[#E56D37] font-bold mb-1">
+                              {member.role}
+                            </p>
+
+                            {member.message ? (
+                              <p className="text-[12px] text-gray-500 font-bold max-h-[55px] overflow-y-auto px-1 custom-scrollbar leading-tight">
+                                {member.message}
+                              </p>
+                            ) : (
+                              <p className="text-[12px] text-gray-300 italic">
+                                No message
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+              {/* CONDITION 3: Management Team */}
+              {activeModal.type === "levels-list" &&
+                Array.isArray(activeModal.details) && (
+                  <div className="space-y-12">
+                    {activeModal.details.map((level, idx) => (
+                      <div
+                        key={idx}
+                        className="border-l-4 border-orange-500 pl-4"
+                      >
+                        <h4 className="text-md font-bold text-orange-600 uppercase tracking-wider mb-6">
+                          {level.levelTitle}
+                        </h4>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
+                          {level.members.map((member, mIdx) => (
+                            <div
+                              key={mIdx}
+                              className="w-40 h-40 relative group [perspective:1000px]"
+                            >
+                              <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
+                                {/* FRONT SIDE (गोल व्यक्तिगत फोटो) */}
+                                <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
+                                  <img
+                                    src={member.img}
+                                    alt={member.name}
+                                    className="w-full h-full rounded-full object-cover border-2 border-[#E56D37]"
+                                    onError={(e) => {
+                                      e.currentTarget.src =
+                                        "https://via.placeholder.com/150";
+                                    }}
+                                  />
+                                </div>
+
+                                {/* BACK SIDE (स्क्वायर टेक्स्ट बॉक्स) */}
+                                <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
+                                  <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
+                                    {member.name}
+                                  </h4>
+                                  <p className="text-[10px] text-[#E56D37] font-semibold mb-1">
+                                    {member.role}
+                                  </p>
+
+                                  {member.message ? (
+                                    <p className="text-[9px] text-gray-500 font-light italic max-h-[55px] overflow-y-auto px-1 custom-scrollbar leading-tight">
+                                      "{member.message}"
+                                    </p>
+                                  ) : (
+                                    <p className="text-[9px] text-gray-300 italic">
+                                      No message
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
             </div>
           </div>
         </div>

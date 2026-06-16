@@ -19,16 +19,12 @@ const PartnersSection = () => {
       .then((res) => res.json())
       .then((resData) => {
         if (resData.status === "success" && Array.isArray(resData.data)) {
-          // Database schema fields map logic
-          // PartnersSection.jsx - Inside your useEffect fetch mapper block
           const formatted = resData.data.map((partner) => {
-            // Safe condition check to join image_url with your exact admin domain folder URL structure
             const finalLogo = getImageUrl(partner.image_url);
-
             return {
               id: partner.id,
               name: partner.title,
-              logo: finalLogo, // Dynamically parsing clean images links directly to the grid view
+              logo: finalLogo,
               link: partner.link,
             };
           });
@@ -53,9 +49,9 @@ const PartnersSection = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
             Partners
           </span>
@@ -65,37 +61,39 @@ const PartnersSection = () => {
           <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 justify-items-center">
           {partnersData.map((partner) => (
             <a
               key={partner.id}
               href={partner.link || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block w-full bg-white rounded-2xl overflow-hidden border border-gray-100 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-xl relative flex flex-col h-64"
-              style={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.02)" }}
+              className="group block w-32 h-32 relative [perspective:1000px]"
             >
-              <div className="absolute inset-0 bg-[#75843a]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
-
-              <div className="w-full flex-grow bg-white overflow-hidden relative p-4 flex items-center justify-center">
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="max-w-full max-h-full object-contain filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out block"
-                />
-              </div>
-
-              <div className="p-4 text-center bg-white border-t border-gray-50 relative z-20 w-full">
-                <h4 className="text-sm font-bold text-[#E56D37] group-hover:text-[#2d3748] tracking-tight transition-colors duration-300 text-center w-full block truncate">
-                  {partner.name}
-                </h4>
-              </div>
-
-              {partner.link && (
-                <div className="absolute bottom-4 right-4 text-gray-400 group-hover:text-[#75843a] text-[10px] font-bold transform translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 z-20">
-                  ↗
+              <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                
+                <div className="absolute inset-0 w-full h-full bg-white rounded-full flex items-center justify-center border border-gray-100 shadow-md [backface-visibility:hidden] overflow-hidden">
+                  <div className="w-full h-full flex items-center justify-center rounded-full bg-white overflow-hidden p-5">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-              )}
+
+                <div className="absolute inset-0 w-full h-full bg-white rounded-full flex flex-col items-center justify-center p-3 border border-gray-100 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] text-center">
+                  <h4 className="text-[11px] font-bold text-[#E56D37] tracking-tight line-clamp-2 px-1 leading-tight">
+                    {partner.name}
+                  </h4>
+                  {partner.link && (
+                    <span className="mt-1 text-[#75843a] text-[9px] font-semibold">
+                      Visit ↗
+                    </span>
+                  )}
+                </div>
+
+              </div>
             </a>
           ))}
         </div>

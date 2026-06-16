@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
@@ -8,7 +8,6 @@ const ProjectSlider = () => {
   const [slidesList, setSlidesList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. Fetch live projects rows data straight from the REST endpoint
   useEffect(() => {
     fetch(`${API_BASE_URL}/projects.php`)
       .then((res) => {
@@ -42,7 +41,6 @@ const ProjectSlider = () => {
       });
   }, []);
 
-  // Continuous 5 seconds transition state loop configuration
   useEffect(() => {
     if (isPaused || slidesList.length <= 1) return;
 
@@ -53,7 +51,6 @@ const ProjectSlider = () => {
     return () => clearInterval(timer);
   }, [isPaused, slidesList.length]);
 
-  // Show loading template until API finishes connection
   if (loading) {
     return (
       <div className="w-full py-24 text-center bg-white text-gray-500 font-bold tracking-wider">
@@ -62,15 +59,12 @@ const ProjectSlider = () => {
     );
   }
 
-  // If database has no projects, do not render empty markup shell
   if (slidesList.length === 0) {
     return null;
   }
 
   return (
-    /* 🌍 MAIN WRAPPER CONTAINER */
     <section className="w-full bg-white py-20 px-6 sm:px-10 lg:px-16 overflow-hidden relative">
-      {/* 🌪️ 50% LEFT SIDE FLOATING TOPOGRAPHY BACKGROUND LAYER */}
       <div className="absolute left-0 top-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden z-0">
         <div
           className="w-full h-full opacity-35 bg-cover bg-left bg-no-repeat animate-left-topo origin-left"
@@ -82,7 +76,6 @@ const ProjectSlider = () => {
 
       {/* 📦 FOREGROUND MAIN CONTENT */}
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* 🎯 HEADINGS CENTERED */}
         <div className="text-center mb-16 flex flex-col items-center justify-center">
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             Our Organization
@@ -93,43 +86,43 @@ const ProjectSlider = () => {
           <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
         </div>
 
-        {/* 🌟 MAIN SPLIT LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[450px]">
-          {/* 📝 LEFT SIDE: ANIMATED TEXT CONTENT */}
-          <div className="lg:col-span-5 relative h-[320px] flex flex-col justify-center order-2 lg:order-1 z-10">
-            {slidesList.map((slide, index) => (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 flex flex-col justify-center space-y-4 text-left transition-all duration-700 ease-in-out ${
-                  index === current
-                    ? "opacity-100 translate-x-0 scale-100 pointer-events-auto z-10"
-                    : "opacity-0 -translate-x-8 scale-95 pointer-events-none z-0"
-                }`}
-              >
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] leading-tight">
-                  {slide.title}
-                </h3>
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed line-clamp-4">
-                  {slide.description}
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+          
+          <div className="lg:col-span-5 relative flex flex-col justify-between order-2 lg:order-1">
+            <div className="w-full h-full flex flex-col justify-start">
+              {slidesList.map((slide, index) => (
+                <div
+                  key={slide.id}
+                  className={`transition-all duration-700 ease-in-out flex flex-col space-y-4 text-left ${
+                    index === current
+                      ? "opacity-100 block translate-x-0 scale-100 pointer-events-auto"
+                      : "opacity-0 hidden -translate-x-8 scale-95 pointer-events-none"
+                  }`}
+                >
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] leading-tight">
+                    {slide.title}
+                  </h3>
+                  <p className="text-gray-700 text-base sm:text-lg leading-relaxed line-clamp-5">
+                    {slide.description}
+                  </p>
 
-                <div className="pt-2">
-                  <Link
-                    to={slide.link}
-                    className="inline-flex items-center text-[#E56D37] hover:text-black font-bold text-base transition-colors group"
-                  >
-                    Explore Project Details
-                    <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
-                      →
-                    </span>
-                  </Link>
+                  <div className="pt-2">
+                    <Link
+                      to={slide.link}
+                      className="inline-flex items-center text-[#E56D37] hover:text-black font-bold text-base transition-colors group"
+                    >
+                      Explore Project Details
+                      <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
+                        →
+                      </span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
-            {/* 📍 Pagination Indicators absolute anchored down */}
             {slidesList.length > 1 && (
-              <div className="flex space-x-2 absolute -bottom-6 left-0 z-20">
+              <div className="flex space-x-2 mt-8 lg:mt-auto pt-4">
                 {slidesList.map((_, index) => (
                   <button
                     key={index}
@@ -145,8 +138,7 @@ const ProjectSlider = () => {
             )}
           </div>
 
-          {/* 🖼️ RIGHT SIDE: IMAGE SLIDER */}
-          <div className="lg:col-span-7 relative h-[350px] sm:h-[420px] w-full order-1 lg:order-2 z-10">
+          <div className="lg:col-span-7 relative h-[300px] sm:h-[400px] w-full order-1 lg:order-2">
             {slidesList.map((slide, index) => (
               <div
                 key={slide.id}
@@ -159,11 +151,11 @@ const ProjectSlider = () => {
                 onMouseLeave={() => setIsPaused(false)}
               >
                 <Link to={slide.link} className="block w-full h-full group">
-                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500 bg-gray-200 relative">
+                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-md group-hover:shadow-2xl group-hover:-translate-y-1 transition-all duration-500 bg-gray-200 relative">
                     <img
                       src={slide.image}
                       alt={slide.title}
-                      className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="w-full h-full object-cover transform scale-100 group-hover:scale-102 transition-transform duration-700 ease-out"
                     />
 
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
@@ -176,6 +168,7 @@ const ProjectSlider = () => {
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
