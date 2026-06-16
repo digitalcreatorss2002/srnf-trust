@@ -52,7 +52,7 @@ const Whowe = () => {
     >
       {/* 1. Overall Heading */}
       <h1 className="text-4xl md:text-5xl font-extrabold text-[#E56D37] mb-8 tracking-tight">
-        Who We Are
+        Why SRNF
       </h1>
 
       {/* 2. Top Dynamic Paragraph */}
