@@ -35,7 +35,6 @@ const Publications = () => {
     fetchData();
   }, []);
 
-  // URL Hash Synchronizer Logic (legal-documents को यहाँ भी शामिल किया गया है)
   useEffect(() => {
     if (location.hash) {
       const tab = location.hash.replace("#", "");
@@ -47,7 +46,6 @@ const Publications = () => {
     }
   }, [location]);
 
-  // Filters for structural tabs
   const reports = publications.filter((p) => p.type === "report");
   const caseStudies = publications.filter((p) => p.type === "case_study");
   const legalDocs = publications.filter((p) => p.type === "legal"); // नया फ़िल्टर: Legal Documents के लिए
@@ -55,7 +53,6 @@ const Publications = () => {
   return (
     <div className="bg-bg-color min-h-screen">
       
-      {/* HEADER HERO VIEW */}
       <section className="bg-primary text-white py-20 px-4 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +66,6 @@ const Publications = () => {
         </motion.p>
       </section>
 
-      {/* STICKY NAVIGATION TABS */}
       <section className="border-b sticky top-20 bg-white z-40 shadow-sm border-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center space-x-8 overflow-x-auto no-scrollbar">
@@ -98,10 +94,8 @@ const Publications = () => {
         </div>
       </section>
 
-      {/* CONDITIONAL CARDS CONTENT RENDERING */}
       <div className="max-w-7xl mx-auto px-4 py-12 min-h-[60vh]">
         
-        {/* ANNUAL REPORTS VIEW */}
         {activeTab === "annual-reports" && (
           reports.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6 animate-in fade-in duration-300">
@@ -129,7 +123,6 @@ const Publications = () => {
           )
         )}
 
-        {/* CASE STUDIES VIEW */}
         {activeTab === "case-studies" && (
           caseStudies.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in duration-300">
@@ -161,7 +154,6 @@ const Publications = () => {
           )
         )}
 
-        {/* IN PUBLICATIONS / BOOKS VIEW */}
         {activeTab === "in-publications" && (
           inPublications.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-in fade-in duration-300">
@@ -193,8 +185,6 @@ const Publications = () => {
           )
         )}
 
-        {/* LEGAL DOCUMENTS VIEW */}
-        {/* नया ब्लॉक: जब Legal Documents टैब एक्टिव होगा तब यह सेक्शन रेंडर होगा */}
         {activeTab === "legal-documents" && (
           legalDocs.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6 animate-in fade-in duration-300">

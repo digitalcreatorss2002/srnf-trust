@@ -10,7 +10,6 @@ const PressCoverageDetails = () => {
 
   const [activePreviewImage, setActivePreviewImage] = useState("");
 
-  // GALLERY LIGHTBOX MODAL STATES
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -73,7 +72,6 @@ const PressCoverageDetails = () => {
     setCurrentIndex(prevIndex);
   };
 
-  // LOADING SCREEN
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 font-bold text-[#6a752b] animate-pulse">
@@ -82,7 +80,6 @@ const PressCoverageDetails = () => {
     );
   }
 
-  // ERROR / NOT FOUND SCREEN
   if (!coverage) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -98,7 +95,6 @@ const PressCoverageDetails = () => {
     <div className="bg-white min-h-screen">
       <article className="max-w-4xl mx-auto px-4 pt-16 pb-12">
         
-        {/* Meta Info */}
         <div className="flex items-center gap-3 mb-4 text-sm font-bold text-[#6a752b] uppercase tracking-widest">
             <span>{coverage.tag || "Press Coverage"}</span>
             <span className="text-gray-300">•</span>
@@ -109,9 +105,7 @@ const PressCoverageDetails = () => {
             {coverage.title}
         </h1>
 
-        {/* 🔥 INTERACTIVE GALLERY CONTAINER (1 BIG IMAGE + THUMBNAILS BELOW) */}
         <div className="mb-10 flex flex-col gap-4">
-            {/* Large Main Display View */}
             <div className="relative group overflow-hidden rounded-3xl shadow-md border border-gray-100 bg-gray-50 flex items-center justify-center">
                 <img
                   src={activePreviewImage}
@@ -121,7 +115,6 @@ const PressCoverageDetails = () => {
                 />
             </div>
 
-            {/* Interactive Row Grid Thumbnails Layout */}
             {coverage.images && coverage.images.length > 1 && (
                 <div className="flex flex-wrap gap-3 items-center justify-start p-1 overflow-x-auto no-scrollbar">
                     {coverage.images.map((img, i) => {
@@ -144,7 +137,6 @@ const PressCoverageDetails = () => {
             )}
         </div>
 
-        {/* TEXT CONTENT AREA */}
         <div className="prose prose-lg max-w-none mb-12">
             {(coverage.para || "").split("\n").map((p, i) => (
               <p key={i} className="mb-6 text-gray-600 leading-relaxed text-lg">
@@ -155,19 +147,15 @@ const PressCoverageDetails = () => {
 
       </article>
 
-      {/* LIGHTBOX FULLSCREEN MODAL GALLERY WRAPPER */}
       {selectedImage && (
         <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-[100] backdrop-blur-md transition-opacity" onClick={closeModal}>
           
-          {/* Close Button */}
           <button className="absolute top-8 right-8 text-white/70 hover:text-white text-5xl font-light z-50 transition-colors cursor-pointer" onClick={closeModal}>&times;</button>
 
-          {/* Previous Arrow Button */}
           <button className="absolute left-4 md:left-8 text-white/50 hover:text-white bg-white/10 hover:bg-white/20 p-4 rounded-full z-50 transition-all cursor-pointer" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
           </button>
 
-          {/* Fullscreen Image Container */}
           <div className="relative max-w-5xl max-h-[85vh] px-4" onClick={(e) => e.stopPropagation()}>
               <img
                 src={selectedImage}
@@ -179,14 +167,12 @@ const PressCoverageDetails = () => {
               </div>
           </div>
 
-          {/* Next Arrow Button */}
           <button className="absolute right-4 md:right-8 text-white/50 hover:text-white bg-white/10 hover:bg-white/20 p-4 rounded-full z-50 transition-all cursor-pointer" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
       )}
 
-      {/* Bottom Directory Return */}
       <div className="text-center py-16 border-t border-gray-50">
         <Link to="/media" className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-all font-black uppercase text-xs tracking-widest">
             <span className="text-xl">←</span> Back to Media & Stories

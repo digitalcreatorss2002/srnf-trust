@@ -7,7 +7,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState(null);
 
-  // Current URL check karne ke liye hook (taaki sub-items active hone par parent ko bhi active style de sakein)
   const location = useLocation();
 
   const formatLabel = (label) => {
@@ -71,7 +70,6 @@ const Navbar = () => {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center min-h-[110px] py-3">
           
-          {/* Logo Section (Left side shrink protected) */}
           <div className="flex items-center shrink-0">
             <Link to="/" className="flex items-center justify-center">
               <div className="h-24 w-auto flex items-center justify-center p-1">
@@ -84,7 +82,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* 🟢 Desktop Navigation: Added justify-center and mx-auto for absolute center mapping */}
           <div className="hidden lg:flex flex-1 justify-center items-center mx-4 space-x-1">
             {menuItems.map((item) => {
               const isParentActive = location.pathname.startsWith(item.path);
@@ -109,7 +106,6 @@ const Navbar = () => {
                     )}
                   </NavLink>
 
-                  {/* Dropdown Menu */}
                   {item.hasDropdown && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-[90%] w-64 bg-white shadow-2xl border border-gray-100 rounded-xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-2 group-hover:pointer-events-auto transition-all duration-300 z-50">
                       <div className="p-2">
@@ -141,7 +137,6 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Donate Button Section (Right side shrink protected) */}
           <div className="hidden lg:flex items-center shrink-0 pl-2">
             <Link
               to="/donate"
@@ -151,7 +146,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <div className="flex items-center lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}

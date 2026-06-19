@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-// Video Checker Helper
 const isVideoFile = (url) => {
   if (!url) return false;
   const cleanUrl = url.split("?")[0];
@@ -14,12 +13,10 @@ const ProjectDetails = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // स्क्रीन स्क्रॉल पोजीशन को टॉप पर रीसेट करना
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // Fetch project dynamically from API
   useEffect(() => {
     const fetchProjectDetails = async () => {
       setLoading(true);
@@ -44,7 +41,6 @@ const ProjectDetails = () => {
     fetchProjectDetails();
   }, [slug]);
 
-  // LOADING STATE
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg-color">
@@ -58,7 +54,6 @@ const ProjectDetails = () => {
     );
   }
 
-  // DATA NOT FOUND STATE
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg-color px-4 text-center">
@@ -82,7 +77,6 @@ const ProjectDetails = () => {
 
   return (
     <div className="bg-bg-color min-h-screen">
-      {/* HERO HEADER SECTION */}
       <section className="bg-primary text-white pt-20 pb-28 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
 
@@ -110,12 +104,9 @@ const ProjectDetails = () => {
         </div>
       </section>
 
-      {/* MAIN LAYOUT STRUCTURE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          {/* Main Left Content Container */}
           <div className="lg:w-2/3 flex flex-col gap-8">
-            {/* Media Rendering Block */}
             <div className="relative h-80 md:h-140 rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white bg-gray-100 group">
               {isVideoFile(getImageUrl(project.image_url)) ? (
                 <video
@@ -155,7 +146,6 @@ const ProjectDetails = () => {
                 ))}
               </div>
 
-              {/* Goal Objective Section */}
               {project.goal && (
                 <div className="mt-12 mb-12 relative bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl border border-green-100 p-10 shadow-sm overflow-hidden">
                   <div className="absolute -top-6 -right-4 p-8 opacity-5">
@@ -175,7 +165,6 @@ const ProjectDetails = () => {
                 </div>
               )}
 
-              {/* Key Activities Mapping */}
               {project.activities && (
                 <div className="mt-16">
                   <h3 className="text-2xl font-serif text-text-primary mb-8 flex items-center gap-3 border-b pb-6 border-gray-100">
@@ -202,7 +191,6 @@ const ProjectDetails = () => {
                 </div>
               )}
 
-              {/* Achievements Mapping */}
               {project.achievements && (
                 <div className="mt-16">
                   <h3 className="text-2xl font-serif text-text-primary mb-8 flex items-center gap-3 border-b pb-6 border-gray-100">
@@ -231,10 +219,8 @@ const ProjectDetails = () => {
             </div>
           </div>
 
-          {/* Right Floating Sidebar */}
           <div className="lg:w-1/3">
             <div className="sticky top-28 flex flex-col gap-8">
-              {/* Snapshot Info Wrapper */}
               <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
                 <h3 className="text-xl font-serif font-bold text-text-primary border-b border-gray-100 pb-5 mb-8">
                   Snapshot
@@ -332,7 +318,6 @@ const ProjectDetails = () => {
                 </ul>
               </div>
 
-              {/* Donation Core CTA Box */}
               <div className="bg-[#2d2d2d] rounded-3xl shadow-2xl p-10 text-center relative overflow-hidden text-white group">
                 <span className="text-5xl block mb-6">🤝</span>
                 <h3 className="text-2xl font-serif font-bold mb-4">

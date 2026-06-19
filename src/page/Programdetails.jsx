@@ -9,7 +9,6 @@ const ProgramDetails = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // स्क्रीन स्क्रॉल पोजीशन को टॉप पर रीसेट करना
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -24,7 +23,6 @@ const ProgramDetails = () => {
         if (result.status === "success") {
           const found = result.data.find((item) => item.slug === slug);
           if (found) {
-            // Map single image_url to images array for slideshow compatibility
             const mappedImages = found.image_url
               ? [getImageUrl(found.image_url)]
               : ["https://placehold.co/1200x800?text=SDF+Program"];
@@ -47,7 +45,6 @@ const ProgramDetails = () => {
     fetchProgramDetails();
   }, [slug]);
 
-  // 🔥 3. AUTOMATIC SLIDESHOW TIMER CAROUSEL
   useEffect(() => {
     setCurrentImage(0);
     if (!program || !program.images?.length) return;
@@ -61,7 +58,6 @@ const ProgramDetails = () => {
     return () => clearInterval(timer);
   }, [program]);
 
-  // 4. LOADING RENDER STATE
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg-color">
@@ -72,7 +68,6 @@ const ProgramDetails = () => {
     );
   }
 
-  // 5. DATA ERROR/NOT FOUND RENDER STATE
   if (!program) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg-color px-4">
@@ -97,7 +92,6 @@ const ProgramDetails = () => {
   return (
     <div className="bg-bg-color min-h-screen">
       
-      {/* HERO SECTION */}
       <section className="bg-primary text-white py-20">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4">
@@ -115,7 +109,6 @@ const ProgramDetails = () => {
         </div>
       </section>
 
-      {/* IMAGE CAROUSEL SECTION */}
       <section className="max-w-7xl mx-auto px-4 -mt-10">
         <div className="relative h-100 md:h-175 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-gray-200">
           {program.images.map((img, index) => (
@@ -137,14 +130,12 @@ const ProgramDetails = () => {
             </div>
           ))}
 
-          {/* Floating Status Badge */}
           <div className="absolute top-4 left-4 z-10">
             <span className="bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
               {program.status || "active"}
             </span>
           </div>
 
-          {/* Carousel Control Dots */}
           {program.images.length > 1 && (
             <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
               {program.images.map((_, index) => (
@@ -163,11 +154,9 @@ const ProgramDetails = () => {
         </div>
       </section>
 
-      {/* MAIN CONTENT BLOCK */}
       <section className="py-16 max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           
-          {/* Side Bar Info Block */}
           <div className="md:col-span-1 space-y-6">
             <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 bg-gradient-to-b from-white to-gray-50/50">
               <h3 className="text-lg font-serif font-bold text-text-primary mb-4 border-b pb-2">
@@ -219,7 +208,6 @@ const ProgramDetails = () => {
             </Link>
           </div>
 
-          {/* Primary Descriptive Area */}
           <div className="md:col-span-2">
             <h2 className="text-3xl font-serif text-text-primary mb-6">
               About the Program
@@ -235,7 +223,6 @@ const ProgramDetails = () => {
                 ))}
             </div>
 
-            {/* Key Activities Block */}
             {program.activities && (
               <div className="mt-12">
                 <h3 className="text-2xl font-serif text-text-primary mb-6 flex items-center gap-3 border-b pb-4 border-gray-100">
@@ -257,7 +244,6 @@ const ProgramDetails = () => {
               </div>
             )}
 
-            {/* Program Achievements Block */}
             {program.achievements && (
               <div className="mt-12">
                 <h3 className="text-2xl font-serif text-text-primary mb-6 flex items-center gap-3 border-b pb-4 border-gray-100">
@@ -279,7 +265,6 @@ const ProgramDetails = () => {
               </div>
             )}
 
-            {/* Program Absolute Goal Banner */}
             {(program.goal || program.title) && (
               <div className="mt-12 mb-4 relative bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-100 p-8 shadow-sm overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 opacity-10">
@@ -301,7 +286,6 @@ const ProgramDetails = () => {
         </div>
       </section>
 
-      {/* FOOTER DIRECTORY REDIRECT */}
       <section className="py-12 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <Link

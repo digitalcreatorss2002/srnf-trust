@@ -167,7 +167,6 @@ const LeadershipGovernance = () => {
         Leadership & Governance
       </h2>
 
-      {/* Main Front Grid Container */}
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24 px-4 mt-8">
         {Object.values(governanceList).map((card) => (
           <div
@@ -177,12 +176,10 @@ const LeadershipGovernance = () => {
           >
             <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] border border-[#E56D37] transform transition-all duration-300 hover:-translate-y-1">
               
-              {/* बदलाव: विड्थ/हाइट को परफेक्ट w-28 h-28 किया गया और पैडिंग को शून्य कर दिया गया */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-28 rounded-full flex items-center justify-center -mt-14 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#E56D37] bg-white overflow-hidden z-10">
                 <img
                   src={card.circleImage}
                   alt={card.title}
-                  /* बदलाव: object-cover और scale-110 लगाया ताकि खुद का खाली स्पेस काटकर इमेज सीधे मुख्य बॉर्डर से चिपक जाए */
                   className="w-full h-full object-cover rounded-full transition-all duration-300 transform scale-110 group-hover:scale-115"
                   onError={(e) => {
                     e.currentTarget.src = "https://via.placeholder.com/150";
@@ -205,7 +202,6 @@ const LeadershipGovernance = () => {
         ))}
       </div>
 
-      {/* ==================== POPUP MODAL LOGIC ==================== */}
       {activeModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300">
           <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200">
@@ -222,7 +218,6 @@ const LeadershipGovernance = () => {
             </div>
 
             <div className="p-6 md:p-8">
-              {/* CONDITION 1: Founder's Message */}
               {activeModal.type === "text-only" && activeModal.details && (
                 <div className="prose max-w-none">
                   <h4 className="text-xl font-semibold text-neutral-800 mb-4">
@@ -234,7 +229,6 @@ const LeadershipGovernance = () => {
                 </div>
               )}
 
-              {/* CONDITION 2: Board & Advisory */}
               {activeModal.type === "members-list" &&
                 Array.isArray(activeModal.details) && (
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
@@ -244,7 +238,6 @@ const LeadershipGovernance = () => {
                         className="w-40 h-40 relative group [perspective:1000px]"
                       >
                         <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
-                          {/* FRONT SIDE (गोल व्यक्तिगत फोटो) */}
                           <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
                             <img
                               src={member.img}
@@ -257,7 +250,6 @@ const LeadershipGovernance = () => {
                             />
                           </div>
 
-                          {/* BACK SIDE (स्क्वायर टेक्स्ट बॉक्स) */}
                           <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
                             <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
                               {member.name}
@@ -282,7 +274,6 @@ const LeadershipGovernance = () => {
                   </div>
                 )}
 
-              {/* CONDITION 3: Management Team */}
               {activeModal.type === "levels-list" &&
                 Array.isArray(activeModal.details) && (
                   <div className="space-y-12">
@@ -302,7 +293,6 @@ const LeadershipGovernance = () => {
                               className="w-40 h-40 relative group [perspective:1000px]"
                             >
                               <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
-                                {/* FRONT SIDE (गोल व्यक्तिगत फोटो) */}
                                 <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
                                   <img
                                     src={member.img}
@@ -315,7 +305,6 @@ const LeadershipGovernance = () => {
                                   />
                                 </div>
 
-                                {/* BACK SIDE (स्क्वायर टेक्स्ट बॉक्स) */}
                                 <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
                                   <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
                                     {member.name}

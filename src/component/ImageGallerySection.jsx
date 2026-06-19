@@ -50,7 +50,6 @@ const ImageGallerySection = () => {
     <section className="w-full bg-white py-16 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
-        {/* 🎯 HEADINGS CENTERED */}
         <div className="text-center mb-16 flex flex-col items-center justify-center">
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
             Grassroots Initiatives

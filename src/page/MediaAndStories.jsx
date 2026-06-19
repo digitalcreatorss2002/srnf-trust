@@ -7,7 +7,6 @@ const MediaAndStories = () => {
   const [activeTab, setActiveTab] = useState('photos');
   const location = useLocation(); 
   
-  // Continuous Gallery Modal States
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [playingVideoId, setPlayingVideoId] = useState(null);
@@ -47,7 +46,6 @@ const MediaAndStories = () => {
     fetchData();
   }, []);
 
-  // URL Hash Sync Navigation Config
   useEffect(() => {
     if (location.hash) {
       const targetTab = location.hash.replace('#', '');
@@ -99,7 +97,6 @@ const MediaAndStories = () => {
 
   return (
     <div className="bg-white min-h-screen relative">
-      {/* Hero Section */}
       <section className="bg-primary text-white py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h1
@@ -120,7 +117,6 @@ const MediaAndStories = () => {
         </div>
       </section>
 
-      {/* Navigation Tabs Bar */}
       <section className="border-b border-gray-200 sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-xl mx-auto px-4 justify-center">
           <div className="flex overflow-x-auto no-scrollbar space-x-8 justify-center">
@@ -145,11 +141,9 @@ const MediaAndStories = () => {
         </div>
       </section>
 
-      {/* Main Container Render Blocks */}
       <section className="py-12 px-4 bg-gray-50 min-h-[60vh]">
         <div className="max-w-7xl mx-auto">
 
-          {/* Photo Grid Section */}
           {activeTab === 'photos' && (
             <motion.div
               id="photos"
@@ -177,7 +171,6 @@ const MediaAndStories = () => {
             </motion.div>
           )}
 
-          {/* Video Grid Section */}
           {activeTab === 'videos' && (
             <motion.div
               id="videos"
@@ -229,7 +222,6 @@ const MediaAndStories = () => {
             </motion.div>
           )}
 
-          {/* Press Coverage Section */}
           {activeTab === 'press' && (
             <motion.div
               id="press"
@@ -238,7 +230,6 @@ const MediaAndStories = () => {
               className="space-y-6 max-w-4xl mx-auto"
             >
               {pressCov.map(item => (
-                /* 🔥 FIXED LINK PATHWAY: अब यह आपको सीधे सटीक प्रेस डिटेल्स यूआरएल पर लेकर जाएगा */
                 <Link key={item.id} to={`/media-and-stories/${item.slug}`} className="flex flex-col sm:flex-row gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
                   <div className="sm:w-48 h-32 bg-gray-100 rounded-xl flex items-center justify-center shrink-0 overflow-hidden border border-gray-50">
                     <img src={getImageUrl(item.image || item.image_url)} alt="" className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
@@ -263,7 +254,6 @@ const MediaAndStories = () => {
         </div>
       </section>
 
-      {/* CONTINUOUS MODAL LIGHTBOX VIEW */}
       {isPhotoModalOpen && medias.length > 0 && (
         <div 
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 p-4 backdrop-blur-md transition-all duration-300"

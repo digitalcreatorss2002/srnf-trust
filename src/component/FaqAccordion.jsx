@@ -29,7 +29,6 @@ const FaqAccordion = () => {
   return (
     <section className="bg-[#f8f8f8] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
       
-      {/* 2. FAQ Main Heading */}
       <h2 
         className="text-center font-bold text-3xl md:text-4xl text-[#2d2d2d] mb-12 tracking-wide"
         style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.6)' }}
@@ -37,7 +36,6 @@ const FaqAccordion = () => {
         Frequently Asked Questions
       </h2>
 
-      {/* Accordion Container */}
       <div className="w-full max-w-4xl space-y-5">
         {faqData.map((faq, index) => {
           const isOpen = openIndex === index;
@@ -47,7 +45,6 @@ const FaqAccordion = () => {
               key={index}
               className="bg-[#E56D37] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#E56D37] transition-all duration-300"
             >
-              {/* Question Row (Clickable) */}
               <button
                 onClick={() => handleToggle(index)}
                 className="w-full flex justify-between items-center p-5 md:p-6 text-left text-white font-semibold text-lg md:text-xl focus:outline-none transition-colors hover:text-[#2d2d2d] group"
@@ -60,14 +57,12 @@ const FaqAccordion = () => {
                 </span>
               </button>
 
-              {/* 3. Animated Answer Container */}
               <div
                 className={`grid transition-all duration-300 ease-in-out ${
                   isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                 }`}
               >
                 <div className="overflow-hidden">
-                  {/* Inner text content wrapper */}
                   <div className="p-5 md:p-6 pt-0 text-white text-base md:text-lg font-light leading-relaxed border-t border-neutral-500/30 bg-[#444444]/50">
                     {faq.answer}
                   </div>

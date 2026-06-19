@@ -42,7 +42,6 @@ const Programs = () => {
     fetchPrograms();
   }, [location.hash]);
 
-  // 🔥 2. EXTRACT UNIQUE CATEGORIES FOR TABS DYNAMICALLY
   const uniqueCategories = [
     ...new Set(
       programsList
@@ -51,7 +50,6 @@ const Programs = () => {
     ),
   ];
 
-  // 🔥 4. SCROLL LOGIC FOR TAB NAVIGATION ARROWS
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft } = scrollRef.current;
@@ -68,13 +66,11 @@ const Programs = () => {
     }
   };
 
-  // Helper to format tab labels properly
   const formatTabLabel = (id) => {
     if (id === "all") return "All Programs 🌍";
     return id.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
 
-  // 🔥 5. FILTER PROGRAMS BASED ON THE ACTIVE TAB
   const displayPrograms = programsList.filter(
     (p) =>
       (p.program_id || "").toLowerCase().trim() ===
@@ -83,7 +79,6 @@ const Programs = () => {
 
   return (
     <div className="bg-bg-color min-h-screen pb-20">
-      {/* HEADER SECTION WITH BACKGROUND IMAGE */}
       <section className="bg-[#E56D37] text-white py-20 bg-opacity-90 relative">
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -97,10 +92,8 @@ const Programs = () => {
         </div>
       </section>
 
-      {/* TABS SECTION WITH SMOOTH HORIZONTAL SCROLL ARROWS */}
       <section className="border-b sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
-          {/* Left Arrow Button */}
           <button
             onClick={() => scroll("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100"
@@ -108,7 +101,6 @@ const Programs = () => {
             <span className="text-lg">❮</span>
           </button>
 
-          {/* Scrollable Tab Container */}
           <div
             ref={scrollRef}
             className="flex items-center space-x-8 overflow-x-auto no-scrollbar scroll-smooth px-12"
@@ -131,7 +123,6 @@ const Programs = () => {
             ))}
           </div>
 
-          {/* Right Arrow Button */}
           <button
             onClick={() => scroll("right")}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100"
@@ -141,7 +132,6 @@ const Programs = () => {
         </div>
       </section>
 
-      {/* FILTERED CARDS CONTENT GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayPrograms.length === 0 && (
@@ -156,7 +146,6 @@ const Programs = () => {
               id={program.program_id}
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group flex flex-col scroll-mt-28"
             >
-              {/* Card Image Block */}
               <div className="h-48 overflow-hidden">
                 <img
                   src={getImageUrl(program.image_url)}
@@ -170,9 +159,7 @@ const Programs = () => {
                 />
               </div>
 
-              {/* Card Detailed Info Block */}
               <div className="p-8 relative grow flex flex-col">
-                {/* Floating Absolute Icon */}
                 <div className="absolute -top-10 right-6 w-20 h-20 bg-white rounded-full flex items-center justify-center text-4xl shadow-xl border border-gray-50 hover:scale-110 transition-transform duration-300">
                   {program.icon || "📌"}
                 </div>
@@ -185,7 +172,6 @@ const Programs = () => {
                   {program.description}
                 </p>
 
-                {/* Badges Info (Beneficiaries & Active Region Status) */}
                 <div className="flex items-center gap-2 mt-auto pt-4 border-t border-gray-100 flex-wrap">
                   <span className="bg-[#E9EFE1] text-primary text-xs font-bold px-3 py-1 rounded-full">
                     {program.beneficiaries || "N/A"} Beneficiaries
@@ -195,7 +181,6 @@ const Programs = () => {
                   </span>
                 </div>
 
-                {/* Detail Router Redirect Link */}
                 <Link
                   to={`/programdetails/${program.slug}`}
                   className="text-primary font-bold hover:text-secondary uppercase tracking-wider text-sm self-start transition-colors mt-6"

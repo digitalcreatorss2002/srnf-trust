@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "../apiConfig";
 
 const Contact = () => {
-  // फॉर्म डेटा को ट्रैक करने के लिए स्टेट
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -11,7 +10,6 @@ const Contact = () => {
     message: "",
   });
 
-  // इनपुट बदलते समय डेटा अपडेट करने का हैंडलर
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -36,7 +34,6 @@ const Contact = () => {
       const data = await response.json();
       if (data.status === "success") {
         alert(data.message);
-        // फॉर्म फील्ड्स को वापस खाली (Reset) करना
         setFormData({
           firstName: "",
           lastName: "",
@@ -55,7 +52,6 @@ const Contact = () => {
 
   return (
     <div className="bg-bg-color min-h-screen">
-      {/* Hero Header Section */}
       <section className="bg-primary text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
@@ -67,11 +63,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Main Core Layout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
-          {/* Contact Information Cards (Left Sidebar) */}
           <div className="lg:col-span-1 space-y-8">
             <div>
               <h2 className="text-2xl font-serif font-bold text-text-primary mb-6">
@@ -138,7 +132,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Embedded Google Maps Frame Placeholder */}
             <div className="w-full h-48 bg-gray-200 rounded-xl overflow-hidden shadow-inner border border-gray-300 relative">
               <iframe
                 src="https://maps.google.com/maps?q=Dwarka%20Sector-15,%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
@@ -150,7 +143,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Interactive Form Box (Right Panel) */}
           <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10">
             <h2 className="text-3xl font-serif font-bold text-text-primary mb-2">
               Write to Us

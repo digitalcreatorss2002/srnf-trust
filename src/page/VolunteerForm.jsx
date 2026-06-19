@@ -63,7 +63,6 @@ const VolunteerForm = () => {
 
   return (
     <div className="bg-bg-color min-h-screen">
-      {/* Hero Header Section */}
       <section className="bg-primary text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
@@ -75,7 +74,6 @@ const VolunteerForm = () => {
         </div>
       </section>
 
-      {/* Main Form Box */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10">
           <h2 className="text-3xl font-serif font-bold text-text-primary mb-2">

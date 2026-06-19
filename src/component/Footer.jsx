@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-[#fff] text-[#E56D37] font-sans mt-auto">
-      {/* 🌿 MAIN CONTENT AREA - Spacing and strict grid alignment */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start text-left">
           
-          {/* 1. Left Side: Brand Statement & Social Icons */}
           <div className="space-y-6 flex flex-col justify-start items-start text-left">
             <p
               className="text-[#E56D37]/95 text-2xl md:text-[22px] leading-relaxed max-w-[380px] text-left font-normal"
@@ -20,7 +18,6 @@ const Footer = () => {
               environment.
             </p>
 
-            {/* Social Icons Container */}
             <div className="flex space-x-3 pt-2">
               <a
                 href="#"
@@ -43,7 +40,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 2. 🔗 Quick Links - Strictly left-aligned with heading */}
           <div className="flex flex-col items-start text-left w-full">
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#E56D37]/20 w-fit pb-1.5 tracking-wide text-left">
               Quick Links
@@ -72,7 +68,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 3. 🎯 Our Programs - Strictly left-aligned with heading */}
           <div className="flex flex-col items-start text-left w-full">
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#E56D37]/20 w-fit pb-1.5 tracking-wide text-left">
               Our Programs
@@ -86,7 +81,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 4. 📍 Contact Information */}
           <div className="flex flex-col items-start text-left w-full">
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#E56D37]/20 w-fit pb-1.5 tracking-wide text-left">
               Contact
@@ -119,7 +113,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* 🔻 BOTTOM STRIP */}
       <div className="border-t border-[#E56D37]/10 bg-[#E56D37]/30 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center text-center text-[13px] text-[#2d2d2d]/80 gap-2 sm:gap-3">
           <p>

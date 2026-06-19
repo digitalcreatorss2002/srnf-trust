@@ -50,12 +50,10 @@ const Whowe = () => {
     <section 
       className="w-full min-h-screen py-16 px-4 md:px-12 lg:px-24 bg-white flex flex-col items-center" 
     >
-      {/* 1. Overall Heading */}
       <h1 className="text-4xl md:text-5xl font-extrabold text-[#E56D37] mb-8 tracking-tight">
         Why SRNF
       </h1>
 
-      {/* 2. Top Dynamic Paragraph */}
       {aboutData.who_we_are_text && (
         <p 
           className="max-w-7xl text-justify text-lg md:text-xl text-[#2d2d2d] font-medium leading-relaxed mb-12"
@@ -63,7 +61,6 @@ const Whowe = () => {
         />
       )}
 
-      {/* 3. Main Display Area with Team Image */}
       <div className="relative w-full max-w-7xl h-[40vh] md:h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-[inset_0_0_80px_rgba(0,0,0,0.1)] border-4 border-gray-100">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -72,10 +69,8 @@ const Whowe = () => {
         <div className="absolute inset-0 bg-black/5 shadow-[inset_0_0_120px_rgba(0,0,0,0.15)] rounded-2xl" />
       </div>
 
-      {/* 4. Bottom Boxes - Mission & Vision */}
       <div className="w-full max-w-7xl mt-[-8vh] md:mt-[-10vh] lg:mt-[-12vh] z-10 flex flex-col md:flex-row gap-8 px-4 md:px-0">
         
-        {/* Our Mission Box */}
         <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[300px]">
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
@@ -91,7 +86,6 @@ const Whowe = () => {
           </div>
         </div>
 
-        {/* Our Vision Box */}
         <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[300px]">
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"

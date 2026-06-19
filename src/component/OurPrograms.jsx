@@ -97,7 +97,6 @@ const OurPrograms = () => {
   return (
     <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden relative z-10">
       
-      {/* 🌪️ 100% PERFECT CONTINUOUS WIDE CONTOUR LINES LAYER */}
       <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[260px] pointer-events-none z-0 overflow-hidden">
         <div 
           className="w-full h-full opacity-30 bg-cover bg-right-top bg-no-repeat"
@@ -108,10 +107,8 @@ const OurPrograms = () => {
         />
       </div>
 
-      {/* 📦 FOREGROUND CONTENT CONTAINER */}
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* 🎯 Centered Section Heading */}
         <div className="text-center mb-24">
           <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
             Our Organization
@@ -122,7 +119,6 @@ const OurPrograms = () => {
           <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />
         </div>
 
-        {/* 📦 CARDS DISPLAY CONTAINER */}
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 items-center pt-6 min-h-[480px]"
           onMouseEnter={() => setIsPaused(true)}
@@ -134,7 +130,6 @@ const OurPrograms = () => {
                 key={`${program.id}-${index}`}
                 className="w-full bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 transform hover:translate-y-10 group flex flex-col justify-between min-h-[420px] border border-gray-100"
               >
-                {/* 🖼️ CARD IMAGE */}
                 <div className="relative h-56 w-full overflow-hidden bg-gray-100">
                   <img
                     src={program.image}
@@ -144,7 +139,6 @@ const OurPrograms = () => {
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 </div>
 
-                {/* 📝 CARD TEXT CONTENT AREA */}
                 <div className="p-6 flex-grow flex flex-col justify-between text-left">
                   <div className="space-y-3">
                     <h3 className="text-xl font-bold text-[#E56D37] group-hover:text-[#2b434d] transition-colors duration-300">
@@ -155,7 +149,6 @@ const OurPrograms = () => {
                     </p>
                   </div>
 
-                  {/* Action Link Button */}
                   <div className="pt-4">
                     <Link
                       to={program.link}
@@ -173,7 +166,6 @@ const OurPrograms = () => {
           })}
         </div>
 
-        {/* 🧭 NAVIGATION CONTROLS */}
         {programsData.length > 3 && (
           <div className="absolute top-[50%] -left-4 -right-4 md:-left-10 md:-right-10 lg:-left-16 lg:-right-16 transform -translate-y-1/2 flex justify-between pointer-events-none z-20">
             <button
@@ -191,7 +183,6 @@ const OurPrograms = () => {
           </div>
         )}
 
-        {/* 📍 BOTTOM DOT INDICATORS */}
         {programsData.length > 1 && (
           <div className="flex justify-center space-x-2 mt-16 md:mt-24">
             {programsData.map((_, index) => (

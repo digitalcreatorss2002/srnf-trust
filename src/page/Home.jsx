@@ -1,13 +1,12 @@
 import React from "react";
 import Hero from "../component/Hero";
 import ProjectSlider from "../component/ProjectSlider";
-import FocusAreas from "../component/StatCounter"; // 🔥 Yeh import add kiya
+import FocusAreas from "../component/StatCounter";
 import OngoingProjects from "../component/OngoingProjects";
 import OurPrograms from "../component/OurPrograms";
 import StoriesImpact from "../component/StoriesImpact";
 import GetInvolved from "../component/GetInvolved";
 import PartnersSection from "../component/PartnersSection";
-// import Newsletter from "../component/Newsletter";
 import Whowe from "../component/Whowe";
 import ImageGallerySection from "../component/ImageGallerySection";
 
@@ -24,7 +23,6 @@ export default function Home() {
       <GetInvolved/>
       <ImageGallerySection/>
       <PartnersSection/>
-      {/* <Newsletter/> */}
     </>
   );
 }

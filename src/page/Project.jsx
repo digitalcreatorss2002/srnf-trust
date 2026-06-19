@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-// Video Checker Helper
 const isVideoFile = (url) => {
   if (!url) return false;
   const cleanUrl = url.split('?')[0];
@@ -18,14 +17,12 @@ const Projects = () => {
   const [projectsList, setProjectsList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch projects from backend API
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/projects.php`);
         const result = await response.json();
         
-        // Deep validation for both direct array and wrapped nested data matrix formats
         if (result) {
           if (Array.isArray(result)) {
             setProjectsList(result);
@@ -44,13 +41,11 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
-  // Helper formatting utility
   const formatTabLabel = (label) => {
     if (!label) return "";
     return label.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
 
-  // Handle URL Hash sync & Layout Scroll Position Tracking
   useEffect(() => {
     if (location.hash) {
       const tab = decodeURIComponent(location.hash.replace("#", "")).trim().toLowerCase();
@@ -63,14 +58,11 @@ const Projects = () => {
       setActiveTab("all");
     }
     
-    // Reset category selection on tab shift to avoid state grid locks
     setSelectedCategory(null);
 
-    // Smooth viewport view reset onto top section container
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.hash]);
 
-  // Horizontal Tab scroll helpers
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft } = scrollRef.current;
@@ -80,13 +72,11 @@ const Projects = () => {
     }
   };
 
-  // 🔥 FIXED 1: SUPER ROBUST CASING & EXTRA SPACE INSENSITIVE FILTER
   const displayProjects = projectsList.filter((p) => {
     const projectStatus = p.status ? p.status.trim().toLowerCase() : "";
     
     let matchesTab = false;
     if (activeTab === "all") {
-      // Isme database ki 'active', 'ongoing', ya khali (default) status sab cover ho jayenge
       matchesTab = projectStatus === "active" || projectStatus === "ongoing" || projectStatus === "";
     } else if (activeTab === "completed") {
       matchesTab = projectStatus === "completed";
@@ -101,7 +91,6 @@ const Projects = () => {
     return matchesTab && matchesCategory;
   });
 
-  // 🔥 FIXED 2: SYNCHRONIZED COMPACT ACTIVE VIEWPORT SUBCATEGORIES 
   const currentTabProjects = projectsList.filter((p) => {
     const projectStatus = p.status ? p.status.trim().toLowerCase() : "";
     if (activeTab === "all") return projectStatus === "active" || projectStatus === "ongoing" || projectStatus === "";
@@ -125,7 +114,6 @@ const Projects = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-20">
       
-      {/* HEADER HERO VIEW */}
       <section id="ongoing" className="bg-accent text-white py-20 relative overflow-hidden scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
@@ -141,7 +129,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* FILTER BUTTON TABS NAVIGATION */}
       <section className="border-b sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
           <button type="button" onClick={() => scroll("left")} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
@@ -154,7 +141,6 @@ const Projects = () => {
             <button type="button" onClick={() => { window.location.hash = "planned"; }} className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${activeTab === "planned" ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-primary"}`}>Planned Projects 📋</button>
           </div>
 
-          {/* Dynamic Categories Row under status updates */}
           {uniqueCategories.length > 0 && (
             <div className="flex flex-wrap items-center justify-center gap-2 mt-2 pb-4 bg-white border-t pt-3 border-gray-50">
               {uniqueCategories.map(cat => (
@@ -169,7 +155,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* CARDS CONTENT GRID RENDERING */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {displayProjects.length === 0 ? (

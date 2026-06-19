@@ -30,7 +30,7 @@ const OngoingProjects = () => {
 
             return {
               id: project.id,
-              tag: project.category, // Map category straight to tag element
+              tag: project.category,
               title: project.title,
               description: project.description,
               locations: project.location,
@@ -62,7 +62,6 @@ const OngoingProjects = () => {
 
   return (
     <section className="relative w-full min-h-[500px] py-15 px-6 sm:px-10 lg:px-16 flex items-center justify-center overflow-hidden bg-gray-950">
-      {/* Background slider layout logic */}
       {projectsData.map((project, index) => (
         <div
           key={`bg-${project.id}`}
@@ -93,7 +92,6 @@ const OngoingProjects = () => {
           onMouseEnter={() => setIsPaused(true)}  
           onMouseLeave={() => setIsPaused(false)} 
         >
-          {/* Information output block area */}
           <div className="md:col-span-6 p-8 sm:p-12 flex flex-col justify-between text-left bg-white">
             {projectsData[current] && (
               <div className="space-y-4">
@@ -126,7 +124,6 @@ const OngoingProjects = () => {
             )}
           </div>
 
-          {/* Media component panel context */}
           <div className="md:col-span-6 relative min-h-[300px] md:min-h-full overflow-hidden bg-gray-100">
             {projectsData.map((project, index) => (
               <img
@@ -142,7 +139,6 @@ const OngoingProjects = () => {
           </div>
         </div>
 
-        {/* Navigation Dot markers layout */}
         {projectsData.length > 1 && (
           <div className="flex space-x-3 mt-8">
             {projectsData.map((_, index) => (

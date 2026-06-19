@@ -69,7 +69,6 @@ const Hero = () => {
 
   const slides = slidesList.length > 0 ? slidesList : defaultSlides;
 
-  // Auto-play interval setup (5 seconds)
   useEffect(() => {
     if (slides.length <= 1) return;
     const timer = setInterval(() => {
@@ -88,7 +87,6 @@ const Hero = () => {
 
   return (
     <div className="relative w-full h-[calc(100vh-110px)] min-h-[500px] overflow-hidden bg-gray-900">
-      {/* 🖼️ Slides Wrapper */}
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -96,7 +94,6 @@ const Hero = () => {
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
-          {/* Background Image with Zoom Effect */}
           <div
             className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[5000ms] ease-out ${
               index === current ? "scale-105" : "scale-100"
@@ -104,14 +101,11 @@ const Hero = () => {
             style={{ backgroundImage: `url("${slide.image}")` }}
           />
 
-          {/* Dark Overlay - Text Visibility ke liye */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-          {/* 📝 Animated Text Content Block */}
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8 w-full text-left">
               <div className="max-w-2xl space-y-6">
-                {/* Title Animation */}
                 <h1
                   className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#fff] transition-all duration-700 delay-300 transform ${
                     index === current
@@ -122,7 +116,6 @@ const Hero = () => {
                   {slide.title}
                 </h1>
 
-                {/* Description Animation */}
                 <p
                   className={`text-lg sm:text-xl text-white/90 leading-relaxed transition-all duration-700 delay-500 transform ${
                     index === current
@@ -133,7 +126,6 @@ const Hero = () => {
                   {slide.description}
                 </p>
 
-                {/* Button Animation */}
                 <div
                   className={`pt-2 transition-all duration-700 delay-700 transform ${
                     index === current
@@ -173,7 +165,6 @@ const Hero = () => {
 
       {slides.length > 1 && (
         <>
-          {/* 🧭 Left & Right Navigation Arrows */}
           <button
             onClick={prevSlide}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/20 hover:bg-black/50 text-white flex items-center justify-center backdrop-blur-sm transition-all focus:outline-none"
@@ -187,7 +178,6 @@ const Hero = () => {
             <span className="text-xl">❯</span>
           </button>
 
-          {/* 📍 Bottom Indicators Dots */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
             {slides.map((_, index) => (
               <button

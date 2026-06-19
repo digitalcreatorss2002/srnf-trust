@@ -37,7 +37,6 @@ const Newsletter = () => {
   return (
     <section className="py-16 bg-[#fff] border-[#E56D37]/20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Static Envelope Icon */}
         <span className="text-4xl text-white  mb-4 block animate-float">✉️</span>
         
         {/* Heading */}
@@ -45,13 +44,11 @@ const Newsletter = () => {
           Subscribe to Our Newsletter
         </h2>
         
-        {/* Description */}
         <p className="text-[#2d2d2d] mb-8 max-w-2xl mx-auto">
           Stay updated with our latest projects, success stories, and ways you
           can help. Join our community of changemakers today.
         </p>
 
-        {/* Dynamic Form Container */}
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
           <input
             type="email"

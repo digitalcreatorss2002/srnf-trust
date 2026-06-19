@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-// Named export का उपयोग करके इम्पोर्ट एरर को फिक्स किया गया है
 import { QRCode } from "react-qr-code";
 import { API_BASE_URL } from "../apiConfig";
 
@@ -16,7 +15,7 @@ export default function DonationForm() {
     pan_number: "",
   };
 
-  const PAYMENT_TIME_LIMIT = 120; // 2 minutes
+  const PAYMENT_TIME_LIMIT = 60; // 1 minutes
   const RESET_DELAY = 4000;
 
   const [showPan, setShowPan] = useState(false);

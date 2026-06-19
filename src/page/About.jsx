@@ -10,16 +10,13 @@ const About = () => {
   return (
     <>
       <section className="relative w-full h-[300px] flex flex-col justify-center items-center overflow-hidden bg-[#2d2d2d]/50">
-        {/* 1. Background Image Div */}
         <div
           className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80"
           style={{ backgroundImage: `url(${backgroundImageURL})` }}
         />
 
-        {/* 2. Dark Overlay for Text Legibility (टेक्स्ट को साफ़ दिखाने के लिए) */}
         <div className="absolute inset-0 bg-black/20 z-10" />
 
-        {/* Banner Content Container */}
         <div className="relative z-40 text-center px-5">
           <h1
             className="text-4xl font-bold text-[#E56D37] mb-2 tracking-wide"

@@ -31,7 +31,6 @@ const FocusAreas = () => {
   const [loading, setLoading] = useState(true);
   const sectionRef = useRef(null);
 
-  // ✅ TIMELINE TRIGGER: Intersection Observer with Fallback
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,14 +39,13 @@ const FocusAreas = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.05 } // Ultra-low window constraint guarantees execution
+      { threshold: 0.05 }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    // Dynamic backup trigger: If observer doesn't fire within 3.5 seconds, force play
     const backupTimer = setTimeout(() => {
       setHasIntersected(true);
     }, 3500);
@@ -69,26 +67,22 @@ const FocusAreas = () => {
           const formatted = resData.data.map((item, index) => {
             const idVal = parseInt(item.id) || index + 1;
             
-            // SANITIZED REGEX PARSER: Extracts numbers vs strings
             const rawText = item.number_text ? String(item.number_text).trim() : "0";
             const numberMatch = rawText.match(/\d+/);
             const targetVal = numberMatch ? parseInt(numberMatch[0], 10) : 0;
             const suffixVal = rawText.replace(/[0-9]/g, "");
 
-            // 🛠️ FIXED: Absolute boundary path verification structure
             let finalImg;
             if (item.image_url && !item.image_url.includes("default.png")) {
               if (item.image_url.startsWith("http://") || item.image_url.startsWith("https://")) {
                 finalImg = item.image_url;
               } else {
-                // Slashes and cleanup mapping
                 let cleanPath = item.image_url.startsWith("/") ? item.image_url.substring(1) : item.image_url;
                 
                 if (cleanPath.startsWith("admin/")) {
                   cleanPath = cleanPath.substring(6);
                 }
                 
-                // Pure dynamic conditional routing matrix
                 if (!cleanPath.startsWith("uploads/")) {
                   cleanPath = `uploads/focus_areas/${cleanPath}`;
                 }
