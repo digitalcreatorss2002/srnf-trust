@@ -1,6 +1,7 @@
 // 1. Link ki jagah NavLink import karein
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import NewslineTicker from "./NewslineTicker";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,17 +26,14 @@ const Navbar = () => {
     {
       label: "skill-development",
       path: "/programs?filter=skill-development",
-      // icon: "🛠️",
     },
     {
       label: "women-empowerment",
       path: "/programs?filter=women-empowerment",
-      // icon: "👩",
     },
     {
       label: "rural-education",
       path: "/programs?filter=rural-education",
-      // icon: "📚",
     },
   ];
 
@@ -43,90 +41,38 @@ const Navbar = () => {
     {
       name: "About",
       path: "/about",
-      // hasDropdown: true,
-      dropdownItems: [
-        // { label: "Who We Are", path: "/about#who-we-are"},
-        // { label: "Leadership", path: "/about#leadership" },
-        // { label: "Our Approach", path: "/about#approach" },
-        // { label: "Partners", path: "/about#partners" },
-        // { label: "FAQ", path: "/about#fAq" },
-      ],
+      dropdownItems: [],
     },
     {
       name: "Programs",
       path: "/programs",
-      // hasDropdown: true,
-      // dropdownItems: staticPrograms,
     },
     {
       name: "Our Work",
       path: "/projects",
-      // hasDropdown: true,
-      // dropdownItems: [
-      //   { label: "Ongoing Projects", path: "/projects#ongoing" },
-      //   { label: "Impact Snapshot", path: "/projects#impact" },
-      // ],
     },
     {
       name: "Publications",
       path: "/publications",
-      // hasDropdown: true,
-      // dropdownItems: [
-      //   {
-      //     label: "Annual Reports",
-      //     path: "/publications#annual-reports",
-      //   },
-      //   {
-      //     label: "Case Studies",
-      //     path: "/publications#case-studies",
-      //   },
-      //   {
-      //     label: "Our Publications",
-      //     path: "/publications#in-publications",
-      //   },
-      //   {
-      //     label: "Legal Documents",
-      //     path: "/publications#legal-documents",
-      //   },
-      // ],
     },
     {
       name: "Media & Stories",
       path: "/media",
-      // hasDropdown: true,
-      // dropdownItems: [
-      //   { label: "Photo Gallery", path: "/media#photos"},
-      //   { label: "Video Gallery", path: "/media#videos"},
-      //   { label: "Press Coverage", path: "/media#press"},
-      // ],
     },
     {
       name: "Get Involved",
       path: "/get-involved",
-      // hasDropdown: true,
-      // dropdownItems: [
-      //   {
-      //     label: "Volunteer With Us",
-      //     path: "/get-involved#volunteer",
-      //     // icon: "🤝",
-      //   },
-      //   { label: "Careers", path: "/get-involved#careers" },
-      //   {
-      //     label: "Partners (EOI/RFQ)",
-      //     path: "/get-involved#funds",
-      //     // icon: "🌱",
-      //   },
-      // ],
     },
     { name: "Contact Us", path: "/contact" },
   ];
 
   return (
     <nav className="bg-white backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center min-h-[110px] py-3">
-          {/* Logo Section */}
-          <div className="flex items-center">
+          
+          {/* Logo Section (Left side shrink protected) */}
+          <div className="flex items-center shrink-0">
             <Link to="/" className="flex items-center justify-center">
               <div className="h-24 w-auto flex items-center justify-center p-1">
                 <img
@@ -138,15 +84,13 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* 🟢 Desktop Navigation: Added justify-center and mx-auto for absolute center mapping */}
+          <div className="hidden lg:flex flex-1 justify-center items-center mx-4 space-x-1">
             {menuItems.map((item) => {
-              // Check karega ki kya dropdown ka koi sub-item ya main path active hai
               const isParentActive = location.pathname.startsWith(item.path);
 
               return (
-                <div key={item.name} className="relative group px-2 py-6">
-                  {/* NavLink use kiya active class toggle karne ke liye */}
+                <div key={item.name} className="relative group px-3 py-6">
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
@@ -195,14 +139,16 @@ const Navbar = () => {
                 </div>
               );
             })}
-            <div className="pl-4">
-              <Link
-                to="/donate"
-                className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md ml-2"
-              >
-                Donate
-              </Link>
-            </div>
+          </div>
+
+          {/* Donate Button Section (Right side shrink protected) */}
+          <div className="hidden lg:flex items-center shrink-0 pl-2">
+            <Link
+              to="/donate"
+              className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-7 py-2.5 rounded-full font-bold transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap"
+            >
+              Donate
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -294,6 +240,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <NewslineTicker/>
     </nav>
   );
 };
