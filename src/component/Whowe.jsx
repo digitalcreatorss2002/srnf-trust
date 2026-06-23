@@ -48,6 +48,7 @@ const Whowe = () => {
 
   return (
     <section 
+      id="who-we-are"
       className="w-full min-h-screen py-16 px-4 md:px-12 lg:px-24 bg-white flex flex-col items-center" 
     >
       <h1 className="text-4xl md:text-5xl font-extrabold text-[#E56D37] mb-8 tracking-tight">
@@ -69,7 +70,10 @@ const Whowe = () => {
         <div className="absolute inset-0 bg-black/5 shadow-[inset_0_0_120px_rgba(0,0,0,0.15)] rounded-2xl" />
       </div>
 
-      <div className="w-full max-w-7xl mt-[-8vh] md:mt-[-10vh] lg:mt-[-12vh] z-10 flex flex-col md:flex-row gap-8 px-4 md:px-0">
+      <div 
+        id="approach"
+        className="w-full max-w-7xl mt-[-8vh] md:mt-[-10vh] lg:mt-[-12vh] z-10 flex flex-col md:flex-row gap-8 px-4 md:px-0"
+      >
         
         <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[300px]">
           <div

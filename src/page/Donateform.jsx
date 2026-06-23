@@ -121,7 +121,6 @@ export default function DonationForm() {
   const startStaticCountdown = (txnId) => {
     setTimeLeft(PAYMENT_TIME_LIMIT);
 
-    // Poll payment status every 4 seconds
     const pollInterval = setInterval(async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/check-payment-status.php?transaction_id=${txnId}`);
@@ -146,7 +145,6 @@ export default function DonationForm() {
           clearInterval(pollInterval);
           clearAllTimers();
           
-          // Expire on server
           fetch(`${API_BASE_URL}/expire-payment.php`, {
             method: "POST",
             headers: {

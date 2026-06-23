@@ -46,7 +46,11 @@ const OurPrograms = () => {
     fetch(`${API_BASE_URL}/programs.php`)
       .then((res) => res.json())
       .then((resData) => {
-        if (resData.status === "success" && resData.data && resData.data.length > 0) {
+        if (
+          resData.status === "success" &&
+          resData.data &&
+          resData.data.length > 0
+        ) {
           const formatted = resData.data.map((program) => ({
             id: program.id,
             title: program.title,
@@ -76,7 +80,7 @@ const OurPrograms = () => {
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prev) => (prev - 1 + programsData.length) % programsData.length
+      (prev) => (prev - 1 + programsData.length) % programsData.length,
     );
   };
 
@@ -96,19 +100,18 @@ const OurPrograms = () => {
 
   return (
     <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden relative z-10">
-      
       <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[260px] pointer-events-none z-0 overflow-hidden">
-        <div 
+        <div
           className="w-full h-full opacity-30 bg-cover bg-right-top bg-no-repeat"
-          style={{ 
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' width='100%25' height='100%25'%3E%3Cpath d='M100 50C250-20 400 120 600 30C700-10 750 80 850 40M50 120C220 30 380 200 580 90C680 40 760 160 880 110M0 200C180 90 320 280 550 160C650 110 720 250 850 190M-50 290C120 160 280 370 500 240C620 170 700 320 820 260M-100 380C50 240 220 450 450 310C580 230 650 400 800 320' fill='none' stroke='%23ffffff' stroke-width='2' stroke-opacity='0.6' stroke-linecap='round'/%3E%3C/svg%3E\")",
-            animation: "pulse 7s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' width='100%25' height='100%25'%3E%3Cpath d='M100 50C250-20 400 120 600 30C700-10 750 80 850 40M50 120C220 30 380 200 580 90C680 40 760 160 880 110M0 200C180 90 320 280 550 160C650 110 720 250 850 190M-50 290C120 160 280 370 500 240C620 170 700 320 820 260M-100 380C50 240 220 450 450 310C580 230 650 400 800 320' fill='none' stroke='%23ffffff' stroke-width='2' stroke-opacity='0.6' stroke-linecap='round'/%3E%3C/svg%3E\")",
+            animation: "pulse 7s cubic-bezier(0.4, 0, 0.6, 1) infinite",
           }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        
         <div className="text-center mb-24">
           <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
             Our Organization

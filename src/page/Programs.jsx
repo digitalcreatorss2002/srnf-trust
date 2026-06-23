@@ -10,6 +10,7 @@ const Programs = () => {
   const [programsList, setProgramsList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 1. Fetch programs list on mount
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
@@ -17,21 +18,6 @@ const Programs = () => {
         const result = await response.json();
         if (result.status === "success") {
           setProgramsList(result.data);
-          
-          const categories = [
-            ...new Set(
-              result.data
-                .map((p) => p.program_id?.trim().toLowerCase())
-                .filter(Boolean),
-            ),
-          ];
-          
-          if (location.hash) {
-            const hashTab = location.hash.replace("#", "").toLowerCase().trim();
-            setActiveTab(hashTab);
-          } else if (categories.length > 0) {
-            setActiveTab(categories[0]);
-          }
         }
       } catch (error) {
         console.error("Error fetching programs:", error);
@@ -40,7 +26,34 @@ const Programs = () => {
       }
     };
     fetchPrograms();
-  }, [location.hash]);
+  }, []);
+
+  // 2. Sync URL parameter/hash with activeTab state
+  useEffect(() => {
+    if (programsList.length === 0) return;
+
+    const categories = [
+      ...new Set(
+        programsList
+          .map((p) => p.program_id?.trim().toLowerCase())
+          .filter(Boolean),
+      ),
+    ];
+
+    const params = new URLSearchParams(location.search);
+    const filterParam = params.get("filter")?.toLowerCase().trim();
+
+    if (filterParam && categories.includes(filterParam)) {
+      setActiveTab(filterParam);
+    } else if (location.hash) {
+      const hashTab = location.hash.replace("#", "").toLowerCase().trim();
+      if (categories.includes(hashTab)) {
+        setActiveTab(hashTab);
+      }
+    } else if (categories.length > 0 && !activeTab) {
+      setActiveTab(categories[0]);
+    }
+  }, [location.search, location.hash, programsList, activeTab]);
 
   const uniqueCategories = [
     ...new Set(
@@ -110,7 +123,7 @@ const Programs = () => {
                 key={tabId}
                 onClick={() => {
                   setActiveTab(tabId);
-                  window.history.replaceState(null, "", `#${tabId}`);
+                  window.history.replaceState(null, "", `?filter=${tabId}`);
                 }}
                 className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors shrink-0 ${
                   activeTab === tabId

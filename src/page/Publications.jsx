@@ -77,6 +77,7 @@ const Publications = () => {
             ].map((tab) => (
               <button
                 key={tab.id}
+                id={tab.id}
                 onClick={() => {
                   setActiveTab(tab.id);
                   window.history.replaceState(null, "", `#${tab.id}`);

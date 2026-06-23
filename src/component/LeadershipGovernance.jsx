@@ -159,7 +159,7 @@ const LeadershipGovernance = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
+    <section id="leadership" className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
       <h2
         className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-20 tracking-wide"
         style={{ textShadow: "1px 1px 2px rgba(255, 255, 255, 0.6)" }}
@@ -204,7 +204,7 @@ const LeadershipGovernance = () => {
 
       {activeModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300">
-          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200">
+          <div className="bg-white rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200">
             <div className="sticky top-0 bg-white border-b border-neutral-100 px-6 py-4 flex justify-between items-center z-30">
               <h3 className="text-2xl font-bold text-neutral-900">
                 {activeModal.title}
@@ -231,40 +231,43 @@ const LeadershipGovernance = () => {
 
               {activeModal.type === "members-list" &&
                 Array.isArray(activeModal.details) && (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
                     {activeModal.details.map((member, idx) => (
                       <div
                         key={idx}
-                        className="w-40 h-40 relative group [perspective:1000px]"
+                        className="w-56 h-70 relative group [perspective:1000px]"
                       >
                         <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
-                          <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
-                            <img
-                              src={member.img}
-                              alt={member.name}
-                              className="w-full h-full rounded-full object-cover border-2 border-[#E56D37]"
-                              onError={(e) => {
-                                e.currentTarget.src =
-                                  "https://via.placeholder.com/150";
-                              }}
-                            />
-                          </div>
-
-                          <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
-                            <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
+                          <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
+                            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                              <img
+                                src={member.img}
+                                alt={member.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.src =
+                                    "https://via.placeholder.com/150";
+                                }}
+                              />
+                            </div>
+                            <h4 className="font-bold text-1xl text-neutral-800 text-center leading-snug mt-4 line-clamp-2">
                               {member.name}
                             </h4>
-                            <p className="text-[12px] text-[#E56D37] font-bold mb-1">
+                            <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">
                               {member.role}
                             </p>
-
+                          </div>
+                          <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center z-20">
+                            <h4 className="font-bold text-1xl text-neutral-800 border-b border-orange-100 pb-1 mb-2 text-center w-full">
+                              {member.name}
+                            </h4>
                             {member.message ? (
-                              <p className="text-[12px] text-gray-500 font-bold max-h-[55px] overflow-y-auto px-1 custom-scrollbar leading-tight">
+                              <p className="text-[16px] text-gray-600 font-medium italic overflow-y-auto max-h-[170px] px-1 custom-scrollbar text-center leading-relaxed">
                                 {member.message}
                               </p>
                             ) : (
-                              <p className="text-[12px] text-gray-300 italic">
-                                No message
+                              <p className="text-[12px] text-gray-400 italic text-center">
+                                Dedicated to the development and success of our initiatives.
                               </p>
                             )}
                           </div>
@@ -286,40 +289,43 @@ const LeadershipGovernance = () => {
                           {level.levelTitle}
                         </h4>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
                           {level.members.map((member, mIdx) => (
                             <div
                               key={mIdx}
-                              className="w-40 h-40 relative group [perspective:1000px]"
+                              className="w-56 h-80 relative group [perspective:1000px]"
                             >
                               <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
-                                <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center [backface-visibility:hidden] z-10 p-1 border border-gray-100 shadow-sm">
-                                  <img
-                                    src={member.img}
-                                    alt={member.name}
-                                    className="w-full h-full rounded-full object-cover border-2 border-[#E56D37]"
-                                    onError={(e) => {
-                                      e.currentTarget.src =
-                                        "https://via.placeholder.com/150";
-                                    }}
-                                  />
-                                </div>
-
-                                <div className="absolute inset-0 bg-white rounded-xl p-3 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center text-center justify-center overflow-y-auto z-20">
-                                  <h4 className="font-bold text-xs text-neutral-800 leading-tight mb-0.5">
+                                <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-center p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
+                                  <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                                    <img
+                                      src={member.img}
+                                      alt={member.name}
+                                      className="w-full h-full object-cover"
+                                      onError={(e) => {
+                                        e.currentTarget.src =
+                                          "https://via.placeholder.com/150";
+                                      }}
+                                    />
+                                  </div>
+                                  <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-4 line-clamp-2">
                                     {member.name}
                                   </h4>
-                                  <p className="text-[10px] text-[#E56D37] font-semibold mb-1">
+                                  <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">
                                     {member.role}
                                   </p>
-
+                                </div>
+                                <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center z-20">
+                                  <h4 className="font-bold text-sm text-neutral-800 border-b border-orange-100 pb-1 mb-2 text-center w-full">
+                                    {member.name}
+                                  </h4>
                                   {member.message ? (
-                                    <p className="text-[9px] text-gray-500 font-light italic max-h-[55px] overflow-y-auto px-1 custom-scrollbar leading-tight">
+                                    <p className="text-[12px] text-gray-600 font-medium italic overflow-y-auto max-h-[170px] px-1 custom-scrollbar text-center leading-relaxed">
                                       "{member.message}"
                                     </p>
                                   ) : (
-                                    <p className="text-[9px] text-gray-300 italic">
-                                      No message
+                                    <p className="text-[12px] text-gray-400 italic text-center">
+                                      Executing operations and managing dynamic workflows.
                                     </p>
                                   )}
                                 </div>

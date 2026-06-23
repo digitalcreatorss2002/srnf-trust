@@ -74,7 +74,6 @@ const ProjectSlider = () => {
         />
       </div>
 
-      {/* 📦 FOREGROUND MAIN CONTENT */}
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 flex flex-col items-center justify-center">
           <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">

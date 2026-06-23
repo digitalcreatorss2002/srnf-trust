@@ -127,6 +127,7 @@ const MediaAndStories = () => {
             ].map(tab => (
               <button
                 key={tab.id}
+                id={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-4 px-2 whitespace-nowrap font-bold flex items-center gap-2 border-b-2 transition-colors cursor-pointer ${
                   activeTab === tab.id
@@ -154,7 +155,7 @@ const MediaAndStories = () => {
               {medias.map((media, idx) => (
                 <div 
                   key={media.id} 
-                  className="aspect-square bg-gray-200 rounded-xl overflow-hidden relative group cursor-pointer shadow-sm border border-gray-100"
+                  className="aspect-square bg-gray-200 rounded-xl overflow-hidden relative group cursor-pointer shadow-md border-4 border-white hover:border-primary transition-all duration-300"
                   onClick={() => {
                     setCurrentPhotoIndex(idx);
                     setIsPhotoModalOpen(true);
@@ -184,7 +185,7 @@ const MediaAndStories = () => {
                   href={video.video_url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer border border-gray-100"
+                  className="block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer border-4 border-white hover:border-primary"
                   onMouseEnter={() => setPlayingVideoId(video.id)}
                   onMouseLeave={() => setPlayingVideoId(null)}
                 >
@@ -231,7 +232,7 @@ const MediaAndStories = () => {
             >
               {pressCov.map(item => (
                 <Link key={item.id} to={`/media-and-stories/${item.slug}`} className="flex flex-col sm:flex-row gap-6 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
-                  <div className="sm:w-48 h-32 bg-gray-100 rounded-xl flex items-center justify-center shrink-0 overflow-hidden border border-gray-50">
+                  <div className="sm:w-48 h-32 bg-gray-100 rounded-xl flex items-center justify-center shrink-0 overflow-hidden border-4 border-white shadow-sm group-hover:border-primary transition-all duration-300">
                     <img src={getImageUrl(item.image || item.image_url)} alt="" className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
                   </div>
                   <div className="flex-1 flex flex-col justify-center">

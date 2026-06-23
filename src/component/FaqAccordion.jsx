@@ -27,7 +27,10 @@ const FaqAccordion = () => {
   };
 
   return (
-    <section className="bg-[#f8f8f8] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center">
+    <section 
+      id="faq"
+      className="bg-[#f8f8f8] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center"
+    >
       
       <h2 
         className="text-center font-bold text-3xl md:text-4xl text-[#2d2d2d] mb-12 tracking-wide"

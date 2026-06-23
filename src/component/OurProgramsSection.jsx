@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const OurProgramsSection = () => {
-  // 🔥 Static Programs Data Array (आप अपनी इमेजेस और टेक्स्ट यहाँ बदल सकते हैं)
   const staticPrograms = [
     {
       id: 1,
@@ -41,14 +40,12 @@ const OurProgramsSection = () => {
           Our Programs
         </h2>
 
-        {/* Static Grid Box */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {staticPrograms.map((program) => (
             <div
               key={program.id}
               className="bg-white rounded-xl border border-gray-100 text-left hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full"
             >
-              {/* Image Container */}
               <div className="h-48 overflow-hidden relative">
                 <img
                   src={program.image_url}
@@ -61,7 +58,6 @@ const OurProgramsSection = () => {
                 />
               </div>
 
-              {/* Content Area */}
               <div className="p-6 grow flex flex-col">
                 <h3 className="text-xl font-serif font-bold text-text-primary mb-3 leading-tight">
                   {program.title}
@@ -84,7 +80,6 @@ const OurProgramsSection = () => {
           ))}
         </div>
 
-        {/* Bottom Navigation Button */}
         <div className="mt-10">
           <Link
             to="/programs"

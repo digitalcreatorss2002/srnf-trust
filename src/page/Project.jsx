@@ -129,7 +129,7 @@ const Projects = () => {
         </div>
       </section>
 
-      <section className="border-b sticky top-20 bg-white z-40 shadow-sm">
+      <section id="impact" className="border-b sticky top-20 bg-white z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
           <button type="button" onClick={() => scroll("left")} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 shadow-lg rounded-full hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center w-10 h-10 border border-gray-100">
             <span>❮</span>

@@ -49,7 +49,10 @@ const PartnersSection = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section 
+      id="partners"
+      className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
