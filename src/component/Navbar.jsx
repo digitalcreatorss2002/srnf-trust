@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../apiConfig";
+import NewslineTicker from "./NewslineTicker"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -269,6 +270,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <NewslineTicker/>
     </nav>
   );
 };

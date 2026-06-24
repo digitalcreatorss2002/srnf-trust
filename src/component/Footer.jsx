@@ -82,7 +82,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-start text-left w-full">
-            <h4 className="text-xl font-bold mb-6 border-b-2 border-[#E56D37]/20 w-fit pb-1.5 tracking-wide text-left heading-font">
+            <h4 className="text-xl font-bold mb-6 border-b-2 border-[#E56D37]/20 w-fit pb-1.5 tracking-wide text-left heading-font  ">
               Contact
             </h4>
             <ul className="space-y-5 text-[14px] font-medium text-[#E56D37]/95 leading-relaxed text-left w-full">
