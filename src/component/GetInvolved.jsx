@@ -24,14 +24,14 @@ const GetInvolved = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         <div className="lg:col-span-5 text-left space-y-4">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block heading-font">
             Get Involved
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 leading-tight heading-font">
             Join Us in Making a Difference
           </h2>
           <div className="w-16 h-1 bg-[#fff] rounded-full pt-1" />
-          <p className="text-white text-base sm:text-lg leading-relaxed pt-2 max-w-[450px]">
+          <p className="text-white text-base sm:text-lg leading-relaxed pt-2 max-w-[450px] body-font">
             Aapka ek chhota sa yogdaan kisi ki zindagi badal sakta hai. Humare sath judkar badlav ka hissa banein.
           </p>
         </div>

@@ -175,17 +175,17 @@ const Projects = () => {
                   </div>
                   <div className="flex flex-col flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="text-[10px] font-bold text-accent uppercase tracking-widest">{project.category}</div>
-                      <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded ${project.status?.toLowerCase() === 'completed' ? 'bg-green-100 text-green-700' : project.status?.toLowerCase() === 'planned' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-700'}`}>
+                      <div className="text-[10px] font-bold text-accent uppercase tracking-widest heading-font">{project.category}</div>
+                      <span className={`text-[9px] uppercase font-bold heading-font px-2 py-0.5 rounded ${project.status?.toLowerCase() === 'completed' ? 'bg-green-100 text-green-700' : project.status?.toLowerCase() === 'planned' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-700'}`}>
                         {project.status}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-text-primary mb-2 leading-tight">{project.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{project.description}</p>
+                    <h3 className="text-1xl heading-font text-left font-bold text-text-primary mb-2 leading-tight heading-font">{project.title}</h3>
+                    <p className="text-gray-600 body-font text-sm text-left mb-4 line-clamp-2">{project.description}</p>
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 mt-auto">
                       <span className="text-base">📍</span> {project.location || "N/A"}
                     </div>
-                    <Link to={`/projectdetails/${project.slug}`} className="inline-block bg-primary hover:bg-[#2d2d2d] text-white px-5 py-2 rounded font-medium text-sm transition-colors text-center self-start shadow-sm">
+                    <Link to={`/projectdetails/${project.slug}`} className="inline-block heading-font bg-primary hover:bg-[#2d2d2d] text-white px-5 py-2 rounded font-medium text-sm transition-colors text-center self-start shadow-sm">
                       View Details
                     </Link>
                   </div>

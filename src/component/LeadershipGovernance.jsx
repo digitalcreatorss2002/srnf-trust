@@ -187,10 +187,10 @@ const LeadershipGovernance = () => {
                 />
               </div>
 
-              <h3 className="text-xl font-bold text-[#E56D37] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors">
+              <h3 className="text-xl font-bold text-[#E56D37] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors heading-title">
                 {card.title}
               </h3>
-              <p className="text-sm text-[#2d2d2d] font-light max-w-sm px-2">
+              <p className="text-sm text-[#2d2d2d] font-light max-w-sm px-2 heading-font">
                 {card.subtitle}
               </p>
 

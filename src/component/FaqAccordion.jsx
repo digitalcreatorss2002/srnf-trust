@@ -33,7 +33,7 @@ const FaqAccordion = () => {
     >
       
       <h2 
-        className="text-center font-bold text-3xl md:text-4xl text-[#2d2d2d] mb-12 tracking-wide"
+        className="text-center font-bold text-3xl md:text-4xl text-[#2d2d2d] mb-12 tracking-wide heading-font"
         style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.6)' }}
       >
         Frequently Asked Questions

@@ -81,7 +81,7 @@ const OngoingProjects = () => {
 
       <div className="relative max-w-6xl w-full mx-auto z-10 flex flex-col items-center">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md">
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md heading-font">
             Our Impact Projects
           </h2>
           <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />

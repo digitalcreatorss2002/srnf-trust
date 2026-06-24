@@ -95,10 +95,10 @@ const Programs = () => {
       <section className="bg-[#E56D37] text-white py-20 bg-opacity-90 relative">
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl heading-font font-bold mb-4">
             Our Programmes
           </h1>
-          <p className="text-xl max-w-2xl mx-auto text-green-50">
+          <p className="text-xl max-w-2xl mx-auto text-green-50 body-font">
             Impact-driven initiatives targeting the most critical challenges
             facing our communities today.
           </p>
@@ -116,7 +116,7 @@ const Programs = () => {
 
           <div
             ref={scrollRef}
-            className="flex items-center space-x-8 overflow-x-auto no-scrollbar scroll-smooth px-12"
+            className="flex items-center space-x-8 overflow-x-auto no-scrollbar scroll-smooth px-12 heading-font"
           >
             {uniqueCategories.map((tabId) => (
               <button
@@ -177,11 +177,11 @@ const Programs = () => {
                   {program.icon || "📌"}
                 </div>
 
-                <h3 className="text-2xl font-serif font-bold text-text-primary mb-4 mt-4 leading-tight">
+                <h3 className="text-1xl text-left font-bold text-text-primary mb-4 mt-4 leading-tight heading-font">
                   {program.title}
                 </h3>
 
-                <p className="text-gray-600 mb-6 grow line-clamp-4">
+                <p className="text-gray-600 mb-6 grow line-clamp-4 body-font text-left">
                   {program.description}
                 </p>
 

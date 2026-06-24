@@ -101,13 +101,13 @@ const Hero = () => {
             style={{ backgroundImage: `url("${slide.image}")` }}
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent" />
 
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8 w-full text-left">
-              <div className="max-w-2xl space-y-6">
+              <div className="max-w-2xl space-y-6 ">
                 <h1
-                  className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#fff] transition-all duration-700 delay-300 transform ${
+                  className={`text-2xl sm:text-5xl lg:text-4xl font-extrabold text-[#fff] transition-all duration-700 delay-300 transform ${
                     index === current
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0"
@@ -138,7 +138,7 @@ const Hero = () => {
                       href={slide.buttonLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
                     >
                       {slide.buttonText}
                       <span className="ml-2 transform group-hover:translate-x-1 transition-transform">
@@ -148,7 +148,7 @@ const Hero = () => {
                   ) : (
                     <Link
                       to={slide.buttonLink}
-                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
                     >
                       {slide.buttonText}
                       <span className="ml-2 transform group-hover:translate-x-1 transition-transform">

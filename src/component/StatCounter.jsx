@@ -119,8 +119,8 @@ const FocusAreas = () => {
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">What We Do</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">Our Focus Areas</h2>
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">What We Do</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">Our Focus Areas</h2>
           <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
         </div>
 

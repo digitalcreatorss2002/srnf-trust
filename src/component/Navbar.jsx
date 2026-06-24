@@ -261,7 +261,7 @@ const Navbar = () => {
           ))}
           <div className="pt-6 pb-2">
             <button
-              className="block w-full text-center bg-accent text-white px-6 py-4 rounded-xl font-bold shadow-md"
+              className="block w-full text-center bg-accent text-white px-6 py-4 rounded-xl font-bold shadow-md heading-font"
               onClick={() => handleDropdownItemClick("/donate")}
             >
               ❤️ Donate Now

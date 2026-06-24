@@ -113,10 +113,10 @@ const OurPrograms = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2 heading-font">
             Our Organization
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">
             Our Programs
           </h2>
           <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />
@@ -144,10 +144,10 @@ const OurPrograms = () => {
 
                 <div className="p-6 flex-grow flex flex-col justify-between text-left">
                   <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-[#E56D37] group-hover:text-[#2b434d] transition-colors duration-300">
+                    <h3 className="text-xl font-bold heading-font text-[#E56D37] group-hover:text-[#2b434d] transition-colors duration-300">
                       {program.title}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                    <p className="text-gray-600 text-sm leading-relaxed body-font line-clamp-3">
                       {program.description}
                     </p>
                   </div>

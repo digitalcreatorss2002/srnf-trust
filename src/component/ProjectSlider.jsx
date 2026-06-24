@@ -76,10 +76,10 @@ const ProjectSlider = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 flex flex-col items-center justify-center">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
             Our Organization
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight heading-font">
             Ongoing Projects
           </h2>
           <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />

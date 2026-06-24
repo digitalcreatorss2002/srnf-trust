@@ -15,3 +15,14 @@ export default {
   },
   plugins: [],
 }
+
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        dancing: ['Dancing Script', 'cursive'],
+        biryani: ['Biryani', 'sans-serif'],
+      },
+    },
+  },
+};

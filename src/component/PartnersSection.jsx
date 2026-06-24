@@ -55,10 +55,10 @@ const PartnersSection = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#fff] uppercase tracking-widest block mb-2 heading-font">
             Partners
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">
             Our Supporters
           </h2>
           <div className="w-20 h-1 bg-[#fff] mt-3 rounded-full mx-auto" />

@@ -69,10 +69,10 @@ const StoriesImpact = () => {
     <section className="w-full bg-[#fff] py-10 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto pt-[-20px]">
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
             Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">
             Stories and Impacts
           </h2>
           <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
@@ -106,15 +106,15 @@ const StoriesImpact = () => {
               </div>
 
               <div className="flex flex-col justify-between h-full space-y-4">
-                <p className="text-gray-600 text-sm leading-relaxed italic font-normal">
+                <p className="text-gray-600 text-sm leading-relaxed italic font-normal body-font">
                   "{item.story}"
                 </p>
 
                 <div className="pt-2 border-t border-gray-50">
-                  <h4 className="text-base font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors duration-300">
+                  <h4 className="text-base font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors duration-300 heading-font">
                     {item.name}
                   </h4>
-                  <p className="text-xs font-semibold text-black mt-0.5">
+                  <p className="text-xs font-semibold text-black mt-0.5 body-font">
                     {item.role}
                   </p>
                 </div>

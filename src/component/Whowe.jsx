@@ -51,13 +51,19 @@ const Whowe = () => {
       id="who-we-are"
       className="w-full min-h-screen py-16 px-4 md:px-12 lg:px-24 bg-white flex flex-col items-center" 
     >
-      <h1 className="text-4xl md:text-5xl font-extrabold text-[#E56D37] mb-8 tracking-tight">
-        Why SRNF
-      </h1>
+      <div className="text-center mb-10">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest heading-font block mb-2">
+            Why Choose
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 heading-font tracking-tight">
+            Sustainable Resources For Nature Foundation ?
+          </h2>
+          <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+        </div>
 
       {aboutData.who_we_are_text && (
         <p 
-          className="max-w-7xl text-justify text-lg md:text-xl text-[#2d2d2d] font-medium leading-relaxed mb-12"
+          className="max-w-7xl text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed mb-12"
           dangerouslySetInnerHTML={{ __html: aboutData.who_we_are_text }}
         />
       )}

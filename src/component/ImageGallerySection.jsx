@@ -51,10 +51,10 @@ const ImageGallerySection = () => {
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-16 flex flex-col items-center justify-center">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2">
+          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
             Grassroots Initiatives
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight heading-font">
             State Map
           </h2>
           <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
@@ -80,7 +80,7 @@ const ImageGallerySection = () => {
             
             {selectedItem && (
               <div className="relative z-10 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white pt-20">
-                <h3 className="font-bold text-xl sm:text-2xl tracking-wide font-serif text-[#E56D37]">
+                <h3 className="font-bold text-xl sm:text-2xl tracking-wide font-serif text-[#E56D37] heading-font">
                   {selectedItem.title}
                 </h3>
               </div>
@@ -101,7 +101,7 @@ const ImageGallerySection = () => {
                         : "bg-white border-gray-200 text-gray-700 hover:border-[#E56D37] hover:text-[#E56D37] hover:bg-orange-50/20"
                     }`}
                   >
-                    <span className="line-clamp-2 leading-snug">{item.title}</span>
+                    <span className="line-clamp-2 leading-snug heading-font">{item.title}</span>
                   </button>
                 );
               })}
