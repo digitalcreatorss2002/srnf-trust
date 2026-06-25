@@ -57,10 +57,16 @@ const GetInvolved = () => {
     }
   }, [searchParams]);
 
+  // FIXED: Handler function to update search params state and scroll page back to top smoothly
+  const handleTabSelection = (tabId) => {
+    setSearchParams({ filter: tabId });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const sidebarTabs = [
-    { id: "volunteer", label: "Volunteer With Us", icon: "🤝" },
-    { id: "careers", label: "Careers Portal", icon: "💼" },
-    { id: "funds", label: "Partners (EOI/RFQ)", icon: "🌱" },
+    { id: "volunteer", label: "Volunteer With Us"},
+    { id: "careers", label: "Careers Portal"},
+    { id: "funds", label: "Partners (EOI/RFQ)"},
   ];
 
   return (
@@ -93,7 +99,8 @@ const GetInvolved = () => {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSearchParams({ filter: tab.id })}
+                    // FIXED: Wired custom handler to handle tab parameter triggers + smooth scrolling
+                    onClick={() => handleTabSelection(tab.id)}
                     className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
                       isSelected
                         ? "bg-[#E56D37] text-white shadow-md translate-x-1"
@@ -169,11 +176,10 @@ const GetInvolved = () => {
                               rel="noopener noreferrer"
                               className="text-blue-600 hover:underline text-[11px] mt-2 inline-block font-extrabold"
                             >
-                              📄 View Job Details (PDF)
+                              View Job Details (PDF)
                             </a>
                           )}
                         </div>
-                        {/* FIXED: Anchor tag replaced with react-router-dom Link targeting /contact page */}
                         <Link 
                           to="/contact" 
                           className="border-2 border-[#E56D37] bg-white text-[#E56D37] hover:bg-[#E56D37] hover:text-white px-5 py-1.5 rounded-xl font-bold text-xs transition-all tracking-wide shrink-0 text-center cursor-pointer"

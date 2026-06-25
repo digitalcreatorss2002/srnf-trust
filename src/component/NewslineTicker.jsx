@@ -55,7 +55,7 @@ export default function NewslineTicker() {
   const duplicatedNews = [...newsData, ...newsData, ...newsData, ...newsData];
 
   return (
-    <div className="w-full bg-transparent text-gray-800 border-t border-zinc-200 relative z-20 flex items-center">
+    <div className="w-full bg-[#E56D37] text-gray-800 border-t border-zinc-200 relative z-20 flex items-center">
       
       <div className="overflow-hidden w-full relative py-2">
         <style>{`
@@ -80,11 +80,11 @@ export default function NewslineTicker() {
               key={`news-${item.id || idx}-${idx}`}
               className="inline-flex items-center text-xs md:text-sm font-semibold tracking-wide"
             >
-              <span className="text-[#E56D37] font-bold mr-4 md:mr-6 text-sm">✦</span>
+              <span className="text-[#fff] font-bold mr-4 md:mr-6 text-sm">✦</span>
               
               <span 
                 onClick={() => handleNewsClick(item.route_type, item.target_slug)}
-                className="cursor-pointer select-none hover:text-[#E56D37] transition-colors duration-200"
+                className="cursor-pointer select-none hover:text-[#fff] transition-colors duration-200"
                 title={`View ${item.route_type} details`}
               >
                 {item.title}

@@ -8,6 +8,7 @@ const Programs = () => {
   const [programsList, setProgramsList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 1. Fetch programs list on mount
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
@@ -25,6 +26,7 @@ const Programs = () => {
     fetchPrograms();
   }, []);
 
+  // Compute unique categories
   const uniqueCategories = [
     ...new Set(
       programsList
@@ -33,6 +35,7 @@ const Programs = () => {
     ),
   ];
 
+  // 2. Purely sync URL parameter (?filter=...) with activeTab state
   useEffect(() => {
     if (uniqueCategories.length === 0) return;
 
@@ -46,6 +49,12 @@ const Programs = () => {
     }
   }, [searchParams, programsList]);
 
+  // FIXED: Handler function to update tab parameter and smoothly scroll viewport to top
+  const handleCategorySelection = (tabId) => {
+    setSearchParams({ filter: tabId });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const formatTabLabel = (id) => {
     if (id === "all") return "All Programs 🌍";
     return id.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
@@ -58,6 +67,7 @@ const Programs = () => {
 
   return (
     <div className="bg-bg-color min-h-screen pb-20">
+      {/* Banner Section */}
       <section className="bg-[#E56D37] text-white py-16 bg-opacity-90 relative mb-12">
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -70,9 +80,11 @@ const Programs = () => {
         </div>
       </section>
 
+      {/* Main Grid: 20:80 split layout */}
       <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
           
+          {/* LEFT SIDEBAR: 20% Width Panel Layer (lg:col-span-2) */}
           <aside className="lg:col-span-2 sticky top-50 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
             <h2 className="text-md font-bold text-[#212121] uppercase tracking-widest px-3 mb-2 heading-font">
               Categories
@@ -83,7 +95,7 @@ const Programs = () => {
                 return (
                   <button
                     key={tabId}
-                    onClick={() => setSearchParams({ filter: tabId })}
+                    onClick={() => handleCategorySelection(tabId)}
                     className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
                       isSelected
                         ? "bg-[#E56D37] text-white shadow-md shadow-orange-500/10 translate-x-1"
@@ -102,6 +114,7 @@ const Programs = () => {
             </div>
           </aside>
 
+          {/* RIGHT GRID CONTENT AREA: 80% Width (lg:col-span-8) */}
           <main className="lg:col-span-8 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {displayPrograms.length === 0 && !loading && (
@@ -129,10 +142,6 @@ const Programs = () => {
                   </div>
 
                   <div className="p-6 relative grow flex flex-col">
-                    <div className="absolute -top-8 right-5 w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-lg border border-gray-50 transition-transform duration-300 group-hover:scale-110">
-                      {program.icon || "📌"}
-                    </div>
-
                     <h3 className="text-base text-left font-bold text-gray-800 mb-3 mt-4 leading-snug heading-font group-hover:text-[#E56D37] transition-colors">
                       {program.title}
                     </h3>

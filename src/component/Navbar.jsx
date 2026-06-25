@@ -66,9 +66,10 @@ const Navbar = () => {
       path: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Who We Are", path: "/about#who-we-are", icon: "ℹ️" },
+        // FIXED: Removed the last remaining icon ("ℹ️") to make all entries clean text strings
+        { label: "Who We Are", path: "/about#who-we-are" },
         { label: "Leadership", path: "/about#leadership" },
-        { label: "Our Approach", path: "/about#approach" },
+        // { label: "Our Approach", path: "/about#approach" },
         { label: "Partners", path: "/about#partners" },
         { label: "FAQ", path: "/about#faq" },
       ],
@@ -131,12 +132,15 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-30 w-full">
+      <NewslineTicker />
+      {/* FIXED: Changed fluid layout constraint width from max-w-7xl to max-w-[90rem] (max-w-12xl feel) to push elements outwards */}
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="flex justify-between items-center h-24 w-full">
+          
           {/* Logo Section */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-2">
-              <div className="flex items-center justify-center h-25 w-auto">
+              <div className="flex items-center justify-center h-22 w-auto">
                 <img
                   src="/logo/logo-bg.png"
                   alt="SDF Logo"
@@ -157,7 +161,7 @@ const Navbar = () => {
                   {item.name}
                   {item.hasDropdown && (
                     <span className="text-[10px] text-gray-400 group-hover:rotate-180 transition-transform duration-300">
-                      ▼
+                      {/* ▼ */}
                     </span>
                   )}
                 </Link>
@@ -171,7 +175,6 @@ const Navbar = () => {
                           onClick={() => handleDropdownItemClick(subItem.path)}
                           className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-teal-50 rounded-lg transition-all group/link text-left hover:shadow-sm border border-transparent hover:border-teal-100/50 cursor-pointer"
                         >
-                          {/* FIXED: Removed icon block completely to output pure text */}
                           <span className="text-sm font-bold text-gray-700 group-hover/link:text-primary transition-colors normal-case">
                             {subItem.label}
                           </span>
@@ -205,6 +208,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -243,7 +247,6 @@ const Navbar = () => {
                         className="w-full flex items-center gap-3 px-4 py-2.5 my-1 text-sm font-bold text-gray-600 hover:text-primary hover:bg-teal-50 rounded-lg border border-transparent hover:border-teal-100/50 hover:shadow-sm transition-all normal-case text-left cursor-pointer"
                         onClick={() => handleDropdownItemClick(subItem.path)}
                       >
-                        {/* FIXED: Removed mobile view icon element container */}
                         {subItem.label}
                       </button>
                     ))}
@@ -269,7 +272,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <NewslineTicker />
     </nav>
   );
 };

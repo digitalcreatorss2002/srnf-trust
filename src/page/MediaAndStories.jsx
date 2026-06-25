@@ -59,6 +59,12 @@ const MediaAndStories = () => {
     }
   }, [searchParams]);
 
+  // FIXED: Added tab transition handler to auto-scroll viewport back to top smoothly
+  const handleTabSelection = (tabId) => {
+    setSearchParams({ filter: tabId });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const getYouTubeEmbedUrl = (url) => {
     if (!url) return '';
     let videoId = '';
@@ -92,9 +98,9 @@ const MediaAndStories = () => {
   }, [isPhotoModalOpen, handlePrevPhoto, handleNextPhoto]);
 
   const sidebarTabs = [
-    { id: 'photos', label: 'Photo Gallery', icon: '📸' },
-    { id: 'videos', label: 'Video Gallery', icon: '🎥' },
-    { id: 'press', label: 'Press Coverage', icon: '🗞️' },
+    { id: 'photos', label: 'Photo Gallery'},
+    { id: 'videos', label: 'Video Gallery'},
+    { id: 'press', label: 'Press Coverage'},
   ];
 
   if (loading) {
@@ -144,8 +150,9 @@ const MediaAndStories = () => {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSearchParams({ filter: tab.id })}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                    // FIXED: Replaced standard hook parameters to custom navigation function handler
+                    onClick={() => handleTabSelection(tab.id)}
+                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
                       isSelected
                         ? "bg-[#E56D37] text-white shadow-md translate-x-1"
                         : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"

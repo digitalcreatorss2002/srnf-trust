@@ -48,15 +48,21 @@ const Publications = () => {
     }
   }, [searchParams]);
 
+  // FIXED: Sidebar items click hander added to auto scroll view to the top smoothly
+  const handleTabSelection = (tabId) => {
+    setSearchParams({ filter: tabId });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const reports = publications.filter((p) => p.type === "report");
   const caseStudies = publications.filter((p) => p.type === "case_study");
   const legalDocs = publications.filter((p) => p.type === "legal");
 
   const sidebarTabs = [
-    { id: "annual-reports", label: "Reports 📊" },
-    { id: "case-studies", label: "Case Studies 📝" },
-    { id: "in-publications", label: "Our Publications 📚" },
-    { id: "legal-documents", label: "Legal Documents ⚖️" },
+    { id: "annual-reports", label: "Reports" },
+    { id: "case-studies", label: "Case Studies" },
+    { id: "in-publications", label: "Our Publications" },
+    { id: "legal-documents", label: "Legal Documents" },
   ];
 
   if (loading) {
@@ -101,7 +107,7 @@ const Publications = () => {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setSearchParams({ filter: tab.id })}
+                    onClick={() => handleTabSelection(tab.id)}
                     className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
                       isSelected
                         ? "bg-[#E56D37] text-white shadow-md translate-x-1"

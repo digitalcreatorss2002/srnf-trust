@@ -62,6 +62,16 @@ const Projects = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.hash]);
 
+  // FIXED: Added central handler to auto scroll to top on any sidebar layout interactions
+  const handleTabSelection = (type, value) => {
+    if (type === "status") {
+      window.location.hash = value; // This automatically triggers the hash listener above
+    } else if (type === "category") {
+      setSelectedCategory(value);
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Manually scrolls view for sector categories
+    }
+  };
+
   const displayProjects = projectsList.filter((p) => {
     const projectStatus = p.status ? p.status.trim().toLowerCase() : "";
     
@@ -135,30 +145,30 @@ const Projects = () => {
               <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
                 <button
                   type="button"
-                  onClick={() => { window.location.hash = "all"; }}
+                  onClick={() => handleTabSelection("status", "all")}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
                     activeTab === "all" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
-                  <span className="heading-font">Ongoing 🏢</span>
+                  <span className="heading-font">Ongoing</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => { window.location.hash = "completed"; }}
+                  onClick={() => handleTabSelection("status", "completed")}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
                     activeTab === "completed" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
-                  <span className="heading-font">Completed ✅</span>
+                  <span className="heading-font">Completed</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => { window.location.hash = "planned"; }}
+                  onClick={() => handleTabSelection("status", "planned")}
                   className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
                     activeTab === "planned" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
-                  <span className="heading-font">Planned 📋</span>
+                  <span className="heading-font">Planned</span>
                 </button>
               </div>
             </div>
@@ -172,7 +182,7 @@ const Projects = () => {
                   </h2>
                   {selectedCategory && (
                     <button 
-                      onClick={() => setSelectedCategory(null)} 
+                      onClick={() => handleTabSelection("category", null)} 
                       className="text-[10px] font-bold text-[#E56D37] hover:underline cursor-pointer"
                     >
                       Clear
@@ -186,8 +196,8 @@ const Projects = () => {
                       <button 
                         type="button" 
                         key={cat} 
-                        onClick={() => setSelectedCategory(isCatSelected ? null : cat)} 
-                        className={`w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                        onClick={() => handleTabSelection("category", isCatSelected ? null : cat)} 
+                        className={`w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                           isCatSelected 
                             ? "bg-orange-50 border-[#E56D37] text-[#E56D37]" 
                             : "bg-white border-gray-100 text-gray-600 hover:border-gray-200"
