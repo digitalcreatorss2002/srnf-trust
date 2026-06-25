@@ -67,11 +67,11 @@ const Navbar = () => {
       path: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Who We Are", path: "/about#who-we-are", icon: "ℹ️" },
-        { label: "Leadership", path: "/about#leadership", icon: "👥" },
-        { label: "Our Approach", path: "/about#approach", icon: "🎯" },
-        { label: "Partners", path: "/about#partners", icon: "🤝" },
-        { label: "FAQ", path: "/about#faq", icon: "❓" },
+        { label: "Who We Are", path: "/about#who-we-are", },
+        { label: "Leadership", path: "/about#leadership" },
+        { label: "Our Approach", path: "/about#approach" },
+        { label: "Partners", path: "/about#partners" },
+        { label: "FAQ", path: "/about#faq" },
       ],
     },
     {
@@ -81,16 +81,16 @@ const Navbar = () => {
       dropdownItems:
         dynamicPrograms.length > 0
           ? dynamicPrograms
-          : [{ label: "Loading...", path: "/programs", icon: "⏳" }],
+          : [{ label: "Loading...", path: "/programs" }],
     },
     {
       name: "Our Work",
       path: "/projects",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Ongoing Projects", path: "/projects#all", icon: "🏢" },
-        { label: "Completed Projects", path: "/projects#completed", icon: "✅" },
-        { label: "Planned Projects", path: "/projects#planned", icon: "📋" },
+        { label: "Ongoing Projects", path: "/projects#all" },
+        { label: "Completed Projects", path: "/projects#completed" },
+        { label: "Planned Projects", path: "/projects#planned" },
       ],
     },
     {
@@ -98,10 +98,10 @@ const Navbar = () => {
       path: "/publications",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Annual Reports", path: "/publications?filter=annual-reports", icon: "📊" },
-        { label: "Case Studies", path: "/publications?filter=case-studies", icon: "📝" },
-        { label: "Legal Documents", path: "/publications?filter=legal-documents", icon: "⚖️" },
-        { label: "Our Publications", path: "/publications?filter=in-publications", icon: "📚" },
+        { label: "Annual Reports", path: "/publications?filter=annual-reports" },
+        { label: "Case Studies", path: "/publications?filter=case-studies" },
+        { label: "Legal Documents", path: "/publications?filter=legal-documents" },
+        { label: "Our Publications", path: "/publications?filter=in-publications" },
       ],
     },
     {
@@ -109,9 +109,9 @@ const Navbar = () => {
       path: "/media",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Photo Gallery", path: "/media?filter=photos", icon: "📸" },
-        { label: "Video Gallery", path: "/media?filter=videos", icon: "🎥" },
-        { label: "Press Coverage", path: "/media?filter=press", icon: "🗞️" },
+        { label: "Photo Gallery", path: "/media?filter=photos" },
+        { label: "Video Gallery", path: "/media?filter=videos" },
+        { label: "Press Coverage", path: "/media?filter=press" },
       ],
     },
     {
@@ -119,9 +119,9 @@ const Navbar = () => {
       path: "/get-involved",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Volunteer With Us", path: "/get-involved?filter=volunteer", icon: "🤝" },
-        { label: "Careers", path: "/get-involved?filter=careers", icon: "💼" },
-        { label: "Partners (EOI/RFQ)", path: "/get-involved?filter=funds", icon: "🌱" },
+        { label: "Volunteer With Us", path: "/get-involved?filter=volunteer" },
+        { label: "Careers", path: "/get-involved?filter=careers" },
+        { label: "Partners (EOI/RFQ)", path: "/get-involved?filter=funds" },
       ],
     },
     {
