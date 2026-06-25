@@ -60,14 +60,13 @@ const Navbar = () => {
     window.dispatchEvent(new Event("popstate"));
   };
 
-  // FIXED: Added missing icon properties for all submenu configurations
   const menuItems = [
     {
       name: "About",
       path: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Who We Are", path: "/about#who-we-are", },
+        { label: "Who We Are", path: "/about#who-we-are", icon: "ℹ️" },
         { label: "Leadership", path: "/about#leadership" },
         { label: "Our Approach", path: "/about#approach" },
         { label: "Partners", path: "/about#partners" },
@@ -172,9 +171,7 @@ const Navbar = () => {
                           onClick={() => handleDropdownItemClick(subItem.path)}
                           className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-teal-50 rounded-lg transition-all group/link text-left hover:shadow-sm border border-transparent hover:border-teal-100/50 cursor-pointer"
                         >
-                          <span className="text-lg group-hover/link:scale-110 transition-transform">
-                            {subItem.icon}
-                          </span>
+                          {/* FIXED: Removed icon block completely to output pure text */}
                           <span className="text-sm font-bold text-gray-700 group-hover/link:text-primary transition-colors normal-case">
                             {subItem.label}
                           </span>
@@ -246,7 +243,7 @@ const Navbar = () => {
                         className="w-full flex items-center gap-3 px-4 py-2.5 my-1 text-sm font-bold text-gray-600 hover:text-primary hover:bg-teal-50 rounded-lg border border-transparent hover:border-teal-100/50 hover:shadow-sm transition-all normal-case text-left cursor-pointer"
                         onClick={() => handleDropdownItemClick(subItem.path)}
                       >
-                        <span className="text-lg transition-transform duration-200 group-hover:scale-110">{subItem.icon}</span>
+                        {/* FIXED: Removed mobile view icon element container */}
                         {subItem.label}
                       </button>
                     ))}
