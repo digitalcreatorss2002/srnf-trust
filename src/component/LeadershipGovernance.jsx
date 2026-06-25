@@ -239,7 +239,7 @@ const LeadershipGovernance = () => {
                       >
                         <div className="w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] relative">
                           <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                            <div className="w-45 h-45 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
                               <img
                                 src={member.img}
                                 alt={member.name}
@@ -250,7 +250,7 @@ const LeadershipGovernance = () => {
                                 }}
                               />
                             </div>
-                            <h4 className="font-bold text-1xl text-neutral-800 text-center leading-snug mt-4 line-clamp-2">
+                            <h4 className="font-bold text-1xl text-neutral-800 text-center leading-snug mt-3 line-clamp-2">
                               {member.name}
                             </h4>
                             <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">

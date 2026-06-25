@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../apiConfig";
-import NewslineTicker from "./NewslineTicker"
+import NewslineTicker from "./NewslineTicker";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,17 +60,18 @@ const Navbar = () => {
     window.dispatchEvent(new Event("popstate"));
   };
 
+  // FIXED: Added missing icon properties for all submenu configurations
   const menuItems = [
     {
       name: "About",
       path: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Who We Are", path: "/about#who-we-are",},
-        { label: "Leadership", path: "/about#leadership",},
-        { label: "Our Approach", path: "/about#approach",},
-        { label: "Partners", path: "/about#partners",},
-        { label: "FAQ", path: "/about#faq",},
+        { label: "Who We Are", path: "/about#who-we-are", icon: "ℹ️" },
+        { label: "Leadership", path: "/about#leadership", icon: "👥" },
+        { label: "Our Approach", path: "/about#approach", icon: "🎯" },
+        { label: "Partners", path: "/about#partners", icon: "🤝" },
+        { label: "FAQ", path: "/about#faq", icon: "❓" },
       ],
     },
     {
@@ -80,15 +81,16 @@ const Navbar = () => {
       dropdownItems:
         dynamicPrograms.length > 0
           ? dynamicPrograms
-          : [{ label: "Loading...", path: "/programs"}],
+          : [{ label: "Loading...", path: "/programs", icon: "⏳" }],
     },
     {
       name: "Our Work",
       path: "/projects",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Ongoing Projects", path: "/projects#ongoing"},
-        // { label: "Impact Snapshot", path: "/projects#impact"},
+        { label: "Ongoing Projects", path: "/projects#all", icon: "🏢" },
+        { label: "Completed Projects", path: "/projects#completed", icon: "✅" },
+        { label: "Planned Projects", path: "/projects#planned", icon: "📋" },
       ],
     },
     {
@@ -96,10 +98,10 @@ const Navbar = () => {
       path: "/publications",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Annual Reports", path: "/publications#annual-reports"},
-        { label: "Case Studies", path: "/publications#case-studies"},
-        { label: "Legal Documents", path: "/publications#legal-documents"},
-        { label: "Our Publications", path: "/publications#in-publications"},
+        { label: "Annual Reports", path: "/publications?filter=annual-reports", icon: "📊" },
+        { label: "Case Studies", path: "/publications?filter=case-studies", icon: "📝" },
+        { label: "Legal Documents", path: "/publications?filter=legal-documents", icon: "⚖️" },
+        { label: "Our Publications", path: "/publications?filter=in-publications", icon: "📚" },
       ],
     },
     {
@@ -107,9 +109,9 @@ const Navbar = () => {
       path: "/media",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Photo Gallery", path: "/media#photos"},
-        { label: "Video Gallery", path: "/media#videos"},
-        { label: "Press Coverage", path: "/media#press"},
+        { label: "Photo Gallery", path: "/media?filter=photos", icon: "📸" },
+        { label: "Video Gallery", path: "/media?filter=videos", icon: "🎥" },
+        { label: "Press Coverage", path: "/media?filter=press", icon: "🗞️" },
       ],
     },
     {
@@ -117,9 +119,9 @@ const Navbar = () => {
       path: "/get-involved",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Volunteer With Us", path: "/get-involved#volunteer"},
-        { label: "Careers", path: "/get-involved#careers"},
-        { label: "Partners (EOI/RFQ)", path: "/get-involved#funds"},
+        { label: "Volunteer With Us", path: "/get-involved?filter=volunteer", icon: "🤝" },
+        { label: "Careers", path: "/get-involved?filter=careers", icon: "💼" },
+        { label: "Partners (EOI/RFQ)", path: "/get-involved?filter=funds", icon: "🌱" },
       ],
     },
     {
@@ -168,7 +170,7 @@ const Navbar = () => {
                         <button
                           key={subItem.path + idx}
                           onClick={() => handleDropdownItemClick(subItem.path)}
-                          className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-teal-50 rounded-lg transition-all group/link text-left hover:shadow-sm border border-transparent hover:border-teal-100/50"
+                          className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-teal-50 rounded-lg transition-all group/link text-left hover:shadow-sm border border-transparent hover:border-teal-100/50 cursor-pointer"
                         >
                           <span className="text-lg group-hover/link:scale-110 transition-transform">
                             {subItem.icon}
@@ -200,7 +202,7 @@ const Navbar = () => {
             <div className="flex items-center xl:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-text-primary hover:text-primary p-2 focus:outline-none"
+                className="text-text-primary hover:text-primary p-2 focus:outline-none cursor-pointer"
               >
                 <span className="text-2xl font-bold">{isOpen ? "✕" : "☰"}</span>
               </button>
@@ -222,7 +224,7 @@ const Navbar = () => {
                 <>
                   <button
                     onClick={() => toggleMobileMenu(item.name)}
-                    className="w-full flex items-center justify-between px-3 py-4 text-base font-bold text-text-primary focus:outline-none"
+                    className="w-full flex items-center justify-between px-3 py-4 text-base font-bold text-text-primary focus:outline-none cursor-pointer"
                   >
                     {item.name}
                     <span
@@ -241,7 +243,7 @@ const Navbar = () => {
                     {item.dropdownItems.map((subItem, idx) => (
                       <button
                         key={subItem.path + idx}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 my-1 text-sm font-bold text-gray-600 hover:text-primary hover:bg-teal-50 rounded-lg border border-transparent hover:border-teal-100/50 hover:shadow-sm transition-all normal-case text-left"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 my-1 text-sm font-bold text-gray-600 hover:text-primary hover:bg-teal-50 rounded-lg border border-transparent hover:border-teal-100/50 hover:shadow-sm transition-all normal-case text-left cursor-pointer"
                         onClick={() => handleDropdownItemClick(subItem.path)}
                       >
                         <span className="text-lg transition-transform duration-200 group-hover:scale-110">{subItem.icon}</span>
@@ -252,7 +254,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <button
-                  className="block w-full text-left px-3 py-4 text-base font-bold text-text-primary"
+                  className="block w-full text-left px-3 py-4 text-base font-bold text-text-primary cursor-pointer"
                   onClick={() => handleDropdownItemClick(item.path)}
                 >
                   {item.name}
@@ -262,7 +264,7 @@ const Navbar = () => {
           ))}
           <div className="pt-6 pb-2">
             <button
-              className="block w-full text-center bg-accent text-white px-6 py-4 rounded-xl font-bold shadow-md heading-font"
+              className="block w-full text-center bg-accent text-white px-6 py-4 rounded-xl font-bold shadow-md heading-font cursor-pointer"
               onClick={() => handleDropdownItemClick("/donate")}
             >
               ❤️ Donate Now
@@ -270,7 +272,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <NewslineTicker/>
+      <NewslineTicker />
     </nav>
   );
 };

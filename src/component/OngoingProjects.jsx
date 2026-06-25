@@ -98,10 +98,10 @@ const OngoingProjects = () => {
                 <span className="inline-block bg-[#E56D37] text-[#fff] text-xs font-bold tracking-widest px-3 py-1 rounded-md uppercase">
                   {projectsData[current].tag}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                <h3 className="text-2xl sm:text-2xl font-extrabold text-slate-900 leading-tight heading-font">
                   {projectsData[current].title}
                 </h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                <p className="text-gray-600 text-sm sm:text-base line-clamp-6 leading-relaxed">
                   {projectsData[current].description}
                 </p>
                 <div className="flex items-start gap-2 pt-2 text-xs font-semibold text-gray-500">

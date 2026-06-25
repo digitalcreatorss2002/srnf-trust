@@ -1,0 +1,224 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { API_BASE_URL, getImageUrl } from "../apiConfig";
+
+const DynamicCirclePrograms = () => {
+  const [programsList, setProgramsList] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // API se programs data fetch karna
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/programs.php`);
+        const result = await response.json();
+        if (result.status === "success" && result.data) {
+          const reversedData = [...result.data].reverse();
+          setProgramsList(reversedData);
+
+          // Unique categories filter aur format karna
+          const uniqueCats = [
+            ...new Set(
+              reversedData
+                .map((p) => p.program_id?.trim().toLowerCase())
+                .filter(Boolean),
+            ),
+          ];
+          setCategories(uniqueCats);
+
+          // Default active category first item set karna
+          if (uniqueCats.length > 0) {
+            setActiveCategory(uniqueCats[0]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPrograms();
+  }, []);
+
+  // Filter programs based on active category
+  const filteredPrograms = programsList.filter(
+    (p) => (p.program_id || "").toLowerCase().trim() === activeCategory,
+  );
+
+  const formatLabel = (label) => {
+    return label.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+  };
+
+  if (loading) {
+    return (
+      <div className="w-full py-20 text-center text-gray-600 font-bold">
+        Loading Beautiful Layout...
+      </div>
+    );
+  }
+
+  return (
+    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-sm heading-font font-bold text-white uppercase tracking-widest block mb-2">
+            Our Organization
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#212121] heading-font tracking-tight">
+            Our Programs
+          </h2>
+          <div className="w-20 h-1 bg-white mt-3 rounded-full mx-auto" />
+        </div>
+
+        {/* Core Layout Grid (50:50 Ratio) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT SIDE: Big Rotating Circle (Pauses instantly on hover) */}
+          {/* Container padding added (min-h-[580px]) to prevent edge clipping */}
+          <div className="flex justify-center items-center min-h-[580px]">
+            <div
+              className="relative w-[400px] h-[400px] sm:w-[460px] sm:h-[460px] rounded-full border-4 border-dashed border-white/50 flex items-center justify-center"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{
+                animation: "spin 25s linear infinite",
+                animationPlayState: isHovered ? "paused" : "running",
+              }}
+            >
+              {/* Center Core Branding */}
+              <div
+                className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center p-4 text-center z-10 border border-orange-200"
+                style={{
+                  animation: "counter-spin 25s linear infinite",
+                  animationPlayState: isHovered ? "paused" : "running",
+                }}
+              >
+                <span className="text-sm font-bold text-[#E56D37] uppercase tracking-wider">
+                  SRNF
+                </span>
+              </div>
+
+              {/* Dynamic Categories Placed on Circle Perimeter */}
+              {categories.map((cat, index) => {
+                const total = categories.length;
+                const angle = (index * 360) / total;
+                return (
+                  <div
+                    key={cat}
+                    className="absolute w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center"
+                    style={{
+                      transform: `rotate(${angle}deg) translate(220px) rotate(-${angle}deg)`,
+                    }}
+                  >
+                    <button
+                      onClick={() => setActiveCategory(cat)}
+                      className={`w-full h-full rounded-full flex items-center justify-center p-3 text-xs sm:text-sm font-bold text-center shadow-xl border transition-all duration-300 ${
+                        activeCategory === cat
+                          ? "bg-white text-[#E56D37] border-white scale-110 ring-4 ring-orange-300/50"
+                          : "bg-[#E56D37] text-white border-white/60 hover:bg-white hover:text-[#E56D37]"
+                      }`}
+                      style={{
+                        animation: "counter-spin 25s linear infinite",
+                        animationPlayState: isHovered ? "paused" : "running",
+                      }}
+                    >
+                      {formatLabel(cat)}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center min-h-[520px]">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-start">
+              {filteredPrograms.length === 0 ? (
+                <div className="col-span-full bg-white/80 backdrop-blur p-8 rounded-2xl text-center text-gray-500 font-medium">
+                  No active programs available in this category.
+                </div>
+              ) : (
+                <>
+                  {filteredPrograms.slice(0, 5).map((program, idx) => (
+                    <Link
+                      key={program.id || idx}
+                      to={`/programdetails/${program.slug}`}
+                      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group h-[250px] cursor-pointer block"
+                    >
+                      <div className="h-28 overflow-hidden relative">
+                        <img
+                          src={getImageUrl(program.image_url)}
+                          alt={program.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src =
+                              "https://placehold.co/600x400?text=Program";
+                          }}
+                        />
+                        <div className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center text-xs shadow">
+                          {program.icon || "📌"}
+                        </div>
+                      </div>
+
+                      <div className="p-3 flex flex-col justify-between flex-grow">
+                        <div>
+                          <h3 className="text-xs font-bold text-gray-800 line-clamp-1 mb-1 heading-font group-hover:text-[#E56D37] transition-colors">
+                            {program.title}
+                          </h3>
+                          <p className="text-gray-600 text-[11px] text-left line-clamp-3 leading-relaxed body-font">
+                            {program.description}
+                          </p>
+                        </div>
+
+                        <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                          <span className="text-[8px] bg-orange-50 text-[#E56D37] font-bold px-1 py-0.5 rounded-full">
+                            Active
+                          </span>
+                          <span className="text-[#E56D37] font-bold text-[10px] group-hover:underline flex items-center gap-0.5">
+                            Explore &rarr;
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+
+                  <Link
+                    to="/programs"
+                    className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#E56D37] p-6 flex flex-col justify-center items-center text-center h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
+                  >
+                    {/* Top Content Area */}
+                    <div className="flex flex-col items-center gap-2">
+                      <h3 className="text-sm font-bold text-[#E56D37] heading-font tracking-wide max-w-[180px]">
+                        Want to explore more initiatives?
+                      </h3>
+                    </div>
+
+                    <div className="w-full bg-transparent text-[#E56D37] border-2 font-extrabold text-xs py-2.5 px-2 rounded-xl shadow transition-all duration-300 group-hover:bg-[#E56D37] group-hover:text-white active:scale-95 text-center">
+                      View All Programs
+                    </div>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes counter-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default DynamicCirclePrograms;

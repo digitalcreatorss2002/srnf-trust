@@ -3,12 +3,13 @@ import Hero from "../component/Hero";
 import ProjectSlider from "../component/ProjectSlider";
 import FocusAreas from "../component/StatCounter";
 import OngoingProjects from "../component/OngoingProjects";
-import OurPrograms from "../component/OurPrograms";
+// import OurPrograms from "../component/OurPrograms";
 import StoriesImpact from "../component/StoriesImpact";
 import GetInvolved from "../component/GetInvolved";
 import PartnersSection from "../component/PartnersSection";
 import Whowe from "../component/Whowe";
 import ImageGallerySection from "../component/ImageGallerySection";
+import DynamicCirclePrograms from "../component/DynamicCirclePrograms";
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <Whowe/>
       <ProjectSlider />
       <FocusAreas />
-      <OurPrograms/>
+      {/* <OurPrograms/> */}
+      <DynamicCirclePrograms/>
       <OngoingProjects/>
       <StoriesImpact/>
       <GetInvolved/>

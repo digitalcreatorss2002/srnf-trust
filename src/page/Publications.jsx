@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const Publications = () => {
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("annual-reports");
   
   const [publications, setPublications] = useState([]);
@@ -35,184 +35,212 @@ const Publications = () => {
     fetchData();
   }, []);
 
+  // Sync URL parameter (?filter=...) cleanly with sidebar active tab state
   useEffect(() => {
-    if (location.hash) {
-      const tab = location.hash.replace("#", "");
-      if (["annual-reports", "case-studies", "in-publications", "legal-documents"].includes(tab)) {
-        setActiveTab(tab);
-      }
+    const filterParam = searchParams.get("filter")?.toLowerCase().trim();
+    const validTabs = ["annual-reports", "case-studies", "in-publications", "legal-documents"];
+
+    if (filterParam && validTabs.includes(filterParam)) {
+      setActiveTab(filterParam);
     } else {
       setActiveTab("annual-reports");
+      setSearchParams({ filter: "annual-reports" }, { replace: true });
     }
-  }, [location]);
+  }, [searchParams]);
 
   const reports = publications.filter((p) => p.type === "report");
   const caseStudies = publications.filter((p) => p.type === "case_study");
-  const legalDocs = publications.filter((p) => p.type === "legal"); // नया फ़िल्टर: Legal Documents के लिए
+  const legalDocs = publications.filter((p) => p.type === "legal");
+
+  const sidebarTabs = [
+    { id: "annual-reports", label: "Reports 📊" },
+    { id: "case-studies", label: "Case Studies 📝" },
+    { id: "in-publications", label: "Our Publications 📚" },
+    { id: "legal-documents", label: "Legal Documents ⚖️" },
+  ];
+
+  if (loading) {
+    return (
+      <div className="w-full py-32 text-center bg-white text-gray-500 font-bold tracking-wider">
+        Loading Publications Portfolio...
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-bg-color min-h-screen">
+    <div className="bg-bg-color min-h-screen pb-20">
       
-      <section className="bg-primary text-white py-20 px-4 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-4 font-serif"
-        >
-          Publications & Resources
-        </motion.h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-primary-50 opacity-90">
-          Explore our reports, case studies, legal documents, and books showcasing our impact-driven work.
-        </motion.p>
-      </section>
-
-      <section className="border-b sticky top-20 bg-white z-40 shadow-sm border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-center space-x-8 overflow-x-auto no-scrollbar">
-            {[
-              { id: "annual-reports", label: "Reports 📊" },
-              { id: "case-studies", label: "Case Studies 📝" },
-              { id: "in-publications", label: "Our Publications 📚" },
-              { id: "legal-documents", label: "Legal Documents ⚖️" }, // नया टैब ऑप्शन जोड़ा गया
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                id={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id);
-                  window.history.replaceState(null, "", `#${tab.id}`);
-                }}
-                className={`py-4 border-b-2 font-bold whitespace-nowrap transition-colors outline-none cursor-pointer ${
-                  activeTab === tab.id
-                    ? "border-primary text-primary"
-                    : "border-transparent text-gray-500 hover:text-primary"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+      {/* Banner Section */}
+      <section className="bg-[#E56D37] text-white py-16 text-center relative mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold mb-4 heading-font"
+          >
+            Publications & Resources
+          </motion.h1>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xl max-w-2xl mx-auto text-orange-50 body-font">
+            Explore our reports, case studies, legal documents, and books showcasing our impact-driven work.
+          </motion.p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-12 min-h-[60vh]">
-        
-        {activeTab === "annual-reports" && (
-          reports.length > 0 ? (
-            <div className="grid md:grid-cols-3 gap-6 animate-in fade-in duration-300">
-              {reports.map((r) => (
-                <a
-                  key={r.id}
-                  href={getImageUrl(r.file_url)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-shadow group"
-                >
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-red-50 text-red-500 rounded flex items-center justify-center font-bold shrink-0 text-xs">PDF</div>
-                     <div>
-                       <h3 className="font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors">{r.title}</h3>
-                       {r.file_size && <p className="text-xs text-gray-400 mt-1 block font-medium">{r.file_size}</p>}
-                     </div>
-                  </div>
-                  <span className="text-primary font-bold text-xl ml-4 transition-transform group-hover:translate-y-0.5">↓</span>
-                </a>
-              ))}
+      {/* Main Grid: Split Layout into Sidebar (20%) and Content Area (80%) */}
+      <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+          
+          {/* LEFT SIDEBAR: 20% Width Layout Structure (lg:col-span-2) */}
+          <aside className="lg:col-span-2 sticky top-50 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
+            <h2 className="text-lg font-bold text-[#212121] uppercase tracking-widest px-2 mb-2 heading-font">
+              Resources
+            </h2>
+            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+              {sidebarTabs.map((tab) => {
+                const isSelected = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setSearchParams({ filter: tab.id })}
+                    className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                      isSelected
+                        ? "bg-[#E56D37] text-white shadow-md translate-x-1"
+                        : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                    }`}
+                  >
+                    <span className="heading-font">{tab.label}</span>
+                    <span className={`text-[10px] hidden lg:inline transition-all ${isSelected ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"}`}>
+                      &rarr;
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-          ) : (
-             <p className="text-gray-500 text-center py-8">No annual reports available.</p>
-          )
-        )}
+          </aside>
 
-        {activeTab === "case-studies" && (
-          caseStudies.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in duration-300">
-              {caseStudies.map((c) => (
-                <div key={c.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col group">
-                  <div className="h-48 bg-gray-100 overflow-hidden">
-                    <img
-                      src={getImageUrl(c.image_url)}
-                      alt={c.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-secondary uppercase tracking-wider mb-2 block">{c.category}</span>
-                      <h3 className="font-bold text-gray-900 text-lg mb-4 leading-tight line-clamp-2">{c.title}</h3>
-                    </div>
-                    {c.file_url && (
-                        <a href={getImageUrl(c.file_url)} target="_blank" rel="noreferrer" className="text-primary hover:text-[#5a6425] text-sm font-bold flex items-center gap-1 self-start mt-4">
-                          Read Study <span className="text-lg transition-transform group-hover:translate-x-1">&rarr;</span>
-                        </a>
-                    )}
-                  </div>
+          {/* RIGHT SIDE: 80% Width Layout Content Cards Area (lg:col-span-8) */}
+          <main className="lg:col-span-8 w-full min-h-[50vh]">
+            
+            {/* 1. REPORTS RENDERING BOX */}
+            {activeTab === "annual-reports" && (
+              reports.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 animate-in fade-in duration-300">
+                  {reports.map((r) => (
+                    <a
+                      key={r.id}
+                      href={getImageUrl(r.file_url)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-all group cursor-pointer"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center font-black shrink-0 text-[10px]">PDF</div>
+                        <div>
+                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#E56D37] transition-colors line-clamp-2 text-left heading-font">{r.title}</h3>
+                          {r.file_size && <p className="text-[10px] text-gray-400 mt-0.5 text-left font-medium">{r.file_size}</p>}
+                        </div>
+                      </div>
+                      <span className="text-[#E56D37] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
+                    </a>
+                  ))}
                 </div>
-              ))}
-            </div>
-             ) : (
-               <p className="text-gray-500 text-center py-8">No case studies available.</p>
-          )
-        )}
+              ) : (
+                <div className="w-full py-16 text-center text-gray-400 border-2 border-dashed border-gray-200 rounded-2xl bg-white font-medium">No annual reports available.</div>
+              )
+            )}
 
-        {activeTab === "in-publications" && (
-          inPublications.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-in fade-in duration-300">
-              {inPublications.map((book) => (
-                <div key={book.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
-                    <div className="aspect-[3/4] bg-gray-100 relative overflow-hidden">
-                      <img 
-                        src={getImageUrl(book.image_url)} 
-                        alt={book.title} 
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                        onError={(e) => e.currentTarget.src='https://via.placeholder.com/400x500?text=No+Cover'} 
-                      />
-                    </div>
-                    <div className="p-5 flex-1 flex flex-col justify-between items-center text-center">
-                      <h3 className="font-bold text-md text-gray-900 mb-4 leading-snug line-clamp-2">{book.title}</h3>
-                      {book.pdf_url && (
-                          <a href={getImageUrl(book.pdf_url)} target="_blank" rel="noreferrer" className="bg-[#6a752b] text-white hover:bg-[#5a6425] w-full py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors block mt-auto">
-                              Read PDF
+            {/* 2. CASE STUDIES RENDERING BOX */}
+            {activeTab === "case-studies" && (
+              caseStudies.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 animate-in fade-in duration-300">
+                  {caseStudies.map((c) => (
+                    <div key={c.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col group">
+                      <div className="h-44 bg-gray-100 overflow-hidden relative">
+                        <img
+                          src={getImageUrl(c.image_url)}
+                          alt={c.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <span className="text-[9px] font-bold text-[#E56D37] uppercase tracking-wider mb-1 block text-left heading-font">{c.category}</span>
+                          <h3 className="font-bold text-gray-800 text-sm mb-3 text-left leading-snug line-clamp-2 heading-font">{c.title}</h3>
+                        </div>
+                        {c.file_url && (
+                          <a href={getImageUrl(c.file_url)} target="_blank" rel="noreferrer" className="text-[#E56D37] hover:text-orange-600 text-xs font-bold flex items-center gap-0.5 self-start pt-2 border-t border-gray-50 w-full">
+                            Read Study <span className="text-sm transition-transform group-hover:translate-x-1">&rarr;</span>
                           </a>
-                      )}
+                        )}
+                      </div>
                     </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-             ) : (
-               <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-dashed border-gray-300">
-                   <p className="text-gray-500 font-medium">No books available at the moment.</p>
-               </div>
-          )
-        )}
+              ) : (
+                <div className="w-full py-16 text-center text-gray-400 border-2 border-dashed border-gray-200 rounded-2xl bg-white font-medium">No case studies available.</div>
+              )
+            )}
 
-        {activeTab === "legal-documents" && (
-          legalDocs.length > 0 ? (
-            <div className="grid md:grid-cols-3 gap-6 animate-in fade-in duration-300">
-              {legalDocs.map((doc) => (
-                <a
-                  key={doc.id}
-                  href={getImageUrl(doc.file_url)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-shadow group"
-                >
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded flex items-center justify-center font-bold shrink-0 text-xs">DOC</div>
-                     <div>
-                       <h3 className="font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors">{doc.title}</h3>
-                       {doc.file_size && <p className="text-xs text-gray-400 mt-1 block font-medium">{doc.file_size}</p>}
-                     </div>
-                  </div>
-                  <span className="text-primary font-bold text-xl ml-4 transition-transform group-hover:translate-y-0.5">↓</span>
-                </a>
-              ))}
-            </div>
-          ) : (
-             <p className="text-gray-500 text-center py-8">No legal documents available.</p>
-          )
-        )}
+            {/* 3. OUR PUBLICATIONS RENDERING BOX */}
+            {activeTab === "in-publications" && (
+              inPublications.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6 animate-in fade-in duration-300">
+                  {inPublications.map((book) => (
+                    <div key={book.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                      <div className="aspect-[3/4] bg-gray-50 relative overflow-hidden">
+                        <img 
+                          src={getImageUrl(book.image_url)} 
+                          alt={book.title} 
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                          onError={(e) => e.currentTarget.src='https://via.placeholder.com/400x500?text=No+Cover'} 
+                        />
+                      </div>
+                      <div className="p-4 flex-1 flex flex-col justify-between items-center text-center">
+                        <h3 className="font-bold text-xs text-gray-800 mb-3 leading-snug line-clamp-2 heading-font">{book.title}</h3>
+                        {book.pdf_url && (
+                          <a href={getImageUrl(book.pdf_url)} target="_blank" rel="noreferrer" className="bg-gray-800 text-white hover:bg-[#E56D37] w-full py-2 rounded-xl text-xs font-bold shadow-sm transition-colors block mt-auto cursor-pointer">
+                            Read PDF
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="w-full py-16 text-center text-gray-400 border-2 border-dashed border-gray-200 rounded-2xl bg-white font-medium">No books available at the moment.</div>
+              )
+            )}
 
+            {/* 4. LEGAL DOCUMENTS RENDERING BOX */}
+            {activeTab === "legal-documents" && (
+              legalDocs.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 animate-in fade-in duration-300">
+                  {legalDocs.map((doc) => (
+                    <a
+                      key={doc.id}
+                      href={getImageUrl(doc.file_url)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md flex items-center justify-between transition-all group cursor-pointer"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-11 h-11 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-black shrink-0 text-[10px]">DOC</div>
+                        <div>
+                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#E56D37] transition-colors line-clamp-2 text-left heading-font">{doc.title}</h3>
+                          {doc.file_size && <p className="text-[10px] text-gray-400 mt-0.5 text-left font-medium">{doc.file_size}</p>}
+                        </div>
+                      </div>
+                      <span className="text-[#E56D37] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="w-full py-16 text-center text-gray-400 border-2 border-dashed border-gray-200 rounded-2xl bg-white font-medium">No legal documents available.</div>
+              )
+            )}
+
+          </main>
+        </div>
       </div>
     </div>
   );
