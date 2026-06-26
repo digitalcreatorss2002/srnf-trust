@@ -98,9 +98,9 @@ const MediaAndStories = () => {
   }, [isPhotoModalOpen, handlePrevPhoto, handleNextPhoto]);
 
   const sidebarTabs = [
-    { id: 'photos', label: 'Photo Gallery'},
-    { id: 'videos', label: 'Video Gallery'},
-    { id: 'press', label: 'Press Coverage'},
+    { id: 'photos', label: 'Photo Gallery', icon: '📸' },
+    { id: 'videos', label: 'Video Gallery', icon: '🎥' },
+    { id: 'press', label: 'Press Coverage', icon: '🗞️' },
   ];
 
   if (loading) {
@@ -115,7 +115,7 @@ const MediaAndStories = () => {
     <div className="bg-bg-color min-h-screen relative pb-20">
       
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 px-4 mb-12">
+      <section className="bg-[#E56D37] text-white py-16 px-4 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -137,25 +137,26 @@ const MediaAndStories = () => {
 
       {/* Main Grid Workspace - Split into Sidebar (20%) and Dynamic Feed (80%) */}
       <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: 20% Width Panel Layer (lg:col-span-2) */}
-          <aside className="lg:col-span-2 sticky top-50 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
-            <h2 className="text-md font-bold text-[#212121] uppercase tracking-widest px-2 mb-2 heading-font">
+          {/* LEFT SIDEBAR: FIXED mobile top sticky layout support applied */}
+          <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-5 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-1 lg:gap-2 z-30 w-full overflow-hidden">
+            <h2 className="text-xs lg:text-md font-bold text-[#212121] uppercase tracking-widest px-2 mb-1 lg:mb-2 heading-font hidden sm:block">
               Galleries & News
             </h2>
-            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+            
+            {/* Horizontal slider bar for mobile viewport support */}
+            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
               {sidebarTabs.map((tab) => {
                 const isSelected = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
-                    // FIXED: Replaced standard hook parameters to custom navigation function handler
                     onClick={() => handleTabSelection(tab.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                    className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md translate-x-1"
-                        : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -172,7 +173,7 @@ const MediaAndStories = () => {
           </aside>
 
           {/* RIGHT VIEWPORT: 80% Width Display Stream Container (lg:col-span-8) */}
-          <main className="lg:col-span-8 w-full min-h-[55vh]">
+          <main className="lg:col-span-8 w-full min-h-[55vh] mt-4 lg:mt-0">
             
             {/* 1. PHOTOS GRID SECTION */}
             {activeTab === 'photos' && (
@@ -337,7 +338,7 @@ const MediaAndStories = () => {
             {medias.length > 1 && (
               <button 
                 onClick={handleNextPhoto}
-                className="absolute right-0 md:-right-16 text-white/50 hover:text-white bg-black/20 hover:bg-black/50 p-4 rounded-full backdrop-blur-sm transition-all z-50 cursor-pointer"
+                className="absolute right-0 md:-left-16 text-white/50 hover:text-white bg-black/20 hover:bg-black/50 p-4 rounded-full backdrop-blur-sm transition-all z-50 cursor-pointer"
               >
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>

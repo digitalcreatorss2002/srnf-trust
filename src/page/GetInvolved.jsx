@@ -57,14 +57,14 @@ const GetInvolved = () => {
     }
   }, [searchParams]);
 
-  // FIXED: Handler function to update search params state and scroll page back to top smoothly
+  // Handler function to update search params state and scroll page back to top smoothly
   const handleTabSelection = (tabId) => {
     setSearchParams({ filter: tabId });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const sidebarTabs = [
-    { id: "volunteer", label: "Volunteer With Us"},
+    { id: "volunteer", label: "Volunteer With Us" },
     { id: "careers", label: "Careers Portal"},
     { id: "funds", label: "Partners (EOI/RFQ)"},
   ];
@@ -72,7 +72,7 @@ const GetInvolved = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-24 relative">
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 mb-12">
+      <section className="bg-[#E56D37] text-white py-16 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 heading-font">
             Get Involved
@@ -86,25 +86,26 @@ const GetInvolved = () => {
 
       {/* Main Workspace Layout - Split into Sidebar (20%) and Content (80%) */}
       <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: 20% Width Layout Structure Panel (lg:col-span-2) */}
-          <aside className="lg:col-span-2 sticky top-50 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
-            <h2 className="text-md font-bold text-[#212121] uppercase tracking-widest px-2 mb-2 heading-font">
+          {/* LEFT SIDEBAR: FIXED mobile top sticky layout support implemented */}
+          <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-5 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-1 lg:gap-2 z-30 w-full overflow-hidden">
+            <h2 className="text-xs lg:text-md font-bold text-[#212121] uppercase tracking-widest px-2 mb-1 lg:mb-2 heading-font hidden sm:block">
               Opportunities
             </h2>
-            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+            
+            {/* Horizontal slider bar for mobile viewport support */}
+            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
               {sidebarTabs.map((tab) => {
                 const isSelected = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
-                    // FIXED: Wired custom handler to handle tab parameter triggers + smooth scrolling
                     onClick={() => handleTabSelection(tab.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                    className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md translate-x-1"
-                        : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -121,7 +122,7 @@ const GetInvolved = () => {
           </aside>
 
           {/* RIGHT VIEWPORT: 80% Width Layout Dynamic Feed Content (lg:col-span-8) */}
-          <main className="lg:col-span-8 w-full min-h-[50vh]">
+          <main className="lg:col-span-8 w-full min-h-[50vh] mt-4 lg:mt-0">
             
             {/* 1. VOLUNTEER SECTION */}
             {activeTab === "volunteer" && (
@@ -176,7 +177,7 @@ const GetInvolved = () => {
                               rel="noopener noreferrer"
                               className="text-blue-600 hover:underline text-[11px] mt-2 inline-block font-extrabold"
                             >
-                              View Job Details (PDF)
+                              📄 View Job Details (PDF)
                             </a>
                           )}
                         </div>

@@ -48,7 +48,7 @@ const Publications = () => {
     }
   }, [searchParams]);
 
-  // FIXED: Sidebar items click hander added to auto scroll view to the top smoothly
+  // Sidebar items click hander added to auto scroll view to the top smoothly
   const handleTabSelection = (tabId) => {
     setSearchParams({ filter: tabId });
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -77,7 +77,7 @@ const Publications = () => {
     <div className="bg-bg-color min-h-screen pb-20">
       
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 text-center relative mb-12">
+      <section className="bg-[#E56D37] text-white py-16 text-center relative mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -94,24 +94,26 @@ const Publications = () => {
 
       {/* Main Grid: Split Layout into Sidebar (20%) and Content Area (80%) */}
       <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: 20% Width Layout Structure (lg:col-span-2) */}
-          <aside className="lg:col-span-2 sticky top-50 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
-            <h2 className="text-lg font-bold text-[#212121] uppercase tracking-widest px-2 mb-2 heading-font">
+          {/* LEFT SIDEBAR: FIXED mobile top sticky layout implementation applied */}
+          <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-5 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-1 lg:gap-2 z-30 w-full overflow-hidden">
+            <h2 className="text-xs lg:text-lg font-bold text-[#212121] uppercase tracking-widest px-2 mb-1 lg:mb-2 heading-font hidden sm:block">
               Resources
             </h2>
-            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+            
+            {/* Horizontal swipe panel for mobile layout fallback wrapper */}
+            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
               {sidebarTabs.map((tab) => {
                 const isSelected = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => handleTabSelection(tab.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                    className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md translate-x-1"
-                        : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                     }`}
                   >
                     <span className="heading-font">{tab.label}</span>
@@ -125,7 +127,7 @@ const Publications = () => {
           </aside>
 
           {/* RIGHT SIDE: 80% Width Layout Content Cards Area (lg:col-span-8) */}
-          <main className="lg:col-span-8 w-full min-h-[50vh]">
+          <main className="lg:col-span-8 w-full min-h-[50vh] mt-4 lg:mt-0">
             
             {/* 1. REPORTS RENDERING BOX */}
             {activeTab === "annual-reports" && (

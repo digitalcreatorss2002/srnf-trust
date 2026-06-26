@@ -49,7 +49,7 @@ const Programs = () => {
     }
   }, [searchParams, programsList]);
 
-  // FIXED: Handler function to update tab parameter and smoothly scroll viewport to top
+  // Handler function to update tab parameter and smoothly scroll viewport to top
   const handleCategorySelection = (tabId) => {
     setSearchParams({ filter: tabId });
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -68,7 +68,7 @@ const Programs = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-20">
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 bg-opacity-90 relative mb-12">
+      <section className="bg-[#E56D37] text-white py-16 bg-opacity-90 relative mb-4 lg:mb-12">
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl heading-font font-bold mb-4">
@@ -80,26 +80,28 @@ const Programs = () => {
         </div>
       </section>
 
-      {/* Main Grid: 20:80 split layout */}
+      {/* Main Grid Content Area */}
       <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: 20% Width Panel Layer (lg:col-span-2) */}
-          <aside className="lg:col-span-2 sticky top-50 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-2 z-30">
-            <h2 className="text-md font-bold text-[#212121] uppercase tracking-widest px-3 mb-2 heading-font">
+          {/* LEFT SIDEBAR: Mobile me top par sticky (top-20 kyuki navbar 20 hai) aur large screen par top-50 sidebar */}
+          <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-1 lg:gap-2 z-30 w-full overflow-hidden">
+            <h2 className="text-xs lg:text-md font-bold text-[#212121] uppercase tracking-widest px-3 mb-1 lg:mb-2 heading-font hidden sm:block">
               Categories
             </h2>
-            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+            
+            {/* Horizontal scroll panel container for mobile views */}
+            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
               {uniqueCategories.map((tabId) => {
                 const isSelected = activeTab === tabId;
                 return (
                   <button
                     key={tabId}
                     onClick={() => handleCategorySelection(tabId)}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer ${
+                    className={`text-left px-4 py-2 lg:py-3 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md shadow-orange-500/10 translate-x-1"
-                        : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#E56D37] text-white shadow-md shadow-orange-500/10 lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                     }`}
                   >
                     <span className="heading-font">{formatTabLabel(tabId)}</span>
@@ -114,8 +116,8 @@ const Programs = () => {
             </div>
           </aside>
 
-          {/* RIGHT GRID CONTENT AREA: 80% Width (lg:col-span-8) */}
-          <main className="lg:col-span-8 w-full">
+          {/* RIGHT GRID CONTENT AREA: 80% Width Layout Feed */}
+          <main className="lg:col-span-8 w-full mt-4 lg:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {displayPrograms.length === 0 && !loading && (
                 <div className="col-span-full py-20 text-center text-gray-500 bg-white rounded-2xl border border-gray-100 shadow-sm font-medium">

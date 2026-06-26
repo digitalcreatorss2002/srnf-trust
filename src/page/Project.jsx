@@ -62,13 +62,13 @@ const Projects = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.hash]);
 
-  // FIXED: Added central handler to auto scroll to top on any sidebar layout interactions
+  // Central handler to auto scroll to top on any sidebar layout interactions
   const handleTabSelection = (type, value) => {
     if (type === "status") {
-      window.location.hash = value; // This automatically triggers the hash listener above
+      window.location.hash = value; 
     } else if (type === "category") {
       setSelectedCategory(value);
-      window.scrollTo({ top: 0, behavior: "smooth" }); // Manually scrolls view for sector categories
+      window.scrollTo({ top: 0, behavior: "smooth" }); 
     }
   };
 
@@ -115,7 +115,7 @@ const Projects = () => {
     <div className="bg-bg-color min-h-screen pb-20">
       
       {/* Banner Section */}
-      <section id="ongoing" className="bg-[#E56D37] text-white py-16 relative overflow-hidden scroll-mt-24 mb-12">
+      <section id="ongoing" className="bg-[#E56D37] text-white py-16 relative overflow-hidden scroll-mt-24 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 heading-font">
             {activeTab === "completed" ? "Completed Projects" : activeTab === "planned" ? "Planned Projects" : "Ongoing Projects"}
@@ -132,22 +132,22 @@ const Projects = () => {
 
       {/* Main Container - Split into Sidebar (20%) and Content Grid (80%) */}
       <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: 20% Width Layout Structure (lg:col-span-2) */}
-          <aside className="lg:col-span-2 sticky top-50 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-4 z-30">
+          {/* LEFT SIDEBAR: FIXED mobile sticky layout support update applied */}
+          <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-5 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-3 lg:gap-4 z-30 w-full overflow-hidden">
             
             {/* Project Status Filters */}
             <div>
-              <h2 className="text-lg font-bold text-[#212121] uppercase tracking-widest px-2 mb-2 heading-font">
+              <h2 className="text-xs lg:text-lg font-bold text-[#212121] uppercase tracking-widest px-2 mb-1 lg:mb-2 heading-font">
                 Project Status
               </h2>
-              <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5">
+              <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
                 <button
                   type="button"
                   onClick={() => handleTabSelection("status", "all")}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
-                    activeTab === "all" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                  className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
+                    activeTab === "all" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
                   <span className="heading-font">Ongoing</span>
@@ -155,8 +155,8 @@ const Projects = () => {
                 <button
                   type="button"
                   onClick={() => handleTabSelection("status", "completed")}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
-                    activeTab === "completed" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                  className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
+                    activeTab === "completed" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
                   <span className="heading-font">Completed</span>
@@ -164,8 +164,8 @@ const Projects = () => {
                 <button
                   type="button"
                   onClick={() => handleTabSelection("status", "planned")}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer ${
-                    activeTab === "planned" ? "bg-[#E56D37] text-white shadow-md translate-x-1" : "text-gray-600 hover:bg-orange-50/40 hover:text-[#E56D37]"
+                  className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
+                    activeTab === "planned" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
                   }`}
                 >
                   <span className="heading-font">Planned</span>
@@ -175,8 +175,8 @@ const Projects = () => {
 
             {/* Sub-Sector Filter Categories inside Sidebar */}
             {uniqueCategories.length > 0 && (
-              <div className="border-t pt-4 border-gray-100">
-                <div className="flex items-center justify-between px-2 mb-2">
+              <div className="border-t pt-3 lg:pt-4 border-gray-100">
+                <div className="flex items-center justify-between px-2 mb-1.5 lg:mb-2">
                   <h2 className="text-xs font-bold text-gray-400 uppercase tracking-widest heading-font">
                     Sectors
                   </h2>
@@ -189,7 +189,7 @@ const Projects = () => {
                     </button>
                   )}
                 </div>
-                <div className="flex flex-wrap lg:flex-col gap-1.5">
+                <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar gap-1.5 pb-1 lg:pb-0 scroll-smooth snap-x">
                   {uniqueCategories.map(cat => {
                     const isCatSelected = selectedCategory === cat;
                     return (
@@ -197,7 +197,7 @@ const Projects = () => {
                         type="button" 
                         key={cat} 
                         onClick={() => handleTabSelection("category", isCatSelected ? null : cat)} 
-                        className={`w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                        className={`text-left px-4 py-1.5 lg:py-2 rounded-lg lg:rounded-xl text-xs font-bold transition-all border cursor-pointer snap-center whitespace-nowrap lg:whitespace-normal ${
                           isCatSelected 
                             ? "bg-orange-50 border-[#E56D37] text-[#E56D37]" 
                             : "bg-white border-gray-100 text-gray-600 hover:border-gray-200"
@@ -213,7 +213,7 @@ const Projects = () => {
           </aside>
 
           {/* RIGHT SIDE: 80% Width Layout Project Grid Content (lg:col-span-8) */}
-          <main className="lg:col-span-8 w-full">
+          <main className="lg:col-span-8 w-full mt-4 lg:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {displayProjects.length === 0 ? (
                 <div className="col-span-full py-20 text-center text-gray-500 bg-white rounded-2xl border border-gray-100 shadow-sm font-medium">
