@@ -84,7 +84,7 @@ const ProjectDetails = () => {
           <div className="inline-block bg-white/20 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-[0.2em] mb-6 backdrop-blur-md border border-white/10">
             {project.category || "General Intervention"}
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold mb-8 max-w-4xl mx-auto leading-tight drop-shadow-md">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-8 max-w-4xl mx-auto leading-tight drop-shadow-md">
             {project.title}
           </h1>
           <div className="flex flex-col items-center gap-3">
@@ -138,7 +138,7 @@ const ProjectDetails = () => {
                 <span className="text-primary text-3xl">🌱</span> Our
                 Intervention
               </h2>
-              <div className="prose prose-lg text-gray-600 max-w-none mb-12 leading-relaxed">
+              <div className="prose prose-lg text-gray-600 text-justify max-w-none mb-12 leading-relaxed">
                 {project.description?.split("\n").map((paragraph, index) => (
                   <p key={index} className="mb-6">
                     {paragraph}

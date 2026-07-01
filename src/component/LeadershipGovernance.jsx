@@ -324,7 +324,7 @@ const LeadershipGovernance = () => {
                                   isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
                                 }`}>
                                   <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-center p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                                    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                                    <div className="w-45 h-45 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
                                       <img
                                         src={member.img}
                                         alt={member.name}

@@ -98,7 +98,7 @@ const ProgramDetails = () => {
             {program.icon || "📌"} {program.slug}
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+          <h1 className="text-3xl md:text-3xl heading-font font-bold mb-4">
             {program.title}
           </h1>
 
@@ -217,7 +217,7 @@ const ProgramDetails = () => {
               {(program.description || "")
                 .split("\n")
                 .map((paragraph, index) => (
-                  <p key={index} className="mb-4 leading-relaxed text-gray-600">
+                  <p key={index} className="mb-4 leading-relaxed text-gray-600 text-justify">
                     {paragraph}
                   </p>
                 ))}
@@ -237,7 +237,7 @@ const ProgramDetails = () => {
                   {program.activities.split("\n").filter(a => a.trim()).map((act, i) => (
                     <div key={i} className="bg-white border border-gray-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
                       <div className="mt-1 bg-green-100 text-primary w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm font-bold shadow-inner">✓</div>
-                      <p className="text-gray-700 leading-relaxed flex-1">{act}</p>
+                      <p className="text-gray-700 text-justify leading-relaxed flex-1">{act}</p>
                     </div>
                   ))}
                 </div>
@@ -258,7 +258,7 @@ const ProgramDetails = () => {
                   {program.achievements.split("\n").filter(a => a.trim()).map((ach, i) => (
                     <div key={i} className="group relative bg-white border border-gray-100 p-5 rounded-xl shadow-sm hover:border-yellow-200 hover:bg-yellow-50/30 transition-all font-medium text-gray-700 flex items-center gap-5">
                       <div className="bg-yellow-100 text-yellow-600 w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-xl group-hover:scale-110 transition-transform shadow-sm">🏆</div>
-                      <p className="flex-1 leading-relaxed">{ach}</p>
+                      <p className="flex-1 leading-relaxed text-justify">{ach}</p>
                     </div>
                   ))}
                 </div>
@@ -274,7 +274,7 @@ const ProgramDetails = () => {
                   <div className="w-1.5 rounded-full bg-primary shrink-0"></div>
                   <div>
                     <h3 className="font-serif text-primary font-bold mb-3 tracking-wide uppercase text-sm">Program Goal</h3>
-                    <p className="text-gray-800 text-xl font-serif italic leading-relaxed">
+                    <p className="text-gray-800 text-xl font-serif text-justify italic leading-relaxed">
                       {program.goal}
                     </p>
                   </div>
