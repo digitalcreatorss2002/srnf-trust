@@ -222,7 +222,7 @@ const Navbar = () => {
             <div className="hidden xl:block">
               <Link
                 to="/donate"
-                className={`inline-flex items-center justify-center bg-accent hover:bg-[#237586] text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md ${
+                className={`inline-flex items-center justify-center bg-accent hover:bg-[#237586] text-white px-6 py-2.5 rounded-full font-bold heading-font transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md ${
                   location.pathname === "/donate" ? "ring-4 ring-teal-200" : ""
                 }`}
               >
