@@ -84,7 +84,7 @@ export default function NewslineTicker() {
               
               <span 
                 onClick={() => handleNewsClick(item.route_type, item.target_slug)}
-                className="cursor-pointer select-none hover:text-[#fff] transition-colors duration-200"
+                className="cursor-pointer select-none text-[#fff] hover:text-[#fff] transition-colors duration-200"
                 title={`View ${item.route_type} details`}
               >
                 {item.title}
