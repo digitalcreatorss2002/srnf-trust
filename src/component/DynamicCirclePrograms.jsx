@@ -5,13 +5,13 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 // Har ek bubble ke liye different distinct background, active background, aur ring color variables
 const bubbleColors = [
   { bg: "bg-[#E56D37]", text: "text-white uppercase", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#E56D37] uppercase" }, // Orange
-  { bg: "bg-[#2E7D32]", text: "text-white", border: "border-white/60", ring: "ring-green-300/50", activeBg: "bg-white text-[#2E7D32]" },  // Green
-  { bg: "bg-[#1565C0]", text: "text-white", border: "border-white/60", ring: "ring-blue-300/50", activeBg: "bg-white text-[#1565C0]" },   // Blue
-  { bg: "bg-[#AD1457]", text: "text-white", border: "border-white/60", ring: "ring-pink-300/50", activeBg: "bg-white text-[#AD1457]" },   // Pink
-  { bg: "bg-[#283593]", text: "text-white", border: "border-white/60", ring: "ring-indigo-300/50", activeBg: "bg-white text-[#283593]" }, // Indigo
-  { bg: "bg-[#00838F]", text: "text-white", border: "border-white/60", ring: "ring-cyan-300/50", activeBg: "bg-white text-[#00838F]" },   // Cyan
-  { bg: "bg-[#6A1B9A]", text: "text-white", border: "border-white/60", ring: "ring-purple-300/50", activeBg: "bg-white text-[#6A1B9A]" }, // Purple
-  { bg: "bg-[#EF6C00]", text: "text-white", border: "border-white/60", ring: "ring-orange-400/50", activeBg: "bg-white text-[#EF6C00]" }, // Deep Orange
+  { bg: "bg-[#FB8C00]", text: "text-white", border: "border-white/60", ring: "ring-green-300/50", activeBg: "bg-white text-[#2E7D32]" },  // Green
+  { bg: "bg-[#8E24AA]", text: "text-white", border: "border-white/60", ring: "ring-blue-300/50", activeBg: "bg-white text-[#1565C0]" },   // Blue
+  { bg: "bg-[#757575]", text: "text-white", border: "border-white/60", ring: "ring-pink-300/50", activeBg: "bg-white text-[#AD1457]" },   // Pink
+  { bg: "bg-[#1E88E5]", text: "text-white", border: "border-white/60", ring: "ring-indigo-300/50", activeBg: "bg-white text-[#283593]" }, // Indigo
+  { bg: "bg-[#FDD835]", text: "text-white", border: "border-white/60", ring: "ring-cyan-300/50", activeBg: "bg-white text-[#00838F]" },   // Cyan
+  { bg: "bg-[#43A047]", text: "text-white", border: "border-white/60", ring: "ring-purple-300/50", activeBg: "bg-white text-[#6A1B9A]" }, // Purple
+  { bg: "bg-[#E53935]", text: "text-white", border: "border-white/60", ring: "ring-orange-400/50", activeBg: "bg-white text-[#EF6C00]" }, // Deep Orange
 ];
 
 const DynamicCirclePrograms = () => {

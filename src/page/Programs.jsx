@@ -57,6 +57,7 @@ const Programs = () => {
 
   const formatTabLabel = (id) => {
     if (id === "all") return "All Programs 🌍";
+    if (id.toLowerCase() === "cbo") return "CBO"; // Handled CBO specifically here
     return id.replace(/[_-]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
 
@@ -84,7 +85,7 @@ const Programs = () => {
       <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: Mobile me top par sticky (top-20 kyuki navbar 20 hai) aur large screen par top-50 sidebar */}
+          {/* LEFT SIDEBAR */}
           <aside className="lg:col-span-2 sticky top-[76px] lg:top-50 bg-white p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-1 lg:gap-2 z-30 w-full overflow-hidden">
             <h2 className="text-xs lg:text-md font-bold text-[#212121] uppercase tracking-widest px-3 mb-1 lg:mb-2 heading-font hidden sm:block">
               Categories
@@ -116,7 +117,7 @@ const Programs = () => {
             </div>
           </aside>
 
-          {/* RIGHT GRID CONTENT AREA: 80% Width Layout Feed */}
+          {/* RIGHT GRID CONTENT AREA */}
           <main className="lg:col-span-8 w-full mt-4 lg:mt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {displayPrograms.length === 0 && !loading && (

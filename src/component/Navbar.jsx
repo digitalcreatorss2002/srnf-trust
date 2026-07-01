@@ -12,8 +12,15 @@ const Navbar = () => {
 
   const formatLabel = (label) => {
     if (!label) return "";
+    
+    // Normalizing hyphens to spaces and title-casing words
     let formatted = label.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
-    return formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
+    
+    // FIXED: Strict checking for standard acronyms like EOI/RFQ and CBO to ensure complete uppercase output formatting
+    formatted = formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
+    formatted = formatted.replace(/\bcbo\b/gi, "CBO");
+    
+    return formatted;
   };
 
   useEffect(() => {
@@ -313,7 +320,7 @@ const Navbar = () => {
               className="block w-full text-center bg-accent text-white px-6 py-4 rounded-xl font-bold shadow-md heading-font cursor-pointer"
               onClick={() => handleDropdownItemClick("/donate")}
             >
-              ❤️ Donate Now
+              Donate Now
             </button>
           </div>
         </div>
