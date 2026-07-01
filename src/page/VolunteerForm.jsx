@@ -83,7 +83,7 @@ const VolunteerForm = () => {
             Please fill out this form to register as a volunteer. Our team will review your application and contact you soon.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label

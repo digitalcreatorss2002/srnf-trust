@@ -71,7 +71,7 @@ const Contact = () => {
               <h2 className="text-2xl font-serif font-bold text-text-primary mb-6">
                 Contact Information
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-6 text-left">
                 <div className="flex items-start gap-4">
                   <div className="bg-white w-12 h-12 rounded-full shadow-sm flex items-center justify-center text-xl shrink-0 border border-gray-100">
                     📍
@@ -151,7 +151,7 @@ const Contact = () => {
               Fill out the form below and our team will get back to you shortly.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 text-left">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label

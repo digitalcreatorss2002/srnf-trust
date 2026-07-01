@@ -3,10 +3,10 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 const LeadershipGovernance = () => {
   const [activeModal, setActiveModal] = useState(null);
+  const [activeSubMemberModal, setActiveSubMemberModal] = useState(null);
   const [governanceList, setGovernanceList] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // Tracks the single currently flipped card key on mobile
   const [flippedCardKey, setFlippedCardKey] = useState(null);
 
   const staticLogos = {
@@ -42,10 +42,11 @@ const LeadershipGovernance = () => {
                 circleImage: staticLogos.founder,
                 type: "text-only",
                 details: {
-                  heading: "Message From Our Founder",
-                  text: firstMember
-                    ? firstMember.content
-                    : sec.description || "",
+                  // heading: "Message From Our Founder",
+                  // name: firstMember ? firstMember.name : "Founder",
+                  role: firstMember ? firstMember.role : "Founder Director",
+                  img: firstMember && firstMember.image_url ? getImageUrl(firstMember.image_url) : staticLogos.founder,
+                  text: firstMember ? firstMember.content : sec.description || "",
                 },
               };
             } else if (titleLower.includes("board")) {
@@ -145,29 +146,24 @@ const LeadershipGovernance = () => {
       });
   }, []);
 
-  // Reset flipped card when modal shifts or closes
   useEffect(() => {
     setFlippedCardKey(null);
   }, [activeModal]);
 
-  // FIXED: If the clicked card is already flipped, unflip it. Otherwise, set it as the ONLY flipped card.
   const handleCardFlipToggle = (e, cardKey) => {
-    e.stopPropagation(); // Prevents layout bubbling side-effects
+    e.stopPropagation(); 
     setFlippedCardKey((prevKey) => (prevKey === cardKey ? null : cardKey));
+  };
+
+  const openSubMemberModal = (e, member) => {
+    e.stopPropagation(); // Main modal background triggers ko disable rakhne k liye
+    setActiveSubMemberModal(member);
   };
 
   if (loading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 text-gray-600 font-bold text-lg">
         Loading Leadership & Governance...
-      </div>
-    );
-  }
-
-  if (!governanceList || Object.keys(governanceList).length === 0) {
-    return (
-      <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 text-gray-500 text-lg">
-        No records found.
       </div>
     );
   }
@@ -216,6 +212,7 @@ const LeadershipGovernance = () => {
         ))}
       </div>
 
+      {/* PRIMARY CATEGORY MODAL DIALOG DISPLAY */}
       {activeModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300">
           <div className="bg-white rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto shadow-2xl relative border border-neutral-200">
@@ -232,140 +229,178 @@ const LeadershipGovernance = () => {
             </div>
 
             <div className="p-6 md:p-8">
+              {/* FOUNDER MODAL SPLIT VIEW: 60% Left Content Panel & 40% Right Custom Graphic */}
               {activeModal.type === "text-only" && activeModal.details && (
-                <div className="prose max-w-none">
-                  <h4 className="text-xl font-semibold text-neutral-800 mb-4">
-                    {activeModal.details.heading}
-                  </h4>
-                  <p className="text-neutral-600 text-justify text-lg leading-relaxed whitespace-pre-line">
-                    {activeModal.details.text}
-                  </p>
+                <div className="flex flex-col md:flex-row gap-8 items-start w-full">
+                  {/* Left Column Text Pane: 60% Width */}
+                  <div className="w-full md:w-[60%] space-y-4">
+                    {/* <h4 className="text-2xl font-bold text-neutral-800">
+                      {activeModal.details.heading}
+                    </h4> */}
+                    {/* <div className="border-l-4 border-[#E56D37] pl-3 py-1">
+                      <p className="font-bold text-lg text-neutral-900 leading-none">{activeModal.details.name}</p>
+                      <p className="text-xs text-[#E56D37] font-semibold uppercase tracking-wider mt-1">{activeModal.details.role}</p>
+                    </div> */}
+                    <p className="text-neutral-600 text-justify text-base leading-relaxed whitespace-pre-line pt-2">
+                      {activeModal.details.text}
+                    </p>
+                  </div>
+                  
+                  {/* Right Column Image Pane: 40% Width */}
+                  <div className="w-full md:w-[40%] flex justify-center sticky top-4 pt-10 md:pt-0">
+                    <div className="w-full max-w-[320px] aspect-square rounded-2xl overflow-hidden border-4 border-[#E56D37] shadow-lg bg-neutral-50">
+                      <img 
+                        src={activeModal.details.img} 
+                        alt={activeModal.details.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/300"; }} 
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
 
-              {activeModal.type === "members-list" &&
-                Array.isArray(activeModal.details) && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-                    {activeModal.details.map((member, idx) => {
-                      const cardKey = `member-${idx}`;
-                      const isFlipped = flippedCardKey === cardKey;
-                      return (
-                        <div
-                          key={idx}
-                          onClick={(e) => handleCardFlipToggle(e, cardKey)}
-                          className="w-56 h-70 relative group [perspective:1000px] cursor-pointer"
-                        >
-                          <div className={`w-full h-full transition-transform duration-700 [transform-style:preserve-3d] relative ${
-                            isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
-                          }`}>
-                            <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                              <div className="w-45 h-45 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
-                                <img
-                                  src={member.img}
-                                  alt={member.name}
-                                  className="w-full h-full object-cover"
-                                  onError={(e) => {
-                                    e.currentTarget.src =
-                                      "https://via.placeholder.com/150";
-                                  }}
-                                />
-                              </div>
-                              <h4 className="font-bold text-1xl text-neutral-800 text-center leading-snug mt-3 line-clamp-2">
-                                {member.name}
-                              </h4>
-                              <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">
-                                {member.role}
-                              </p>
-                            </div>
-                            <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center z-20">
-                              <h4 className="font-bold text-1xl text-neutral-800 border-b border-orange-100 pb-1 mb-2 text-center w-full">
-                                {member.name}
-                              </h4>
-                              {member.message ? (
-                                <p className="text-[16px] text-gray-600 font-medium italic overflow-y-auto max-h-[170px] px-1 custom-scrollbar text-center leading-relaxed">
-                                  {member.message}
-                                </p>
-                              ) : (
-                                <p className="text-[12px] text-gray-400 italic text-center">
-                                  Dedicated to the development and success of our initiatives.
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-              {activeModal.type === "levels-list" &&
-                Array.isArray(activeModal.details) && (
-                  <div className="space-y-12">
-                    {activeModal.details.map((level, idx) => (
+              {/* MEMBERS-LIST (Board & Advisory) VIEW */}
+              {activeModal.type === "members-list" && Array.isArray(activeModal.details) && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                  {activeModal.details.map((member, idx) => {
+                    const cardKey = `member-${idx}`;
+                    const isFlipped = flippedCardKey === cardKey;
+                    return (
                       <div
                         key={idx}
-                        className="border-l-4 border-orange-500 pl-4"
+                        onClick={(e) => handleCardFlipToggle(e, cardKey)}
+                        className="w-56 h-72 relative group [perspective:1000px] cursor-pointer"
                       >
-                        <h4 className="text-md font-bold text-orange-600 uppercase tracking-wider mb-6">
-                          {level.levelTitle}
-                        </h4>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-                          {level.members.map((member, mIdx) => {
-                            const cardKey = `level-${idx}-member-${mIdx}`;
-                            const isFlipped = flippedCardKey === cardKey;
-                            return (
-                              <div
-                                key={mIdx}
-                                onClick={(e) => handleCardFlipToggle(e, cardKey)}
-                                className="w-56 h-80 relative group [perspective:1000px] cursor-pointer"
-                              >
-                                <div className={`w-full h-full transition-transform duration-700 [transform-style:preserve-3d] relative ${
-                                  isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
-                                }`}>
-                                  <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-center p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                                    <div className="w-45 h-45 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
-                                      <img
-                                        src={member.img}
-                                        alt={member.name}
-                                        className="w-full h-full object-cover"
-                                        onError={(e) => {
-                                          e.currentTarget.src =
-                                            "https://via.placeholder.com/150";
-                                        }}
-                                      />
-                                    </div>
-                                    <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-4 line-clamp-2">
-                                      {member.name}
-                                    </h4>
-                                    <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">
-                                      {member.role}
-                                    </p>
-                                  </div>
-                                  <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center z-20">
-                                    <h4 className="font-bold text-sm text-neutral-800 border-b border-orange-100 pb-1 mb-2 text-center w-full">
-                                      {member.name}
-                                    </h4>
-                                    {member.message ? (
-                                      <p className="text-[12px] text-gray-600 font-medium italic overflow-y-auto max-h-[170px] px-1 custom-scrollbar text-center leading-relaxed">
-                                        "{member.message}"
-                                      </p>
-                                    ) : (
-                                      <p className="text-[12px] text-gray-400 italic text-center">
-                                        Executing operations and managing dynamic workflows.
-                                      </p>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
+                        <div className={`w-full h-full transition-transform duration-700 [transform-style:preserve-3d] relative ${
+                          isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
+                        }`}>
+                          <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
+                            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                              <img src={member.img} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
+                            </div>
+                            <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-3 line-clamp-2">{member.name}</h4>
+                            <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
+                          </div>
+                          <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
+                            <div className="w-full text-center flex flex-col items-center">
+                              <h4 className="font-bold text-base text-neutral-800 border-b border-orange-100 pb-1 mb-2 w-full">{member.name}</h4>
+                              <p className="text-[11px] text-gray-500 font-medium italic line-clamp-5 leading-relaxed">
+                                {member.message || "Dedicated to the development and success of our initiatives."}
+                              </p>
+                            </div>
+                            <button 
+                              onClick={(e) => openSubMemberModal(e, member)}
+                              className="w-full bg-[#E56D37] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
+                            >
+                              Read Full Bio &rarr;
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* LEVELS-LIST (Management Team) VIEW */}
+              {activeModal.type === "levels-list" && Array.isArray(activeModal.details) && (
+                <div className="space-y-12">
+                  {activeModal.details.map((level, idx) => (
+                    <div key={idx} className="border-l-4 border-orange-500 pl-4">
+                      <h4 className="text-md font-bold text-orange-600 uppercase tracking-wider mb-6">{level.levelTitle}</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                        {level.members.map((member, mIdx) => {
+                          const cardKey = `level-${idx}-member-${mIdx}`;
+                          const isFlipped = flippedCardKey === cardKey;
+                          return (
+                            <div
+                              key={mIdx}
+                              onClick={(e) => handleCardFlipToggle(e, cardKey)}
+                              className="w-56 h-72 relative group [perspective:1000px] cursor-pointer"
+                            >
+                              <div className={`w-full h-full transition-transform duration-700 [transform-style:preserve-3d] relative ${
+                                isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
+                              }`}>
+                                <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
+                                  <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                                    <img src={member.img} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
+                                  </div>
+                                  <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-3 line-clamp-2">{member.name}</h4>
+                                  <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
+                                </div>
+                                <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
+                                  <div className="w-full text-center flex flex-col items-center">
+                                    <h4 className="font-bold text-base text-neutral-800 border-b border-orange-100 pb-1 mb-2 w-full">{member.name}</h4>
+                                    <p className="text-[11px] text-gray-500 font-medium italic line-clamp-5 leading-relaxed">
+                                      {member.message || "Executing operations and managing dynamic workflows."}
+                                    </p>
+                                  </div>
+                                  <button 
+                                    onClick={(e) => openSubMemberModal(e, member)}
+                                    className="w-full bg-[#E56D37] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
+                                  >
+                                    Read Full Bio &rarr;
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* SECONDARY DETAILED SUB-MEMBER MODAL DIALOG (Left Image 40%, Right Details 60%) */}
+      {activeSubMemberModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl relative border border-neutral-100 flex flex-col md:flex-row min-h-[350px]">
+            
+            {/* Close Trigger Button */}
+            <button
+              onClick={() => setActiveSubMemberModal(null)}
+              className="absolute top-3 right-4 text-neutral-400 hover:text-neutral-700 text-3xl font-light transition-colors z-50 cursor-pointer p-1"
+            >
+              &times;
+            </button>
+
+            {/* Left Frame Side Panel: Image Container Area (40% Split Ratio Layout) */}
+            <div className="w-full md:w-[40%] bg-neutral-50 border-r border-neutral-100 flex items-center justify-center p-6 bg-gradient-to-br from-orange-50/30 to-white">
+              <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-md aspect-square">
+                <img 
+                  src={activeSubMemberModal.img} 
+                  alt={activeSubMemberModal.name} 
+                  className="w-full h-full object-cover"
+                  onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/200"; }}
+                />
+              </div>
+            </div>
+
+            {/* Right Frame Side Panel: Text, Core Credentials and Complete Message Content (60% Ratio View) */}
+            <div className="w-full md:w-[60%] p-6 md:p-8 flex flex-col justify-start">
+              <div className="mb-4">
+                <h4 className="text-2xl font-bold text-neutral-900 leading-tight">
+                  {activeSubMemberModal.name}
+                </h4>
+                <p className="text-xs md:text-sm text-[#E56D37] font-bold uppercase tracking-widest mt-1">
+                  {activeSubMemberModal.role}
+                </p>
+                <div className="w-16 h-0.5 bg-orange-200 mt-2.5 rounded-full" />
+              </div>
+
+              <div className="flex-grow overflow-y-auto max-h-[220px] pr-2 custom-scrollbar">
+                <p className="text-neutral-600 text-justify text-sm md:text-base leading-relaxed whitespace-pre-line font-light">
+                  {activeSubMemberModal.message || "Dedicated to executing strategies, overseeing development."}
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       )}

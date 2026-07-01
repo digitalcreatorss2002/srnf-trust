@@ -69,7 +69,7 @@ const Programs = () => {
     <div className="bg-bg-color min-h-screen pb-20">
       {/* Banner Section */}
       <section className="bg-[#E56D37] text-white py-16 bg-opacity-90 relative mb-4 lg:mb-12">
-        <div className="absolute inset-0 z-0 opacity-20 bg-[url('program/programbg.png')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl heading-font font-bold mb-4">
             Our Programmes

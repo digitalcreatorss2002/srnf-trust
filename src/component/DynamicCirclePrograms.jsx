@@ -4,7 +4,7 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // Har ek bubble ke liye different distinct background, active background, aur ring color variables
 const bubbleColors = [
-  { bg: "bg-[#E56D37]", text: "text-white", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#E56D37]" }, // Orange
+  { bg: "bg-[#E56D37]", text: "text-white uppercase", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#E56D37] uppercase" }, // Orange
   { bg: "bg-[#2E7D32]", text: "text-white", border: "border-white/60", ring: "ring-green-300/50", activeBg: "bg-white text-[#2E7D32]" },  // Green
   { bg: "bg-[#1565C0]", text: "text-white", border: "border-white/60", ring: "ring-blue-300/50", activeBg: "bg-white text-[#1565C0]" },   // Blue
   { bg: "bg-[#AD1457]", text: "text-white", border: "border-white/60", ring: "ring-pink-300/50", activeBg: "bg-white text-[#AD1457]" },   // Pink
@@ -20,6 +20,24 @@ const DynamicCirclePrograms = () => {
   const [activeCategory, setActiveCategory] = useState("");
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [radius, setRadius] = useState(220); // Dynamic radius initialization
+
+  // Window resize handler to update translation radius instantly
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setRadius(120); // Mobile radius reduction to prevent screen clipping and overlaps
+      } else if (window.innerWidth < 1024) {
+        setRadius(170); // Tablet view radius
+      } else {
+        setRadius(220); // Desktop view radius
+      }
+    };
+
+    handleResize(); // Initial trigger
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // API se programs data fetch karna
   useEffect(() => {
@@ -76,7 +94,7 @@ const DynamicCirclePrograms = () => {
     <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-12 sm:py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-16">
+        <div className="text-center mb-6 sm:mb-16">
           <span className="text-sm heading-font font-bold text-white uppercase tracking-widest block mb-2">
             Our Organization
           </span>
@@ -87,14 +105,14 @@ const DynamicCirclePrograms = () => {
         </div>
 
         {/* Core Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-12 items-center">
           
           {/* LEFT SIDE: Big Rotating Circle (Perfect Circle Fluid Configuration) */}
-          <div className="flex justify-center items-center min-h-[340px] sm:min-h-[500px] lg:min-h-[580px] overflow-visible w-full">
+          <div className="flex justify-center items-center min-h-[320px] sm:min-h-[500px] lg:min-h-[580px] overflow-visible w-full mt-4 sm:mt-0">
             
-            {/* Main Outer Circle Container - Sizing variable matches breakpoint aspect ratio layout */}
+            {/* FIXED: Mobile aspect size scale optimized down to 240px from 280px to fix heading intersection */}
             <div
-              className="relative rounded-full border-4 border-dashed border-white/50 flex items-center justify-center transition-all duration-300 aspect-square w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px]"
+              className="relative rounded-full border-4 border-dashed border-white/50 flex items-center justify-center transition-all duration-300 aspect-square w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px]"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               style={{
@@ -102,17 +120,23 @@ const DynamicCirclePrograms = () => {
                 animationPlayState: isHovered ? "paused" : "running",
               }}
             >
-              {/* Center Core Branding */}
+              {/* FIXED: Center Core Branding Image Element Logo Layout with precise mobile centering anchor variables */}
               <div
-                className="bg-white rounded-full shadow-2xl flex items-center justify-center p-3 text-center z-10 border border-orange-200 transition-all w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32"
+                className="absolute rounded-full flex items-center justify-center p-2 text-center z-10 transition-all w-16 h-16 sm:w-28 sm:h-28 lg:w-32 lg:h-32 overflow-hidden top-1/2 left-1/2 -mt-8 -ml-8 sm:-mt-14 sm:-ml-14 lg:-mt-16 lg:-ml-16"
                 style={{
                   animation: "counter-spin 25s linear infinite",
                   animationPlayState: isHovered ? "paused" : "running",
                 }}
               >
-                <span className="text-xs sm:text-sm font-bold text-[#E56D37] uppercase tracking-wider">
-                  SRNF
-                </span>
+                <img
+                  src="/logo/logo-bg.png"
+                  alt="SRNF Logo"
+                  className="w-full h-full object-contain rounded-full select-none pointer-events-none"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
               </div>
 
               {/* Dynamic Categories Placed on Circle Perimeter */}
@@ -121,16 +145,8 @@ const DynamicCirclePrograms = () => {
                 const angle = (index * 360) / total;
                 const colorConfig = bubbleColors[index % bubbleColors.length];
 
-                // FIXED: Screen widths track variable radius translate measurements to prevent absolute breaking
-                let radius = 220; // Default Desktop
-                if (window.innerWidth < 640) {
-                  radius = 140; // Mobile view radius offset
-                } else if (window.innerWidth < 1024) {
-                  radius = 190; // Tablet view radius offset
-                }
-
                 return (
-                  // FIXED: Absolute center mapping using dynamic css parameters variables to lock dot centering perfectly
+                  // FIXED: Absolute pivot points centered logic with dynamic responsive dot positions
                   <div
                     key={cat}
                     className="absolute flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 top-1/2 left-1/2 -mt-10 -ml-10 sm:-mt-14 sm:-ml-14 lg:-mt-16 lg:-ml-16 transition-all duration-300"
@@ -159,7 +175,7 @@ const DynamicCirclePrograms = () => {
           </div>
 
           {/* RIGHT SIDE: Filtered Output Cards Layout */}
-          <div className="flex flex-col justify-center min-h-[400px] w-full mt-4 lg:mt-0">
+          <div className="flex flex-col justify-center min-h-[400px] w-full mt-10 lg:mt-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
               {filteredPrograms.length === 0 ? (
                 <div className="col-span-full bg-white/80 backdrop-blur p-8 rounded-2xl text-center text-gray-500 font-medium">
