@@ -51,7 +51,7 @@ const PartnersSection = () => {
   return (
     <section 
       id="partners"
-      className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-14 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="w-full bg-gradient-to-b from-[#006D5B] to-[#fff] py-14 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -86,7 +86,7 @@ const PartnersSection = () => {
                 </div>
 
                 <div className="absolute inset-0 w-full h-full bg-white rounded-full flex flex-col items-center justify-center p-3 border border-gray-100 shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] text-center">
-                  <h4 className="text-[11px] font-bold text-[#E56D37] tracking-tight line-clamp-2 px-1 leading-tight">
+                  <h4 className="text-[11px] font-bold text-[#006D5B] tracking-tight line-clamp-2 px-1 leading-tight">
                     {partner.name}
                   </h4>
                   {partner.link && (

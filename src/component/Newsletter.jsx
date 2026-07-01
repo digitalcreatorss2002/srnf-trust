@@ -35,12 +35,12 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-16 bg-[#fff] border-[#E56D37]/20">
+    <section className="py-16 bg-[#fff] border-[#006D5B]/20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="text-4xl text-white  mb-4 block animate-float">✉️</span>
         
         {/* Heading */}
-        <h2 className="text-3xl font-serif text-[#E56D37] mb-4">
+        <h2 className="text-3xl font-serif text-[#006D5B] mb-4">
           Subscribe to Our Newsletter
         </h2>
         
@@ -55,13 +55,13 @@ const Newsletter = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email address"
-            className="grow px-6 py-4 rounded-full border border-gray-300 focus:outline-none focus:border-[#E56D37] focus:ring-2 focus:ring-[#E56D37]/20 bg-white shadow-sm"
+            className="grow px-6 py-4 rounded-full border border-gray-300 focus:outline-none focus:border-[#006D5B] focus:ring-2 focus:ring-[#006D5B]/20 bg-white shadow-sm"
             required
           />
           <button
             type="submit"
             disabled={loading}
-            className="bg-[#E56D37] hover:bg-[#2d3748] text-white px-8 py-4 rounded-full font-bold transition-all shadow-md hover:-translate-y-1 hover:shadow-lg whitespace-nowrap disabled:opacity-50"
+            className="bg-[#006D5B] hover:bg-[#2d3748] text-white px-8 py-4 rounded-full font-bold transition-all shadow-md hover:-translate-y-1 hover:shadow-lg whitespace-nowrap disabled:opacity-50"
           >
             {loading ? "Subscribing..." : "Subscribe"}
           </button>

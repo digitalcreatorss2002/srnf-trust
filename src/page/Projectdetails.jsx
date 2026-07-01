@@ -234,7 +234,7 @@ const ProjectDetails = () => {
                       <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         State
                       </p>
-                      <p className="font-bold text-[#E56D37] leading-tight">
+                      <p className="font-bold text-[#006D5B] leading-tight">
                         {project.location}
                       </p>
                     </div>
@@ -249,7 +249,7 @@ const ProjectDetails = () => {
                         <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           District
                         </p>
-                        <p className="font-bold text-[#E56D37] leading-tight">
+                        <p className="font-bold text-[#006D5B] leading-tight">
                           {project.district}
                         </p>
                       </div>
@@ -265,7 +265,7 @@ const ProjectDetails = () => {
                         <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           Block
                         </p>
-                        <p className="font-bold text-[#E56D37] leading-tight">
+                        <p className="font-bold text-[#006D5B] leading-tight">
                           {project.block}
                         </p>
                       </div>
@@ -281,7 +281,7 @@ const ProjectDetails = () => {
                         <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                           Village / Area
                         </p>
-                        <p className="font-bold text-[#E56D37] leading-tight">
+                        <p className="font-bold text-[#006D5B] leading-tight">
                           {project.village}
                         </p>
                       </div>
@@ -296,7 +296,7 @@ const ProjectDetails = () => {
                       <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         Target Base
                       </p>
-                      <p className="font-bold text-[#E56D37] leading-tight">
+                      <p className="font-bold text-[#006D5B] leading-tight">
                         {project.beneficiaries || "Community Wide"}
                       </p>
                     </div>
@@ -310,7 +310,7 @@ const ProjectDetails = () => {
                       <p className="text-[10px] text-[#2d2d2d] font-black uppercase tracking-widest mb-1">
                         Funding Support
                       </p>
-                      <p className="font-bold text-[#E56D37] leading-tight">
+                      <p className="font-bold text-[#006D5B] leading-tight">
                         {project.cost || "Grant Based"}
                       </p>
                     </div>
@@ -329,7 +329,7 @@ const ProjectDetails = () => {
                 </p>
                 <Link
                   to="/donate"
-                  className="block w-full bg-[#E56D37] hover:bg-[#2d2d2d] text-white font-black py-4 px-6 rounded-2xl shadow-xl transition-all hover:-translate-y-1 uppercase text-xs tracking-widest"
+                  className="block w-full bg-[#006D5B] hover:bg-[#2d2d2d] text-white font-black py-4 px-6 rounded-2xl shadow-xl transition-all hover:-translate-y-1 uppercase text-xs tracking-widest"
                 >
                   Contribute Now
                 </Link>

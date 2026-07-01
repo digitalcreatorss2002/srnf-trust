@@ -60,13 +60,13 @@ const ImageGallerySection = () => {
         
         {/* Section Header */}
         <div className="text-center mb-16 flex flex-col items-center justify-center">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
+          <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest block mb-2 heading-font">
             Grassroots Initiatives
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight heading-font">
             State Map
           </h2>
-          <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+          <div className="w-24 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
         </div>
 
         {/* Main Content Layout Container */}
@@ -92,7 +92,7 @@ const ImageGallerySection = () => {
               
               {selectedItem && (
                 <div className="relative z-10 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white pt-20">
-                  <h3 className="font-bold text-xl sm:text-2xl tracking-wide font-serif text-[#E56D37] heading-font">
+                  <h3 className="font-bold text-xl sm:text-2xl tracking-wide font-serif text-[#006D5B] heading-font">
                     {selectedItem.title}
                   </h3>
                 </div>
@@ -113,8 +113,8 @@ const ImageGallerySection = () => {
                       onClick={() => setSelectedImage(item)}
                       className={`w-full text-center px-2 py-4 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 border focus:outline-none flex items-center justify-center min-h-[68px] shadow-sm cursor-pointer ${
                         isSelected
-                          ? "bg-[#E56D37] border-[#E56D37] text-white shadow-md scale-[1.01]"
-                          : "bg-white border-gray-200 text-gray-700 hover:border-[#E56D37] hover:text-[#E56D37] hover:bg-orange-50/20"
+                          ? "bg-[#006D5B] border-[#006D5B] text-white shadow-md scale-[1.01]"
+                          : "bg-white border-gray-200 text-gray-700 hover:border-[#006D5B] hover:text-[#006D5B] hover:bg-orange-50/20"
                       }`}
                     >
                       <span className="line-clamp-2 leading-snug heading-font">{item.title}</span>
@@ -132,7 +132,7 @@ const ImageGallerySection = () => {
                   Impact Snap Shot ⚡
                 </h3>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-5 rounded-2xl border border-[#E56D37] shadow-sm transition-all duration-300">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-5 rounded-2xl border border-[#006D5B] shadow-sm transition-all duration-300">
                   
                   {/* Column 1, Row 1: District */}
                   <div className="bg-orange-50/40 p-3 rounded-xl border border-orange-100/80">
@@ -161,13 +161,13 @@ const ImageGallerySection = () => {
                   {/* Column 2, Row 2: Total Complete Projects */}
                   <div className="bg-orange-50/40 p-3 rounded-xl border border-orange-100/60">
                     <span className="block text-[10px] font-bold text-[#212121] uppercase tracking-wider mb-0.5">Total Complete Projects</span>
-                    <span className="text-sm font-extrabold text-[#E56D37]">{selectedItem.totalProjects}</span>
+                    <span className="text-sm font-extrabold text-[#006D5B]">{selectedItem.totalProjects}</span>
                   </div>
 
                   {/* Column 3, Row 2: Live Impact */}
                   <div className="bg-orange-50/40 p-3 rounded-xl border border-orange-100/60">
                     <span className="block text-[10px] font-bold text-[#212121] uppercase tracking-wider mb-0.5">Live Impact</span>
-                    <span className="text-sm font-extrabold text-[#E56D37]">{selectedItem.liveImpact}</span>
+                    <span className="text-sm font-extrabold text-[#006D5B]">{selectedItem.liveImpact}</span>
                   </div>
 
                 </div>

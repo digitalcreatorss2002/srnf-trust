@@ -77,14 +77,14 @@ const OngoingProjects = () => {
         />
       ))}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#E56D37]/60 via-[#2d3748]/40 to-black/70 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#006D5B]/60 via-[#2d3748]/40 to-black/70 z-0" />
 
       <div className="relative max-w-6xl w-full mx-auto z-10 flex flex-col items-center">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md heading-font">
             Our Impact Projects
           </h2>
-          <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+          <div className="w-20 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
         </div>
 
         <div 
@@ -95,7 +95,7 @@ const OngoingProjects = () => {
           <div className="md:col-span-6 p-8 sm:p-12 flex flex-col justify-between text-left bg-white">
             {projectsData[current] && (
               <div className="space-y-4">
-                <span className="inline-block bg-[#E56D37] text-[#fff] text-xs font-bold tracking-widest px-3 py-1 rounded-md uppercase">
+                <span className="inline-block bg-[#006D5B] text-[#fff] text-xs font-bold tracking-widest px-3 py-1 rounded-md uppercase">
                   {projectsData[current].tag}
                 </span>
                 <h3 className="text-2xl sm:text-2xl font-extrabold text-slate-900 leading-tight heading-font">
@@ -115,7 +115,7 @@ const OngoingProjects = () => {
               <div className="pt-6">
                 <Link
                   to={projectsData[current].link}
-                  className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2d2d2d] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md group"
+                  className="inline-flex items-center justify-center bg-[#006D5B] hover:bg-[#2d2d2d] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md group"
                 >
                   Explore Project
                   <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">→</span>
@@ -146,7 +146,7 @@ const OngoingProjects = () => {
                 key={index}
                 onClick={() => setCurrent(index)}
                 className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
-                  index === current ? "w-8 bg-white" : "w-2.5 bg-[#E56D37] hover:bg-white/70"
+                  index === current ? "w-8 bg-white" : "w-2.5 bg-[#006D5B] hover:bg-white/70"
                 }`}
               />
             ))}

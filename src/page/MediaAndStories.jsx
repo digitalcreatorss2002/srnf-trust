@@ -115,7 +115,7 @@ const MediaAndStories = () => {
     <div className="bg-bg-color min-h-screen relative pb-20">
       
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 px-4 mb-4 lg:mb-12">
+      <section className="bg-[#006D5B] text-white py-16 px-4 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -155,8 +155,8 @@ const MediaAndStories = () => {
                     onClick={() => handleTabSelection(tab.id)}
                     className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
-                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -186,7 +186,7 @@ const MediaAndStories = () => {
                   {medias.map((media, idx) => (
                     <div 
                       key={media.id} 
-                      className="aspect-square bg-white rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm border-2 border-white hover:border-[#E56D37] transition-all duration-300"
+                      className="aspect-square bg-white rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm border-2 border-white hover:border-[#006D5B] transition-all duration-300"
                       onClick={() => {
                         setCurrentPhotoIndex(idx);
                         setIsPhotoModalOpen(true);
@@ -240,7 +240,7 @@ const MediaAndStories = () => {
                               className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-60 transition-opacity duration-300" 
                               onError={(e) => { e.target.src = "https://placehold.co/600x400?text=Video+Thumbnail"; }}
                             />
-                            <div className="absolute w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center shadow-md group-hover:bg-[#E56D37] group-hover:scale-110 transition-all duration-300 z-10">
+                            <div className="absolute w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center shadow-md group-hover:bg-[#006D5B] group-hover:scale-110 transition-all duration-300 z-10">
                               <svg className="w-6 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                               </svg>
@@ -249,7 +249,7 @@ const MediaAndStories = () => {
                         )}
                       </div>
                       <div className="p-4 bg-white">
-                        <h3 className="font-bold text-gray-800 text-xs mb-1 line-clamp-2 text-left leading-snug group-hover:text-[#E56D37] transition-colors heading-font">{video.title}</h3>
+                        <h3 className="font-bold text-gray-800 text-xs mb-1 line-clamp-2 text-left leading-snug group-hover:text-[#006D5B] transition-colors heading-font">{video.title}</h3>
                         <p className="text-[10px] text-gray-400 font-medium text-left">
                           {video.duration ? `${video.duration} • ` : ''} {video.views} views
                         </p>
@@ -277,10 +277,10 @@ const MediaAndStories = () => {
                       </div>
                       <div className="flex-1 flex flex-col justify-center">
                         <div className="flex items-center gap-2 mb-1.5">
-                          <span className="bg-orange-50 text-[#E56D37] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold heading-font">{item.tag || 'News'}</span>
+                          <span className="bg-orange-50 text-[#006D5B] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold heading-font">{item.tag || 'News'}</span>
                           <span className="text-gray-400 text-[11px] font-medium">{item.datee}</span>
                         </div>
-                        <h3 className="text-sm font-bold text-gray-800 text-left mb-1.5 group-hover:text-[#E56D37] transition-colors leading-snug heading-font line-clamp-1">
+                        <h3 className="text-sm font-bold text-gray-800 text-left mb-1.5 group-hover:text-[#006D5B] transition-colors leading-snug heading-font line-clamp-1">
                           {item.title}
                         </h3>
                         <p className="text-gray-500 text-xs text-left line-clamp-2 leading-relaxed body-font">

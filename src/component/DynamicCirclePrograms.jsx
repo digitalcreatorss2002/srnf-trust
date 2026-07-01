@@ -4,7 +4,7 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // Har ek bubble ke liye different distinct background, active background, aur ring color variables
 const bubbleColors = [
-  { bg: "bg-[#E56D37]", text: "text-white uppercase", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#E56D37] uppercase" }, // Orange
+  { bg: "bg-[#006D5B]", text: "text-white uppercase", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#006D5B] uppercase" }, // Orange
   { bg: "bg-[#FB8C00]", text: "text-white", border: "border-white/60", ring: "ring-green-300/50", activeBg: "bg-white text-[#2E7D32]" },  // Green
   { bg: "bg-[#8E24AA]", text: "text-white", border: "border-white/60", ring: "ring-blue-300/50", activeBg: "bg-white text-[#1565C0]" },   // Blue
   { bg: "bg-[#757575]", text: "text-white", border: "border-white/60", ring: "ring-pink-300/50", activeBg: "bg-white text-[#AD1457]" },   // Pink
@@ -91,7 +91,7 @@ const DynamicCirclePrograms = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-12 sm:py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-b from-[#006D5B] to-[#fff] py-12 sm:py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-6 sm:mb-16">
@@ -207,7 +207,7 @@ const DynamicCirclePrograms = () => {
 
                       <div className="p-4 sm:p-3 flex flex-col justify-between flex-grow">
                         <div>
-                          <h3 className="text-sm sm:text-xs font-bold text-gray-800 line-clamp-1 mb-1 heading-font group-hover:text-[#E56D37] transition-colors">
+                          <h3 className="text-sm sm:text-xs font-bold text-gray-800 line-clamp-1 mb-1 heading-font group-hover:text-[#006D5B] transition-colors">
                             {program.title}
                           </h3>
                           <p className="text-gray-600 text-xs sm:text-[11px] text-left line-clamp-3 leading-relaxed body-font">
@@ -216,10 +216,10 @@ const DynamicCirclePrograms = () => {
                         </div>
 
                         <div className="pt-3 sm:pt-2 mt-2 border-t border-gray-100 flex items-center justify-between">
-                          <span className="text-[10px] sm:text-[8px] bg-orange-50 text-[#E56D37] font-bold px-2 sm:px-1 py-0.5 rounded-full">
+                          <span className="text-[10px] sm:text-[8px] bg-orange-50 text-[#006D5B] font-bold px-2 sm:px-1 py-0.5 rounded-full">
                             Active
                           </span>
-                          <span className="text-[#E56D37] font-bold text-xs sm:text-[10px] group-hover:underline flex items-center gap-0.5">
+                          <span className="text-[#006D5B] font-bold text-xs sm:text-[10px] group-hover:underline flex items-center gap-0.5">
                             Explore &rarr;
                           </span>
                         </div>
@@ -229,15 +229,15 @@ const DynamicCirclePrograms = () => {
 
                   <Link
                     to="/programs"
-                    className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#E56D37] p-6 flex flex-col justify-center items-center text-center h-[180px] sm:h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
+                    className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#006D5B] p-6 flex flex-col justify-center items-center text-center h-[180px] sm:h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
                   >
                     <div className="flex flex-col items-center gap-2">
-                      <h3 className="text-sm font-bold text-[#E56D37] heading-font tracking-wide max-w-[180px]">
+                      <h3 className="text-sm font-bold text-[#006D5B] heading-font tracking-wide max-w-[180px]">
                         Want to explore more initiatives?
                       </h3>
                     </div>
 
-                    <div className="w-full bg-transparent text-[#E56D37] border-2 font-extrabold text-xs py-2.5 px-2 rounded-xl shadow transition-all duration-300 group-hover:bg-[#E56D37] group-hover:text-white active:scale-95 text-center">
+                    <div className="w-full bg-transparent text-[#006D5B] border-2 font-extrabold text-xs py-2.5 px-2 rounded-xl shadow transition-all duration-300 group-hover:bg-[#006D5B] group-hover:text-white active:scale-95 text-center">
                       View All Programs
                     </div>
                   </Link>

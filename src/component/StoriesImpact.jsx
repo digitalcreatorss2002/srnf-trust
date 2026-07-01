@@ -69,22 +69,22 @@ const StoriesImpact = () => {
     <section className="w-full bg-[#fff] py-10 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto pt-[-20px]">
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
+          <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest block mb-2 heading-font">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">
             Stories and Impacts
           </h2>
-          <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+          <div className="w-20 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-20 pt-6">
           {storiesData.map((item) => (
             <div
               key={item.id}
-              className="w-full bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 pt-16 flex flex-col justify-between text-center relative border border-[#E56D37] transition-all duration-500 transform hover:-translate-y-3 group cursor-pointer"
+              className="w-full bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 pt-16 flex flex-col justify-between text-center relative border border-[#006D5B] transition-all duration-500 transform hover:-translate-y-3 group cursor-pointer"
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full p-1 bg-white shadow-md border-2 border-dashed border-[#E56D37]/40 group-hover:border-solid group-hover:border-[#E56D37] transition-all duration-500">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full p-1 bg-white shadow-md border-2 border-dashed border-[#006D5B]/40 group-hover:border-solid group-hover:border-[#006D5B] transition-all duration-500">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-100">
                   <img
                     src={item.image}
@@ -111,7 +111,7 @@ const StoriesImpact = () => {
                 </p>
 
                 <div className="pt-2 border-t border-gray-50">
-                  <h4 className="text-base font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors duration-300 heading-font">
+                  <h4 className="text-base font-bold text-[#006D5B] group-hover:text-[#2d3748] transition-colors duration-300 heading-font">
                     {item.name}
                   </h4>
                   <p className="text-xs font-semibold text-black mt-0.5 body-font">

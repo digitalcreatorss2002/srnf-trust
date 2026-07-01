@@ -69,7 +69,7 @@ const Programs = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-20">
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 bg-opacity-90 relative mb-4 lg:mb-12">
+      <section className="bg-[#006D5B] text-white py-16 bg-opacity-90 relative mb-4 lg:mb-12">
         <div className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl heading-font font-bold mb-4">
@@ -101,8 +101,8 @@ const Programs = () => {
                     onClick={() => handleCategorySelection(tabId)}
                     className={`text-left px-4 py-2 lg:py-3 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md shadow-orange-500/10 lg:translate-x-1"
-                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#006D5B] text-white shadow-md shadow-orange-500/10 lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                     }`}
                   >
                     <span className="heading-font">{formatTabLabel(tabId)}</span>
@@ -145,7 +145,7 @@ const Programs = () => {
                   </div>
 
                   <div className="p-6 relative grow flex flex-col">
-                    <h3 className="text-base text-left font-bold text-gray-800 mb-3 mt-4 leading-snug heading-font group-hover:text-[#E56D37] transition-colors">
+                    <h3 className="text-base text-left font-bold text-gray-800 mb-3 mt-4 leading-snug heading-font group-hover:text-[#006D5B] transition-colors">
                       {program.title}
                     </h3>
 
@@ -154,7 +154,7 @@ const Programs = () => {
                     </p>
 
                     <div className="flex items-center gap-2 mt-auto pt-4 border-t border-gray-100 flex-wrap">
-                      <span className="bg-orange-50 text-[#E56D37] text-[10px] font-extrabold px-2.5 py-1 rounded-full">
+                      <span className="bg-orange-50 text-[#006D5B] text-[10px] font-extrabold px-2.5 py-1 rounded-full">
                         {program.beneficiaries || "N/A"} Beneficiaries
                       </span>
                       <span className="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1 rounded-full">
@@ -164,7 +164,7 @@ const Programs = () => {
 
                     <Link
                       to={`/programdetails/${program.slug}`}
-                      className="text-[#E56D37] font-bold hover:text-orange-600 uppercase tracking-wider text-xs self-start transition-colors mt-5 flex items-center gap-1"
+                      className="text-[#006D5B] font-bold hover:text-orange-600 uppercase tracking-wider text-xs self-start transition-colors mt-5 flex items-center gap-1"
                     >
                       Explore Project &rarr;
                     </Link>

@@ -9,7 +9,7 @@ const About = () => {
     "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070";
   return (
     <>
-      <section className="relative w-full h-[300px] flex flex-col justify-center items-center overflow-hidden bg-[#E56D37]">
+      <section className="relative w-full h-[300px] flex flex-col justify-center items-center overflow-hidden bg-[#006D5B]">
         <div
           className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80"
           // style={{ backgroundImage: `url(${backgroundImageURL})` }}

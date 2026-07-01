@@ -55,7 +55,7 @@ export default function NewslineTicker() {
   const duplicatedNews = [...newsData, ...newsData, ...newsData, ...newsData];
 
   return (
-    <div className="w-full bg-[#E56D37] text-gray-800 border-t border-zinc-200 relative z-20 flex items-center">
+    <div className="w-full bg-[#006D5B] text-gray-800 border-t border-zinc-200 relative z-20 flex items-center">
       
       <div className="overflow-hidden w-full relative py-2">
         <style>{`

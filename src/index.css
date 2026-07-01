@@ -8,11 +8,11 @@
 /* 3. Agar aapka koi apna custom CSS hai, to wo iske niche aayega */
 
 @theme {
-  --color-primary: #E56D37;
+  --color-primary: #006D5B;
   --color-secondary: #2d2d2d;
-  --color-accent: #E56D37;
+  --color-accent: #006D5B;
   --color-light-aqua: #6BB9C8;
-  --color-text-primary: #E56D37;
+  --color-text-primary: #006D5B;
   --color-bg-color: #FAF9F4;
 
   --font-sans: 'Biryani', system-ui, sans-serif;

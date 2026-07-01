@@ -54,13 +54,13 @@ const Whowe = () => {
       className="w-full min-h-screen py-16 px-4 md:px-12 lg:px-24 bg-white flex flex-col items-center"
     >
       <div className="text-center mb-10">
-        <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest heading-font block mb-2">
+        <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest heading-font block mb-2">
           Why Choose
         </span>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 heading-font tracking-tight">
           Sustainable Resources For Nature Foundation ?
         </h2>
-        <div className="w-20 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+        <div className="w-20 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
       </div>
 
       {aboutData.who_we_are_text && (
@@ -76,7 +76,7 @@ const Whowe = () => {
     <div className="w-full flex justify-center mt-4">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="inline-flex items-center gap-2 bg-[#E56D37] hover:bg-[#237586] text-white px-5 py-2 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer focus:outline-none transform hover:-translate-y-0.5 active:scale-95"
+        className="inline-flex items-center gap-2 bg-[#006D5B] hover:bg-[#237586] text-white px-5 py-2 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer focus:outline-none transform hover:-translate-y-0.5 active:scale-95"
       >
         {isExpanded ? (
           <>
@@ -115,7 +115,7 @@ const Whowe = () => {
           />
           <div className="absolute inset-0 bg-black/50 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
           <div className="relative z-10 p-10 md:p-12 text-white h-full flex flex-col justify-end">
-            <h2 className="text-3xl text-[#E56D37] font-bold mb-4 tracking-tight">
+            <h2 className="text-3xl text-[#006D5B] font-bold mb-4 tracking-tight">
               Our Mission
             </h2>
             <p
@@ -136,7 +136,7 @@ const Whowe = () => {
           />
           <div className="absolute inset-0 bg-black/50 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
           <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
-            <h2 className="text-3xl font-bold text-[#E56D37] mb-4 tracking-tight">
+            <h2 className="text-3xl font-bold text-[#006D5B] mb-4 tracking-tight">
               Our Vision
             </h2>
             <p

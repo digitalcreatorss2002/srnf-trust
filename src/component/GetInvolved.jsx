@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const GetInvolved = () => {
   return (
-    <section className="w-full bg-gradient-to-t from-[#E56D37] to-[#fff] py-15 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-t from-[#006D5B] to-[#fff] py-15 px-6 sm:px-10 lg:px-16 overflow-hidden">
       
       <style>{`
         @keyframes floatUp {
@@ -24,7 +24,7 @@ const GetInvolved = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         <div className="lg:col-span-5 text-left space-y-4">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block heading-font">
+          <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest block heading-font">
             Get Involved
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-800 leading-tight heading-font">
@@ -52,7 +52,7 @@ const GetInvolved = () => {
               </div>
               
               <div className="p-4 text-center bg-white border-t border-gray-50">
-                <h4 className="font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
+                <h4 className="font-bold text-[#006D5B] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
                   Volunteer With Us
                 </h4>
               </div>
@@ -75,7 +75,7 @@ const GetInvolved = () => {
               </div>
               
               <div className="p-4 text-center bg-white border-t border-gray-50">
-                <h4 className="font-bold text-[#E56D37] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
+                <h4 className="font-bold text-[#006D5B] group-hover:text-[#2d3748] transition-colors text-sm sm:text-base">
                   Donate Now ❤️
                 </h4>
               </div>

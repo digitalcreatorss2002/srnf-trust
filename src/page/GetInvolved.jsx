@@ -72,7 +72,7 @@ const GetInvolved = () => {
   return (
     <div className="bg-bg-color min-h-screen pb-24 relative">
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 mb-4 lg:mb-12">
+      <section className="bg-[#006D5B] text-white py-16 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 heading-font">
             Get Involved
@@ -104,8 +104,8 @@ const GetInvolved = () => {
                     onClick={() => handleTabSelection(tab.id)}
                     className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
-                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -149,7 +149,7 @@ const GetInvolved = () => {
                     </p>
                     <Link
                       to="/volunteerform"
-                      className="bg-[#E56D37] hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold shadow-sm transition-all text-xs inline-block cursor-pointer"
+                      className="bg-[#006D5B] hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold shadow-sm transition-all text-xs inline-block cursor-pointer"
                     >
                       Apply to Volunteer &rarr;
                     </Link>
@@ -168,7 +168,7 @@ const GetInvolved = () => {
                     careers.map((career) => (
                       <div key={career.id} className="p-5 border-b border-gray-50 last:border-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-orange-50/10 rounded-xl transition-colors">
                         <div className="text-left">
-                          <h3 className="text-base font-bold text-gray-800 mb-1 heading-font group-hover:text-[#E56D37]">{career.title}</h3>
+                          <h3 className="text-base font-bold text-gray-800 mb-1 heading-font group-hover:text-[#006D5B]">{career.title}</h3>
                           <p className="text-gray-400 text-xs flex items-center gap-1 font-medium">📍 {career.location}</p>
                           {career.pdf_url && career.pdf_url !== "#" && (
                             <a 
@@ -183,7 +183,7 @@ const GetInvolved = () => {
                         </div>
                         <Link 
                           to="/contact" 
-                          className="border-2 border-[#E56D37] bg-white text-[#E56D37] hover:bg-[#E56D37] hover:text-white px-5 py-1.5 rounded-xl font-bold text-xs transition-all tracking-wide shrink-0 text-center cursor-pointer"
+                          className="border-2 border-[#006D5B] bg-white text-[#006D5B] hover:bg-[#006D5B] hover:text-white px-5 py-1.5 rounded-xl font-bold text-xs transition-all tracking-wide shrink-0 text-center cursor-pointer"
                         >
                           Apply Now
                         </Link>
@@ -212,7 +212,7 @@ const GetInvolved = () => {
                         </div>
                         <a
                           href={fund.donate_link || `mailto:partner@sdfoundation.org?subject=${encodeURIComponent("EOI/RFQ - " + fund.title)}`}
-                          className="shrink-0 border-2 border-[#E56D37] text-[#E56D37] hover:bg-[#E56D37] hover:text-white px-5 py-2 rounded-xl font-bold text-xs transition-all hover:shadow-sm tracking-wide"
+                          className="shrink-0 border-2 border-[#006D5B] text-[#006D5B] hover:bg-[#006D5B] hover:text-white px-5 py-2 rounded-xl font-bold text-xs transition-all hover:shadow-sm tracking-wide"
                         >
                           Submit Quote
                         </a>

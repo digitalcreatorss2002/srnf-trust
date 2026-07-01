@@ -99,7 +99,7 @@ const OurPrograms = () => {
   const visibleCards = getVisibleCards();
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden relative z-10">
+    <section className="w-full bg-gradient-to-b from-[#006D5B] to-[#fff] py-16 px-6 sm:px-10 lg:px-16 overflow-hidden relative z-10">
       <div className="absolute top-0 right-0 w-full lg:w-1/2 h-[260px] pointer-events-none z-0 overflow-hidden">
         <div
           className="w-full h-full opacity-30 bg-cover bg-right-top bg-no-repeat"
@@ -144,7 +144,7 @@ const OurPrograms = () => {
 
                 <div className="p-6 flex-grow flex flex-col justify-between text-left">
                   <div className="space-y-3">
-                    <h3 className="text-xl font-bold heading-font text-[#E56D37] group-hover:text-[#2b434d] transition-colors duration-300">
+                    <h3 className="text-xl font-bold heading-font text-[#006D5B] group-hover:text-[#2b434d] transition-colors duration-300">
                       {program.title}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed body-font line-clamp-3">
@@ -155,7 +155,7 @@ const OurPrograms = () => {
                   <div className="pt-4">
                     <Link
                       to={program.link}
-                      className="inline-flex items-center text-sm font-bold text-[#E56D37] hover:text-[#2b434d] transition-colors group/btn"
+                      className="inline-flex items-center text-sm font-bold text-[#006D5B] hover:text-[#2b434d] transition-colors group/btn"
                     >
                       Read More
                       <span className="ml-1.5 transform group-hover/btn:translate-x-1 transition-transform duration-200">
@@ -173,13 +173,13 @@ const OurPrograms = () => {
           <div className="absolute top-[50%] -left-4 -right-4 md:-left-10 md:-right-10 lg:-left-16 lg:-right-16 transform -translate-y-1/2 flex justify-between pointer-events-none z-20">
             <button
               onClick={handlePrev}
-              className="w-12 h-12 rounded-full bg-white hover:bg-[#E56D37] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
+              className="w-12 h-12 rounded-full bg-white hover:bg-[#006D5B] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
             >
               <span className="text-lg font-bold">❮</span>
             </button>
             <button
               onClick={handleNext}
-              className="w-12 h-12 rounded-full bg-[#E56D37] hover:bg-[#2d3748] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
+              className="w-12 h-12 rounded-full bg-[#006D5B] hover:bg-[#2d3748] text-gray-800 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none"
             >
               <span className="text-lg font-bold">❯</span>
             </button>
@@ -194,7 +194,7 @@ const OurPrograms = () => {
                 onClick={() => setCurrentIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
                   index === currentIndex
-                    ? "w-8 bg-[#E56D37]"
+                    ? "w-8 bg-[#006D5B]"
                     : "w-2 bg-gray-300 hover:bg-gray-400"
                 }`}
               />

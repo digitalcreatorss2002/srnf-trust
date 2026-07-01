@@ -169,7 +169,7 @@ const LeadershipGovernance = () => {
   }
 
   return (
-    <section id="leadership" className="bg-gradient-to-b from-[#fff] to-[#E56D37] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
+    <section id="leadership" className="bg-gradient-to-b from-[#fff] to-[#006D5B] min-h-screen font-sans py-16 px-4 md:px-12 lg:px-24 flex flex-col items-center relative overflow-hidden">
       <h2
         className="text-center font-bold text-3xl md:text-4xl text-[#2c3e50] mb-20 tracking-wide"
         style={{ textShadow: "1px 1px 2px rgba(255, 255, 255, 0.6)" }}
@@ -184,9 +184,9 @@ const LeadershipGovernance = () => {
             onClick={() => setActiveModal(card)}
             className="relative group cursor-pointer"
           >
-            <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] border border-[#E56D37] transform transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-[#fff] rounded-2xl p-6 pt-16 w-full min-h-[180px] flex flex-col items-center justify-center text-center shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] border border-[#006D5B] transform transition-all duration-300 hover:-translate-y-1">
               
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-28 rounded-full flex items-center justify-center -mt-14 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#E56D37] bg-white overflow-hidden z-10">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-28 rounded-full flex items-center justify-center -mt-14 shadow-[0_8px_16px_rgba(0,0,0,0.2)] border-2 border-[#006D5B] bg-white overflow-hidden z-10">
                 <img
                   src={card.circleImage}
                   alt={card.title}
@@ -197,7 +197,7 @@ const LeadershipGovernance = () => {
                 />
               </div>
 
-              <h3 className="text-xl font-bold text-[#E56D37] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors heading-title">
+              <h3 className="text-xl font-bold text-[#006D5B] mb-2 tracking-wide group-hover:text-[#2d2d2d] transition-colors heading-title">
                 {card.title}
               </h3>
               <p className="text-sm text-[#2d2d2d] font-light max-w-sm px-2 heading-font">
@@ -237,9 +237,9 @@ const LeadershipGovernance = () => {
                     {/* <h4 className="text-2xl font-bold text-neutral-800">
                       {activeModal.details.heading}
                     </h4> */}
-                    {/* <div className="border-l-4 border-[#E56D37] pl-3 py-1">
+                    {/* <div className="border-l-4 border-[#006D5B] pl-3 py-1">
                       <p className="font-bold text-lg text-neutral-900 leading-none">{activeModal.details.name}</p>
-                      <p className="text-xs text-[#E56D37] font-semibold uppercase tracking-wider mt-1">{activeModal.details.role}</p>
+                      <p className="text-xs text-[#006D5B] font-semibold uppercase tracking-wider mt-1">{activeModal.details.role}</p>
                     </div> */}
                     <p className="text-neutral-600 text-justify text-base leading-relaxed whitespace-pre-line pt-2">
                       {activeModal.details.text}
@@ -248,7 +248,7 @@ const LeadershipGovernance = () => {
                   
                   {/* Right Column Image Pane: 40% Width */}
                   <div className="w-full md:w-[40%] flex justify-center sticky top-4 pt-10 md:pt-0">
-                    <div className="w-full max-w-[320px] aspect-square rounded-2xl overflow-hidden border-4 border-[#E56D37] shadow-lg bg-neutral-50">
+                    <div className="w-full max-w-[320px] aspect-square rounded-2xl overflow-hidden border-4 border-[#006D5B] shadow-lg bg-neutral-50">
                       <img 
                         src={activeModal.details.img} 
                         alt={activeModal.details.name}
@@ -276,13 +276,13 @@ const LeadershipGovernance = () => {
                           isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
                         }`}>
                           <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#006D5B] shadow-sm flex-shrink-0">
                               <img src={member.img} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
                             </div>
                             <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-3 line-clamp-2">{member.name}</h4>
-                            <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
+                            <p className="text-[11px] text-[#006D5B] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
                           </div>
-                          <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
+                          <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#006D5B] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
                             <div className="w-full text-center flex flex-col items-center">
                               <h4 className="font-bold text-base text-neutral-800 border-b border-orange-100 pb-1 mb-2 w-full">{member.name}</h4>
                               <p className="text-[11px] text-gray-500 font-medium italic line-clamp-5 leading-relaxed">
@@ -291,7 +291,7 @@ const LeadershipGovernance = () => {
                             </div>
                             <button 
                               onClick={(e) => openSubMemberModal(e, member)}
-                              className="w-full bg-[#E56D37] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
+                              className="w-full bg-[#006D5B] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
                             >
                               Read Full Bio &rarr;
                             </button>
@@ -323,13 +323,13 @@ const LeadershipGovernance = () => {
                                 isFlipped ? "[transform:rotateY(180deg)]" : "lg:group-hover:[transform:rotateY(180deg)]"
                               }`}>
                                 <div className="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-start p-4 [backface-visibility:hidden] z-10 border border-gray-200 shadow-md">
-                                  <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-sm flex-shrink-0">
+                                  <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#006D5B] shadow-sm flex-shrink-0">
                                     <img src={member.img} alt={member.name} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150"; }} />
                                   </div>
                                   <h4 className="font-bold text-base text-neutral-800 text-center leading-snug mt-3 line-clamp-2">{member.name}</h4>
-                                  <p className="text-[11px] text-[#E56D37] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
+                                  <p className="text-[11px] text-[#006D5B] font-bold uppercase tracking-wider text-center mt-1">{member.role}</p>
                                 </div>
-                                <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#E56D37] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
+                                <div className="absolute inset-0 bg-white rounded-2xl p-4 border border-[#006D5B] shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-between z-20">
                                   <div className="w-full text-center flex flex-col items-center">
                                     <h4 className="font-bold text-base text-neutral-800 border-b border-orange-100 pb-1 mb-2 w-full">{member.name}</h4>
                                     <p className="text-[11px] text-gray-500 font-medium italic line-clamp-5 leading-relaxed">
@@ -338,7 +338,7 @@ const LeadershipGovernance = () => {
                                   </div>
                                   <button 
                                     onClick={(e) => openSubMemberModal(e, member)}
-                                    className="w-full bg-[#E56D37] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
+                                    className="w-full bg-[#006D5B] hover:bg-[#237586] text-white text-[11px] font-extrabold py-1.5 px-3 rounded-full transition-colors cursor-pointer shadow-sm active:scale-95"
                                   >
                                     Read Full Bio &rarr;
                                   </button>
@@ -372,7 +372,7 @@ const LeadershipGovernance = () => {
 
             {/* Left Frame Side Panel: Image Container Area (40% Split Ratio Layout) */}
             <div className="w-full md:w-[40%] bg-neutral-50 border-r border-neutral-100 flex items-center justify-center p-6 bg-gradient-to-br from-orange-50/30 to-white">
-              <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-[#E56D37] shadow-md aspect-square">
+              <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-[#006D5B] shadow-md aspect-square">
                 <img 
                   src={activeSubMemberModal.img} 
                   alt={activeSubMemberModal.name} 
@@ -388,7 +388,7 @@ const LeadershipGovernance = () => {
                 <h4 className="text-2xl font-bold text-neutral-900 leading-tight">
                   {activeSubMemberModal.name}
                 </h4>
-                <p className="text-xs md:text-sm text-[#E56D37] font-bold uppercase tracking-widest mt-1">
+                <p className="text-xs md:text-sm text-[#006D5B] font-bold uppercase tracking-widest mt-1">
                   {activeSubMemberModal.role}
                 </p>
                 <div className="w-16 h-0.5 bg-orange-200 mt-2.5 rounded-full" />

@@ -76,13 +76,13 @@ const ProjectSlider = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16 flex flex-col items-center justify-center">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">
+          <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest block mb-2 heading-font">
             Our Organization
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight heading-font">
             Ongoing Projects
           </h2>
-          <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+          <div className="w-24 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
@@ -98,7 +98,7 @@ const ProjectSlider = () => {
                       : "opacity-0 hidden -translate-x-8 scale-95 pointer-events-none"
                   }`}
                 >
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#E56D37] leading-tight">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#006D5B] leading-tight">
                     {slide.title}
                   </h3>
                   <p className="text-gray-700 text-base sm:text-lg leading-relaxed line-clamp-5">
@@ -108,7 +108,7 @@ const ProjectSlider = () => {
                   <div className="pt-2">
                     <Link
                       to={slide.link}
-                      className="inline-flex items-center text-[#E56D37] hover:text-black font-bold text-base transition-colors group"
+                      className="inline-flex items-center text-[#006D5B] hover:text-black font-bold text-base transition-colors group"
                     >
                       Explore Project Details
                       <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
@@ -128,7 +128,7 @@ const ProjectSlider = () => {
                     onClick={() => setCurrent(index)}
                     className={`h-2 rounded-full transition-all duration-300 focus:outline-none ${
                       index === current
-                        ? "w-8 bg-[#E56D37]"
+                        ? "w-8 bg-[#006D5B]"
                         : "w-2 bg-black/20 hover:bg-black/50"
                     }`}
                   />

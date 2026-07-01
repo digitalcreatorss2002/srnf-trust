@@ -46,7 +46,7 @@ const FaqAccordion = () => {
           return (
             <div 
               key={index}
-              className="bg-[#E56D37] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#E56D37] transition-all duration-300"
+              className="bg-[#006D5B] rounded-xl overflow-hidden shadow-[0_8px_20px_-6px_rgba(0,0,0,0.3)] border border-[#006D5B] transition-all duration-300"
             >
               <button
                 onClick={() => handleToggle(index)}

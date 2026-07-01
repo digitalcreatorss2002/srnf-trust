@@ -137,7 +137,7 @@ const Hero = () => {
                       href={slide.buttonLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
+                      className="inline-flex items-center justify-center bg-[#006D5B] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
                     >
                       {slide.buttonText}
                       <span className="ml-2 transform group-hover:translate-x-1 transition-transform">
@@ -147,7 +147,7 @@ const Hero = () => {
                   ) : (
                     <Link
                       to={slide.buttonLink}
-                      className="inline-flex items-center justify-center bg-[#E56D37] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
+                      className="inline-flex items-center justify-center bg-[#006D5B] hover:bg-[#2b434d]/90 text-white px-8 py-3.5 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 group heading-font"
                     >
                       {slide.buttonText}
                       <span className="ml-2 transform group-hover:translate-x-1 transition-transform">
@@ -184,7 +184,7 @@ const Hero = () => {
                 onClick={() => setCurrent(index)}
                 className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
                   index === current
-                    ? "w-8 bg-[#E56D37]"
+                    ? "w-8 bg-[#006D5B]"
                     : "w-2.5 bg-white/50 hover:bg-white"
                 }`}
               />

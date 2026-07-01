@@ -77,7 +77,7 @@ const Publications = () => {
     <div className="bg-bg-color min-h-screen pb-20">
       
       {/* Banner Section */}
-      <section className="bg-[#E56D37] text-white py-16 text-center relative mb-4 lg:mb-12">
+      <section className="bg-[#006D5B] text-white py-16 text-center relative mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -112,8 +112,8 @@ const Publications = () => {
                     onClick={() => handleTabSelection(tab.id)}
                     className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold whitespace-nowrap lg:whitespace-normal transition-all duration-200 flex items-center justify-between group cursor-pointer snap-center ${
                       isSelected
-                        ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1"
-                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                        ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1"
+                        : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                     }`}
                   >
                     <span className="heading-font">{tab.label}</span>
@@ -144,11 +144,11 @@ const Publications = () => {
                       <div className="flex items-center gap-4">
                         <div className="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center font-black shrink-0 text-[10px]">PDF</div>
                         <div>
-                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#E56D37] transition-colors line-clamp-2 text-left heading-font">{r.title}</h3>
+                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#006D5B] transition-colors line-clamp-2 text-left heading-font">{r.title}</h3>
                           {r.file_size && <p className="text-[10px] text-gray-400 mt-0.5 text-left font-medium">{r.file_size}</p>}
                         </div>
                       </div>
-                      <span className="text-[#E56D37] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
+                      <span className="text-[#006D5B] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
                     </a>
                   ))}
                 </div>
@@ -172,11 +172,11 @@ const Publications = () => {
                       </div>
                       <div className="p-5 flex-1 flex flex-col justify-between">
                         <div>
-                          <span className="text-[9px] font-bold text-[#E56D37] uppercase tracking-wider mb-1 block text-left heading-font">{c.category}</span>
+                          <span className="text-[9px] font-bold text-[#006D5B] uppercase tracking-wider mb-1 block text-left heading-font">{c.category}</span>
                           <h3 className="font-bold text-gray-800 text-sm mb-3 text-left leading-snug line-clamp-2 heading-font">{c.title}</h3>
                         </div>
                         {c.file_url && (
-                          <a href={getImageUrl(c.file_url)} target="_blank" rel="noreferrer" className="text-[#E56D37] hover:text-orange-600 text-xs font-bold flex items-center gap-0.5 self-start pt-2 border-t border-gray-50 w-full">
+                          <a href={getImageUrl(c.file_url)} target="_blank" rel="noreferrer" className="text-[#006D5B] hover:text-orange-600 text-xs font-bold flex items-center gap-0.5 self-start pt-2 border-t border-gray-50 w-full">
                             Read Study <span className="text-sm transition-transform group-hover:translate-x-1">&rarr;</span>
                           </a>
                         )}
@@ -206,7 +206,7 @@ const Publications = () => {
                       <div className="p-4 flex-1 flex flex-col justify-between items-center text-center">
                         <h3 className="font-bold text-xs text-gray-800 mb-3 leading-snug line-clamp-2 heading-font">{book.title}</h3>
                         {book.pdf_url && (
-                          <a href={getImageUrl(book.pdf_url)} target="_blank" rel="noreferrer" className="bg-gray-800 text-white hover:bg-[#E56D37] w-full py-2 rounded-xl text-xs font-bold shadow-sm transition-colors block mt-auto cursor-pointer">
+                          <a href={getImageUrl(book.pdf_url)} target="_blank" rel="noreferrer" className="bg-gray-800 text-white hover:bg-[#006D5B] w-full py-2 rounded-xl text-xs font-bold shadow-sm transition-colors block mt-auto cursor-pointer">
                             Read PDF
                           </a>
                         )}
@@ -234,11 +234,11 @@ const Publications = () => {
                       <div className="flex items-center gap-4">
                         <div className="w-11 h-11 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-black shrink-0 text-[10px]">DOC</div>
                         <div>
-                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#E56D37] transition-colors line-clamp-2 text-left heading-font">{doc.title}</h3>
+                          <h3 className="font-bold text-xs text-gray-800 leading-tight group-hover:text-[#006D5B] transition-colors line-clamp-2 text-left heading-font">{doc.title}</h3>
                           {doc.file_size && <p className="text-[10px] text-gray-400 mt-0.5 text-left font-medium">{doc.file_size}</p>}
                         </div>
                       </div>
-                      <span className="text-[#E56D37] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
+                      <span className="text-[#006D5B] font-bold text-lg ml-2 transition-transform group-hover:translate-y-0.5">↓</span>
                     </a>
                   ))}
                 </div>

@@ -115,7 +115,7 @@ const Projects = () => {
     <div className="bg-bg-color min-h-screen pb-20">
       
       {/* Banner Section */}
-      <section id="ongoing" className="bg-[#E56D37] text-white py-16 relative overflow-hidden scroll-mt-24 mb-4 lg:mb-12">
+      <section id="ongoing" className="bg-[#006D5B] text-white py-16 relative overflow-hidden scroll-mt-24 mb-4 lg:mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 heading-font">
             {activeTab === "completed" ? "Completed Projects" : activeTab === "planned" ? "Planned Projects" : "Ongoing Projects"}
@@ -147,7 +147,7 @@ const Projects = () => {
                   type="button"
                   onClick={() => handleTabSelection("status", "all")}
                   className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
-                    activeTab === "all" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                    activeTab === "all" ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                   }`}
                 >
                   <span className="heading-font">Ongoing</span>
@@ -156,7 +156,7 @@ const Projects = () => {
                   type="button"
                   onClick={() => handleTabSelection("status", "completed")}
                   className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
-                    activeTab === "completed" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                    activeTab === "completed" ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                   }`}
                 >
                   <span className="heading-font">Completed</span>
@@ -165,7 +165,7 @@ const Projects = () => {
                   type="button"
                   onClick={() => handleTabSelection("status", "planned")}
                   className={`text-left px-4 py-2 lg:py-2.5 rounded-lg lg:rounded-xl text-xs lg:text-md font-bold whitespace-nowrap transition-all flex items-center justify-between cursor-pointer snap-center ${
-                    activeTab === "planned" ? "bg-[#E56D37] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#E56D37]"
+                    activeTab === "planned" ? "bg-[#006D5B] text-white shadow-md lg:translate-x-1" : "text-gray-600 bg-gray-50 lg:bg-transparent hover:bg-orange-50/40 hover:text-[#006D5B]"
                   }`}
                 >
                   <span className="heading-font">Planned</span>
@@ -183,7 +183,7 @@ const Projects = () => {
                   {selectedCategory && (
                     <button 
                       onClick={() => handleTabSelection("category", null)} 
-                      className="text-[10px] font-bold text-[#E56D37] hover:underline cursor-pointer"
+                      className="text-[10px] font-bold text-[#006D5B] hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -199,7 +199,7 @@ const Projects = () => {
                         onClick={() => handleTabSelection("category", isCatSelected ? null : cat)} 
                         className={`text-left px-4 py-1.5 lg:py-2 rounded-lg lg:rounded-xl text-xs font-bold transition-all border cursor-pointer snap-center whitespace-nowrap lg:whitespace-normal ${
                           isCatSelected 
-                            ? "bg-orange-50 border-[#E56D37] text-[#E56D37]" 
+                            ? "bg-orange-50 border-[#006D5B] text-[#006D5B]" 
                             : "bg-white border-gray-100 text-gray-600 hover:border-gray-200"
                         }`}
                       >
@@ -240,12 +240,12 @@ const Projects = () => {
                       <div className="flex flex-col flex-1 justify-between">
                         <div>
                           <div className="flex items-center justify-between mb-1.5">
-                            <div className="text-[9px] font-bold text-[#E56D37] uppercase tracking-widest heading-font">{project.category}</div>
+                            <div className="text-[9px] font-bold text-[#006D5B] uppercase tracking-widest heading-font">{project.category}</div>
                             <span className={`text-[8px] uppercase font-bold heading-font px-2 py-0.5 rounded ${project.status?.toLowerCase() === 'completed' ? 'bg-green-100 text-green-700' : project.status?.toLowerCase() === 'planned' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-700'}`}>
                               {project.status || 'Active'}
                             </span>
                           </div>
-                          <h3 className="text-sm font-bold text-gray-800 mb-1.5 leading-snug heading-font text-left group-hover:text-[#E56D37] transition-colors line-clamp-1">{project.title}</h3>
+                          <h3 className="text-sm font-bold text-gray-800 mb-1.5 leading-snug heading-font text-left group-hover:text-[#006D5B] transition-colors line-clamp-1">{project.title}</h3>
                           <p className="text-gray-600 body-font text-xs text-left mb-3 line-clamp-3 leading-relaxed">{project.description}</p>
                         </div>
                         
@@ -253,7 +253,7 @@ const Projects = () => {
                           <div className="flex items-center gap-1 text-xs text-gray-500 mb-3.5">
                             <span className="text-sm">📍</span> {project.location || "N/A"}
                           </div>
-                          <Link to={`/projectdetails/${project.slug}`} className="inline-block heading-font bg-gray-800 hover:bg-[#E56D37] text-white px-4 py-2 rounded-lg font-bold text-xs transition-colors text-center shadow-sm w-full sm:w-auto cursor-pointer">
+                          <Link to={`/projectdetails/${project.slug}`} className="inline-block heading-font bg-gray-800 hover:bg-[#006D5B] text-white px-4 py-2 rounded-lg font-bold text-xs transition-colors text-center shadow-sm w-full sm:w-auto cursor-pointer">
                             View Details
                           </Link>
                         </div>

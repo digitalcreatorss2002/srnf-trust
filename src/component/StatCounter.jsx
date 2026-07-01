@@ -115,26 +115,26 @@ const FocusAreas = () => {
   if (loading || focusData.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#E56D37]/10 via-[#fdf4ee] to-[#fff] text-slate-800 pt-[40px] pb-28 px-6 overflow-hidden">
+    <section ref={sectionRef} className="w-full bg-gradient-to-t from-[#006D5B]/10 via-[#fdf4ee] to-[#fff] text-slate-800 pt-[40px] pb-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-24">
-          <span className="text-sm font-bold text-[#E56D37] uppercase tracking-widest block mb-2 heading-font">What We Do</span>
+          <span className="text-sm font-bold text-[#006D5B] uppercase tracking-widest block mb-2 heading-font">What We Do</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight heading-font">Our Focus Areas</h2>
-          <div className="w-24 h-1 bg-[#E56D37] mt-3 rounded-full mx-auto" />
+          <div className="w-24 h-1 bg-[#006D5B] mt-3 rounded-full mx-auto" />
         </div>
 
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-24 gap-x-8 items-center pt-6">
           <div className="hidden lg:block absolute top-[50%] left-[10%] right-[10%] h-[2px] pointer-events-none z-0">
             <svg className="w-full h-32 absolute -top-16 left-0" viewBox="0 0 1000 100" fill="none" preserveAspectRatio="none">
-              <path d="M 0,30 L 333,100 L 666,0 L 1000,70" stroke="#E56D37" strokeWidth="2" strokeDasharray="6,6" opacity="0.4" />
+              <path d="M 0,30 L 333,100 L 666,0 L 1000,70" stroke="#006D5B" strokeWidth="2" strokeDasharray="6,6" opacity="0.4" />
             </svg>
           </div>
 
           {focusData.map((item) => (
             <div key={item.id} className={`flex flex-col items-center text-center relative z-10 transition-all duration-1000 ${item.isUp ? "lg:-translate-y-12" : "lg:translate-y-12"}`}>
               
-              <div className="w-36 h-36 rounded-full p-1 border border-dashed border-[#E56D37] bg-white hover:border-solid hover:scale-110 transition-all duration-300 shadow-xl relative overflow-hidden group cursor-pointer">
+              <div className="w-36 h-36 rounded-full p-1 border border-dashed border-[#006D5B] bg-white hover:border-solid hover:scale-110 transition-all duration-300 shadow-xl relative overflow-hidden group cursor-pointer">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gray-100 relative">
                   <img 
                     src={item.image} 
