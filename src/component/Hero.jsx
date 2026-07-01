@@ -5,7 +5,7 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 const defaultSlides = [
   {
     id: 1,
-    image: "hero/banner1.png", // Yahan apni local ya server image path dalein
+    image: "hero/banner1.png",
     title: "Building Stronger Communities",
     description:
       "Together, we create opportunities for all. Stronger communities start with collective action.",
@@ -94,14 +94,13 @@ const Hero = () => {
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
+          {/* FIXED: Zoom behavior scale effects turned off (scale-100 completely) and sizing locked to 100% boundary framework layout */}
           <div
-            className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[5000ms] ease-out ${
-              index === current ? "scale-105" : "scale-100"
-            }`}
+            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[5000ms] ease-out scale-100"
             style={{ backgroundImage: `url("${slide.image}")` }}
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/50 to-transparent" />
 
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8 w-full text-left">
@@ -198,4 +197,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
