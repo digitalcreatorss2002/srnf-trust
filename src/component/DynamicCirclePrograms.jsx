@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
+// Har ek bubble ke liye different distinct background, active background, aur ring color variables
+const bubbleColors = [
+  { bg: "bg-[#E56D37]", text: "text-white", border: "border-white/60", ring: "ring-orange-300/50", activeBg: "bg-white text-[#E56D37]" }, // Orange
+  { bg: "bg-[#2E7D32]", text: "text-white", border: "border-white/60", ring: "ring-green-300/50", activeBg: "bg-white text-[#2E7D32]" },  // Green
+  { bg: "bg-[#1565C0]", text: "text-white", border: "border-white/60", ring: "ring-blue-300/50", activeBg: "bg-white text-[#1565C0]" },   // Blue
+  { bg: "bg-[#AD1457]", text: "text-white", border: "border-white/60", ring: "ring-pink-300/50", activeBg: "bg-white text-[#AD1457]" },   // Pink
+  { bg: "bg-[#283593]", text: "text-white", border: "border-white/60", ring: "ring-indigo-300/50", activeBg: "bg-white text-[#283593]" }, // Indigo
+  { bg: "bg-[#00838F]", text: "text-white", border: "border-white/60", ring: "ring-cyan-300/50", activeBg: "bg-white text-[#00838F]" },   // Cyan
+  { bg: "bg-[#6A1B9A]", text: "text-white", border: "border-white/60", ring: "ring-purple-300/50", activeBg: "bg-white text-[#6A1B9A]" }, // Purple
+  { bg: "bg-[#EF6C00]", text: "text-white", border: "border-white/60", ring: "ring-orange-400/50", activeBg: "bg-white text-[#EF6C00]" }, // Deep Orange
+];
+
 const DynamicCirclePrograms = () => {
   const [programsList, setProgramsList] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -76,8 +88,7 @@ const DynamicCirclePrograms = () => {
 
         {/* Core Layout Grid (50:50 Ratio) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT SIDE: Big Rotating Circle (Pauses instantly on hover) */}
-          {/* Container padding added (min-h-[580px]) to prevent edge clipping */}
+          {/* LEFT SIDE: Big Rotating Circle */}
           <div className="flex justify-center items-center min-h-[580px]">
             <div
               className="relative w-[400px] h-[400px] sm:w-[460px] sm:h-[460px] rounded-full border-4 border-dashed border-white/50 flex items-center justify-center"
@@ -105,6 +116,10 @@ const DynamicCirclePrograms = () => {
               {categories.map((cat, index) => {
                 const total = categories.length;
                 const angle = (index * 360) / total;
+                
+                // Safe mapping: agar categories array size se zyada ho jayein toh loop back karega
+                const colorConfig = bubbleColors[index % bubbleColors.length];
+
                 return (
                   <div
                     key={cat}
@@ -117,8 +132,8 @@ const DynamicCirclePrograms = () => {
                       onClick={() => setActiveCategory(cat)}
                       className={`w-full h-full rounded-full flex items-center justify-center p-3 text-xs sm:text-sm font-bold text-center shadow-xl border transition-all duration-300 ${
                         activeCategory === cat
-                          ? "bg-white text-[#E56D37] border-white scale-110 ring-4 ring-orange-300/50"
-                          : "bg-[#E56D37] text-white border-white/60 hover:bg-white hover:text-[#E56D37]"
+                          ? `${colorConfig.activeBg} border-white scale-110 ring-4 ${colorConfig.ring}`
+                          : `${colorConfig.bg} ${colorConfig.text} ${colorConfig.border} hover:bg-white hover:text-gray-800`
                       }`}
                       style={{
                         animation: "counter-spin 25s linear infinite",
@@ -133,6 +148,7 @@ const DynamicCirclePrograms = () => {
             </div>
           </div>
 
+          {/* RIGHT SIDE: Filtered Output Cards */}
           <div className="flex flex-col justify-center min-h-[520px]">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-start">
               {filteredPrograms.length === 0 ? (
@@ -189,7 +205,6 @@ const DynamicCirclePrograms = () => {
                     to="/programs"
                     className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#E56D37] p-6 flex flex-col justify-center items-center text-center h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
                   >
-                    {/* Top Content Area */}
                     <div className="flex flex-col items-center gap-2">
                       <h3 className="text-sm font-bold text-[#E56D37] heading-font tracking-wide max-w-[180px]">
                         Want to explore more initiatives?
