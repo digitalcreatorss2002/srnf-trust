@@ -73,10 +73,10 @@ const DynamicCirclePrograms = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gradient-to-b from-[#E56D37] to-[#fff] py-12 sm:py-20 px-4 sm:px-8 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-16">
           <span className="text-sm heading-font font-bold text-white uppercase tracking-widest block mb-2">
             Our Organization
           </span>
@@ -86,12 +86,15 @@ const DynamicCirclePrograms = () => {
           <div className="w-20 h-1 bg-white mt-3 rounded-full mx-auto" />
         </div>
 
-        {/* Core Layout Grid (50:50 Ratio) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT SIDE: Big Rotating Circle */}
-          <div className="flex justify-center items-center min-h-[580px]">
+        {/* Core Layout Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-center">
+          
+          {/* LEFT SIDE: Big Rotating Circle (Perfect Circle Fluid Configuration) */}
+          <div className="flex justify-center items-center min-h-[340px] sm:min-h-[500px] lg:min-h-[580px] overflow-visible w-full">
+            
+            {/* Main Outer Circle Container - Sizing variable matches breakpoint aspect ratio layout */}
             <div
-              className="relative w-[400px] h-[400px] sm:w-[460px] sm:h-[460px] rounded-full border-4 border-dashed border-white/50 flex items-center justify-center"
+              className="relative rounded-full border-4 border-dashed border-white/50 flex items-center justify-center transition-all duration-300 aspect-square w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px]"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               style={{
@@ -101,13 +104,13 @@ const DynamicCirclePrograms = () => {
             >
               {/* Center Core Branding */}
               <div
-                className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center p-4 text-center z-10 border border-orange-200"
+                className="bg-white rounded-full shadow-2xl flex items-center justify-center p-3 text-center z-10 border border-orange-200 transition-all w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32"
                 style={{
                   animation: "counter-spin 25s linear infinite",
                   animationPlayState: isHovered ? "paused" : "running",
                 }}
               >
-                <span className="text-sm font-bold text-[#E56D37] uppercase tracking-wider">
+                <span className="text-xs sm:text-sm font-bold text-[#E56D37] uppercase tracking-wider">
                   SRNF
                 </span>
               </div>
@@ -116,21 +119,28 @@ const DynamicCirclePrograms = () => {
               {categories.map((cat, index) => {
                 const total = categories.length;
                 const angle = (index * 360) / total;
-                
-                // Safe mapping: agar categories array size se zyada ho jayein toh loop back karega
                 const colorConfig = bubbleColors[index % bubbleColors.length];
 
+                // FIXED: Screen widths track variable radius translate measurements to prevent absolute breaking
+                let radius = 220; // Default Desktop
+                if (window.innerWidth < 640) {
+                  radius = 140; // Mobile view radius offset
+                } else if (window.innerWidth < 1024) {
+                  radius = 190; // Tablet view radius offset
+                }
+
                 return (
+                  // FIXED: Absolute center mapping using dynamic css parameters variables to lock dot centering perfectly
                   <div
                     key={cat}
-                    className="absolute w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center"
+                    className="absolute flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 top-1/2 left-1/2 -mt-10 -ml-10 sm:-mt-14 sm:-ml-14 lg:-mt-16 lg:-ml-16 transition-all duration-300"
                     style={{
-                      transform: `rotate(${angle}deg) translate(220px) rotate(-${angle}deg)`,
+                      transform: `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg)`,
                     }}
                   >
                     <button
                       onClick={() => setActiveCategory(cat)}
-                      className={`w-full h-full rounded-full flex items-center justify-center p-3 text-xs sm:text-sm font-bold text-center shadow-xl border transition-all duration-300 ${
+                      className={`w-full h-full rounded-full flex items-center justify-center p-2 sm:p-3 text-[10px] sm:text-xs lg:text-sm font-bold text-center shadow-xl border transition-all duration-300 ${
                         activeCategory === cat
                           ? `${colorConfig.activeBg} border-white scale-110 ring-4 ${colorConfig.ring}`
                           : `${colorConfig.bg} ${colorConfig.text} ${colorConfig.border} hover:bg-white hover:text-gray-800`
@@ -148,9 +158,9 @@ const DynamicCirclePrograms = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Filtered Output Cards */}
-          <div className="flex flex-col justify-center min-h-[520px]">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-start">
+          {/* RIGHT SIDE: Filtered Output Cards Layout */}
+          <div className="flex flex-col justify-center min-h-[400px] w-full mt-4 lg:mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
               {filteredPrograms.length === 0 ? (
                 <div className="col-span-full bg-white/80 backdrop-blur p-8 rounded-2xl text-center text-gray-500 font-medium">
                   No active programs available in this category.
@@ -161,9 +171,9 @@ const DynamicCirclePrograms = () => {
                     <Link
                       key={program.id || idx}
                       to={`/programdetails/${program.slug}`}
-                      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group h-[250px] cursor-pointer block"
+                      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group h-auto sm:h-[250px] cursor-pointer block"
                     >
-                      <div className="h-28 overflow-hidden relative">
+                      <div className="h-44 sm:h-28 overflow-hidden relative w-full">
                         <img
                           src={getImageUrl(program.image_url)}
                           alt={program.title}
@@ -179,21 +189,21 @@ const DynamicCirclePrograms = () => {
                         </div>
                       </div>
 
-                      <div className="p-3 flex flex-col justify-between flex-grow">
+                      <div className="p-4 sm:p-3 flex flex-col justify-between flex-grow">
                         <div>
-                          <h3 className="text-xs font-bold text-gray-800 line-clamp-1 mb-1 heading-font group-hover:text-[#E56D37] transition-colors">
+                          <h3 className="text-sm sm:text-xs font-bold text-gray-800 line-clamp-1 mb-1 heading-font group-hover:text-[#E56D37] transition-colors">
                             {program.title}
                           </h3>
-                          <p className="text-gray-600 text-[11px] text-left line-clamp-3 leading-relaxed body-font">
+                          <p className="text-gray-600 text-xs sm:text-[11px] text-left line-clamp-3 leading-relaxed body-font">
                             {program.description}
                           </p>
                         </div>
 
-                        <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                          <span className="text-[8px] bg-orange-50 text-[#E56D37] font-bold px-1 py-0.5 rounded-full">
+                        <div className="pt-3 sm:pt-2 mt-2 border-t border-gray-100 flex items-center justify-between">
+                          <span className="text-[10px] sm:text-[8px] bg-orange-50 text-[#E56D37] font-bold px-2 sm:px-1 py-0.5 rounded-full">
                             Active
                           </span>
-                          <span className="text-[#E56D37] font-bold text-[10px] group-hover:underline flex items-center gap-0.5">
+                          <span className="text-[#E56D37] font-bold text-xs sm:text-[10px] group-hover:underline flex items-center gap-0.5">
                             Explore &rarr;
                           </span>
                         </div>
@@ -203,7 +213,7 @@ const DynamicCirclePrograms = () => {
 
                   <Link
                     to="/programs"
-                    className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#E56D37] p-6 flex flex-col justify-center items-center text-center h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
+                    className="bg-[#fff] rounded-2xl shadow-md border-2 border-[#E56D37] p-6 flex flex-col justify-center items-center text-center h-[180px] sm:h-[250px] group transition-all duration-300 hover:shadow-xl cursor-pointer gap-4"
                   >
                     <div className="flex flex-col items-center gap-2">
                       <h3 className="text-sm font-bold text-[#E56D37] heading-font tracking-wide max-w-[180px]">
