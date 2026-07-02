@@ -19,7 +19,7 @@ const About = () => {
 
         <div className="relative z-40 text-center px-5">
           <h1
-            className="text-6xl font-bold text-[#212121] mb-2 heading-font tracking-wide"
+            className="text-6xl font-bold text-[#fff] mb-2 heading-font tracking-wide"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)" }}
           >
             About Us
