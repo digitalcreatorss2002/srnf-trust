@@ -32,7 +32,7 @@ export default function DonationForm() {
   const resetRef = useRef(null);
 
   const upiId = "9709544166@ybl";
-  const payeeName = "SDF Trust";
+  const payeeName = "SRNF Trust";
 
   const createUpiUrl = ({ upiId, payeeName, amount, transactionId }) => {
     const params = new URLSearchParams({
@@ -213,7 +213,7 @@ export default function DonationForm() {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-3xl shadow-2xl border border-gray-100">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif font-bold text-[#006D5B] mb-2">Support SDF Trust</h2>
+        <h2 className="text-3xl font-serif font-bold text-[#006D5B] mb-2">Support SRNF Trust</h2>
         <p className="text-gray-500 italic">"Your contribution makes a direct impact on underprivileged lives."</p>
       </div>
 

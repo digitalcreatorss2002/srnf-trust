@@ -81,7 +81,7 @@ const Contact = () => {
                       Head Office Location
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Sustainable Development Foundation (SRNF), Near Dwarka
+                      Sustainable Resources for Nature (SRNF), Near Dwarka
                       More, Sector-15, Dwarka, Delhi – 110059
                     </p>
                   </div>
