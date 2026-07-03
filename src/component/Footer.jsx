@@ -126,7 +126,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="hover:underline font-bold text-[#2d2d2d]/95"
             >
-              Digital Creators
+              Digital Creatorss
             </a>
           </p>
         </div>
