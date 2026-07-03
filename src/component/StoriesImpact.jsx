@@ -7,7 +7,7 @@ const defaultStories = [
     name: "Dharmendra Kumar",
     role: "Developer, Bihar",
     story:
-      "SDF ke 3-day training program se maine multi-cropping seekhi. Ab meri paani ki khapat 40% kam ho gayi hai aur meri kamaai pehle se dugni ho chuki hai.",
+      "SRNF ke 3-day training program se maine multi-cropping seekhi. Ab meri paani ki khapat 40% kam ho gayi hai aur meri kamaai pehle se dugni ho chuki hai.",
     rating: 5,
     image: "hero/banner2.png",
   },
@@ -34,7 +34,7 @@ const defaultStories = [
     name: "Tiya Saini",
     role: "Beneficiary, Uttar Pradesh",
     story:
-      "Health & Nutrition camp ki wajah se humare bacchon ko sahi poshan aur time par dawaaiyan mil pa rahi hain. SDF ki team sach mein bohot madadgaar hai.",
+      "Health & Nutrition camp ki wajah se humare bacchon ko sahi poshan aur time par dawaaiyan mil pa rahi hain. SRNF ki team sach mein bohot madadgaar hai.",
     rating: 3,
     image: "hero/banner1.png",
   },

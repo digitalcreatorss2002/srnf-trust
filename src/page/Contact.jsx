@@ -81,7 +81,7 @@ const Contact = () => {
                       Head Office Location
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Sustainable Development Foundation (SDF), Near Dwarka
+                      Sustainable Development Foundation (SRNF), Near Dwarka
                       More, Sector-15, Dwarka, Delhi – 110059
                     </p>
                   </div>
@@ -110,7 +110,7 @@ const Contact = () => {
                       Email Address
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      contact@sdfoundation.org <br />
+                      contact@srnfoundation.org <br />
                     </p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ const Contact = () => {
                 src="https://maps.google.com/maps?q=Dwarka%20Sector-15,%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
-                title="SDF Location Map"
+                title="SRNF Location Map"
                 className="border-0"
               ></iframe>
             </div>

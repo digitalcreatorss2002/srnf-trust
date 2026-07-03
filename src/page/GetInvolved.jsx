@@ -211,7 +211,7 @@ const GetInvolved = () => {
                           <p className="text-gray-500 text-xs leading-relaxed body-font">{fund.description}</p>
                         </div>
                         <a
-                          href={fund.donate_link || `mailto:partner@sdfoundation.org?subject=${encodeURIComponent("EOI/RFQ - " + fund.title)}`}
+                          href={fund.donate_link || `mailto:partner@srnfoundation.org?subject=${encodeURIComponent("EOI/RFQ - " + fund.title)}`}
                           className="shrink-0 border-2 border-[#006D5B] text-[#006D5B] hover:bg-[#006D5B] hover:text-white px-5 py-2 rounded-xl font-bold text-xs transition-all hover:shadow-sm tracking-wide"
                         >
                           Submit Quote

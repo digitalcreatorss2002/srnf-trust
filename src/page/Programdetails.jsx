@@ -25,7 +25,7 @@ const ProgramDetails = () => {
           if (found) {
             const mappedImages = found.image_url
               ? [getImageUrl(found.image_url)]
-              : ["https://placehold.co/1200x800?text=SDF+Program"];
+              : ["https://placehold.co/1200x800?text=SRNF+Program"];
             
             setProgram({
               ...found,

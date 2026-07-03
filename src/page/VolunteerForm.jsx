@@ -69,7 +69,7 @@ const VolunteerForm = () => {
             Apply to Volunteer
           </h1>
           <p className="text-xl max-w-2xl mx-auto text-primary-50">
-            Join hands with SDF Trust to bring meaningful change in the lives of underprivileged communities.
+            Join hands with SRNF Trust to bring meaningful change in the lives of underprivileged communities.
           </p>
         </div>
       </section>

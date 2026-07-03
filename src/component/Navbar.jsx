@@ -166,7 +166,7 @@ const Navbar = () => {
               <div className="flex items-center justify-center h-22 w-auto">
                 <img
                   src="/logo/logo-bg.png"
-                  alt="SDF Logo"
+                  alt="SRNF Logo"
                   className="h-full object-contain"
                 />
               </div>

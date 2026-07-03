@@ -139,7 +139,7 @@ const Programs = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
-                        e.currentTarget.src = "https://placehold.co/600x400?text=SDF+Program";
+                        e.currentTarget.src = "https://placehold.co/600x400?text=SRNF+Program";
                       }}
                     />
                   </div>
