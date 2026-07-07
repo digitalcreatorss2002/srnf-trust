@@ -89,22 +89,21 @@ const Footer = () => {
               <li className="flex items-start gap-3 text-left">
                 <span className="text-base select-none mt-0.5">📍</span>
                 <span className="text-left block">
-                  Sustainable Development Foundation (SRNF), Near Dwarka More,
-                  Sector-15, Dwarka, Delhi – 110059
+                  Sustainable Resources for Nature (SRNF), B-9 G/F, PATEL GARDEN, UTTAM NAGAR, NEW DELHI-110059
                 </span>
               </li>
 
               <li className="flex items-center gap-3 text-left">
                 <span className="text-base select-none">📞</span>
-                <a href="tel:+919289222127" className="hover:underline tracking-wide block w-fit text-left">
-                  +91 9289222127
+                <a href="tel:+918882845062" className="hover:underline tracking-wide block w-fit text-left">
+                  +91 8882845062
                 </a>
               </li>
 
               <li className="flex items-center gap-3 text-left">
                 <span className="text-base select-none">✉️</span>
-                <a href="mailto:contact@srnfoundation.org" className="hover:underline break-all block w-fit text-left">
-                  contact@srnfoundation.org
+                <a href="mailto:srnfindia@gmail.com" className="hover:underline break-all block w-fit text-left">
+                  srnfindia@gmail.com
                 </a>
               </li>
             </ul>
@@ -116,7 +115,7 @@ const Footer = () => {
       <div className="border-t border-[#006D5B]/10 bg-[#006D5B]/30 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center text-center text-[13px] text-[#2d2d2d]/80 gap-2 sm:gap-3">
           <p>
-            © {new Date().getFullYear()} Sustainable Development Foundation (SRNF). All rights reserved.
+            © {new Date().getFullYear()} Sustainable Resources for Nature (SRNF). All rights reserved.
           </p>
           <span className="hidden sm:inline text-[#2d2d2d]/80">||</span>
           <p>

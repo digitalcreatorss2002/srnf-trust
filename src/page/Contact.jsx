@@ -81,8 +81,7 @@ const Contact = () => {
                       Head Office Location
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Sustainable Resources for Nature (SRNF), Near Dwarka
-                      More, Sector-15, Dwarka, Delhi – 110059
+                      Sustainable Resources for Nature (SRNF), B-9 G/F, PATEL GARDEN, UTTAM NAGAR, NEW DELHI-110059
                     </p>
                   </div>
                 </div>
@@ -96,7 +95,7 @@ const Contact = () => {
                       Phone Number
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      +91 9289222127 <br />
+                      +91 8882845062 <br />
                     </p>
                   </div>
                 </div>
@@ -110,7 +109,7 @@ const Contact = () => {
                       Email Address
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      contact@srnfoundation.org <br />
+                      srnfindia@gmail.com <br />
                     </p>
                   </div>
                 </div>
@@ -124,7 +123,7 @@ const Contact = () => {
                       Working Hours
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Monday - Friday: 9:00 AM - 6:00 PM <br /> Saturday &
+                      Monday - Friday: 10:00 AM - 07:00 PM <br />
                       Sunday: Closed
                     </p>
                   </div>
