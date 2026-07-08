@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
-const Whowe = () => {
+// isHomePage prop ko extract kiya, default value false rkhi h
+const Whowe = ({ isHomePage = false }) => {
   const [aboutData, setAboutData] = useState(null);
   const [loading, setLoading] = useState(true);
   const mainOfficeImage = "hero/banner1.png";
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/about_who_we_are.php`)
@@ -64,33 +63,28 @@ const Whowe = () => {
       </div>
 
       {aboutData.who_we_are_text && (
-  <div className="max-w-7xl mb-12 flex flex-col">
-    <p 
-      className={`text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed transition-all duration-300 ${
-        isExpanded ? "" : "line-clamp-4"
-      }`}
-      dangerouslySetInnerHTML={{ __html: aboutData.who_we_are_text }}
-    />
-    
-    {/* Right alignment ke liye justify-end wrapper */}
-    <div className="w-full flex justify-center mt-4">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="inline-flex items-center gap-2 bg-[#006D5B] hover:bg-[#237586] text-white px-5 py-2 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer focus:outline-none transform hover:-translate-y-0.5 active:scale-95"
-      >
-        {isExpanded ? (
-          <>
-            View Less <span className="text-[10px] transition-transform">▲</span>
-          </>
-        ) : (
-          <>
-            View More <span className="text-[10px] transition-transform">▼</span>
-          </>
-        )}
-      </button>
-    </div>
-  </div>
-)}
+        <div className="max-w-7xl mb-12 flex flex-col">
+          {/* isHomePage true hone par line-clamp-4 apply hoga, verna full text dikhega */}
+          <p
+            className={`text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed ${
+              isHomePage ? "line-clamp-4" : ""
+            }`}
+            dangerouslySetInnerHTML={{ __html: aboutData.who_we_are_text }}
+          />
+          
+          {/* View More Button sirf tabhi render hoga jab isHomePage prop true hoga */}
+          {isHomePage && (
+            <div className="w-full flex justify-center mt-6">
+              <a
+                href="/about" 
+                className="inline-flex items-center gap-2 bg-[#006D5B] hover:bg-[#237586] text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5 active:scale-95"
+              >
+                View More <span className="text-[10px]"></span>
+              </a>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="relative w-full max-w-7xl h-[40vh] md:h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-[inset_0_0_80px_rgba(0,0,0,0.1)] border-4 border-gray-100">
         <div

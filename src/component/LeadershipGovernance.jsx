@@ -260,7 +260,7 @@ const LeadershipGovernance = () => {
                       <h3 className="text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight leading-none">
                         {activeModal.title}
                       </h3>
-                      <div className="w-16 h-1 bg-orange-500 rounded-full mt-3" />
+                      {/* <div className="w-16 h-1 bg-orange-500 rounded-full mt-3" /> */}
                     </div>
 
                     <div className="text-neutral-600 text-justify text-sm md:text-base leading-relaxed space-y-4 max-h-[280px] overflow-y-auto pr-3 custom-scrollbar font-light whitespace-pre-line">
@@ -269,12 +269,12 @@ const LeadershipGovernance = () => {
 
                     {/* Footer Custom Signatory Block directly derived from image pattern */}
                     <div className="mt-8 pt-4 border-t border-neutral-100 flex flex-col items-start">
-                      <p className="font-bold text-lg text-neutral-900 leading-tight">
+                      {/* <p className="font-bold text-lg text-neutral-900 leading-tight">
                         — {activeModal.details.name !== "Founder Director" ? activeModal.details.name : "Dr. Shardindu Upadhyay"}
-                      </p>
-                      <p className="text-xs text-[#006D5B] font-semibold uppercase tracking-wider mt-1">
+                      </p> */}
+                      {/* <p className="text-xs text-[#006D5B] font-semibold uppercase tracking-wider mt-1">
                         {activeModal.details.role}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
 
