@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      {/* Home page par conditional design trigger karne ke liye prop pass kiya */}
       <Whowe isHomePage={true} />
       <ProjectSlider />
       <FocusAreas />

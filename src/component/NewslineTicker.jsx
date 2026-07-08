@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate Hook import kiya
 import { API_BASE_URL } from "../apiConfig"; 
 
 export default function NewslineTicker() {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Hook initialize kiya
 
   useEffect(() => {
     const fetchNewslineFeed = async () => {
@@ -17,6 +19,7 @@ export default function NewslineTicker() {
       } catch (error) {
         console.error("Error loading newsline feed:", error);
       } finally {
+        navigate
         setLoading(false);
       }
     };
@@ -47,7 +50,8 @@ export default function NewslineTicker() {
       targetPath = `/projectdetails/${activeSlug}`; 
     }
 
-    window.location.href = targetPath;
+    // window.location.href ko badal kar navigate use kiya takki routing smooth ho
+    navigate(targetPath);
   };
 
   if (loading || newsData.length === 0) return null;
@@ -56,7 +60,6 @@ export default function NewslineTicker() {
 
   return (
     <div className="w-full bg-[#006D5B] text-gray-800 border-t border-zinc-200 relative z-20 flex items-center">
-      
       <div className="overflow-hidden w-full relative py-2">
         <style>{`
           @keyframes newsTickerLoop {
