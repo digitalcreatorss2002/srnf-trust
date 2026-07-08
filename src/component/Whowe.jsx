@@ -80,7 +80,7 @@ const Whowe = ({ isHomePage = false }) => {
                 to="/about"
                 className="inline-flex items-center gap-2 bg-[#006D5B] hover:bg-[#237586] text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5 active:scale-95"
               >
-                View More <span className="text-[10px]">▼</span>
+                View More
               </Link>
             </div>
           )}
