@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { API_BASE_URL, getImageUrl } from "../apiConfig";
 
 // isHomePage prop ko extract kiya, default value false rkhi h
@@ -71,16 +72,16 @@ const Whowe = ({ isHomePage = false }) => {
             }`}
             dangerouslySetInnerHTML={{ __html: aboutData.who_we_are_text }}
           />
-          
+
           {/* View More Button sirf tabhi render hoga jab isHomePage prop true hoga */}
           {isHomePage && (
             <div className="w-full flex justify-center mt-6">
-              <a
-                href="/about" 
+              <Link
+                to="/about"
                 className="inline-flex items-center gap-2 bg-[#006D5B] hover:bg-[#237586] text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5 active:scale-95"
               >
-                View More <span className="text-[10px]"></span>
-              </a>
+                View More <span className="text-[10px]">▼</span>
+              </Link>
             </div>
           )}
         </div>
