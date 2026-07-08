@@ -81,7 +81,7 @@ const Contact = () => {
                       Head Office Location
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Sustainable Resources for Nature (SRNF), B-9 G/F, PATEL GARDEN, UTTAM NAGAR, NEW DELHI-110059
+                      Sustainable Resources for Nature Foundation (SRNF), B-9 G/F, Patel Garden, Uttam Nagar, New Delhi-110059
                     </p>
                   </div>
                 </div>
@@ -123,7 +123,7 @@ const Contact = () => {
                       Working Hours
                     </h3>
                     <p className="text-gray-600 text-sm">
-                      Monday - Friday: 10:00 AM - 07:00 PM <br />
+                      Monday - Saturday: 10:00 AM - 06:30 PM <br />
                       Sunday: Closed
                     </p>
                   </div>
