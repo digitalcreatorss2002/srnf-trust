@@ -3,12 +3,13 @@ const isLocalhost =
   window.location.hostname === "127.0.0.1";
 
 export const API_BASE_URL = isLocalhost
-  ? "https://hrntechsolutions.com/srnf_data/api"
-  : "https://hrntechsolutions.com/srnf_data/api";
+  ? "https://api.srnf.org"
+  : "https://api.srnf.org";
+
 
 export const ADMIN_BASE_URL = isLocalhost
-  ? "https://hrntechsolutions.com/srnf_data/admin"
-  : "https://hrntechsolutions.com/srnf_data/admin";
+  ? "https://admin.srnf.org"
+  : "https://admin.srnf.org";
 
 export const getImageUrl = (url) => {
   if (!url) return "";
