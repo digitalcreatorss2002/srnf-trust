@@ -99,28 +99,7 @@ const Whowe = ({ isHomePage = false }) => {
         id="approach"
         className="w-full max-w-7xl mt-[-8vh] md:mt-[-10vh] lg:mt-[-12vh] z-10 flex flex-col md:flex-row gap-8 px-4 md:px-0"
       >
-        <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[300px]">
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-            style={{
-              backgroundImage: lighthouseImage
-                ? `url(${lighthouseImage})`
-                : "none",
-            }}
-          />
-          <div className="absolute inset-0 bg-black/50 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
-          <div className="relative z-10 p-10 md:p-12 text-white h-full flex flex-col justify-end">
-            <h2 className="text-3xl text-[#006D5B] font-bold mb-4 tracking-tight">
-              Our Mission
-            </h2>
-            <p
-              className="text-lg font-medium leading-relaxed text-[#fff]"
-              dangerouslySetInnerHTML={{ __html: aboutData.mission_text }}
-            />
-          </div>
-        </div>
-
-        <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[300px]">
+        <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[400px]">
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
             style={{
@@ -129,8 +108,8 @@ const Whowe = ({ isHomePage = false }) => {
                 : "none",
             }}
           />
-          <div className="absolute inset-0 bg-black/50 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
-          <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
+          <div className="absolute inset-0 bg-black/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
+          {/* <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
             <h2 className="text-3xl font-bold text-[#006D5B] mb-4 tracking-tight">
               Our Vision
             </h2>
@@ -138,7 +117,28 @@ const Whowe = ({ isHomePage = false }) => {
               className="text-lg text-[#fff] font-medium leading-relaxed"
               dangerouslySetInnerHTML={{ __html: aboutData.vision_text }}
             />
-          </div>
+          </div> */}
+        </div>
+
+        <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[400px]">
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            style={{
+              backgroundImage: lighthouseImage
+                ? `url(${lighthouseImage})`
+                : "none",
+            }}
+          />
+          <div className="absolute inset-0 bg-black/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
+          {/* <div className="relative z-10 p-10 md:p-12 text-white h-full flex flex-col justify-end">
+            <h2 className="text-3xl text-[#006D5B] font-bold mb-4 tracking-tight">
+              Our Mission
+            </h2>
+            <p
+              className="text-lg font-medium leading-relaxed text-[#fff]"
+              dangerouslySetInnerHTML={{ __html: aboutData.mission_text }}
+            />
+          </div> */}
         </div>
       </div>
     </section>
