@@ -108,7 +108,7 @@ const Whowe = ({ isHomePage = false }) => {
                 : "none",
             }}
           />
-          <div className="absolute inset-0 bg-black/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
+          <div className="absolute inset-0 bg-black shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
           {/* <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
             <h2 className="text-3xl font-bold text-[#006D5B] mb-4 tracking-tight">
               Our Vision
@@ -129,7 +129,7 @@ const Whowe = ({ isHomePage = false }) => {
                 : "none",
             }}
           />
-          <div className="absolute inset-0 bg-black/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
+          <div className="absolute inset-0 bg-black shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
           {/* <div className="relative z-10 p-10 md:p-12 text-white h-full flex flex-col justify-end">
             <h2 className="text-3xl text-[#006D5B] font-bold mb-4 tracking-tight">
               Our Mission
