@@ -65,9 +65,9 @@ const Whowe = ({ isHomePage = false }) => {
 
       {aboutData.who_we_are_text && (
         <div className="max-w-7xl mb-12 flex flex-col">
-          {/* isHomePage true hone par line-clamp-4 apply hoga, verna full text dikhega */}
+         
           <p
-            className={`text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed ${
+            className={`text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed whitespace-pre-line ${
               isHomePage ? "line-clamp-4" : ""
             }`}
             dangerouslySetInnerHTML={{ __html: aboutData.who_we_are_text }}
@@ -109,12 +109,13 @@ const Whowe = ({ isHomePage = false }) => {
             }}
           />
           <div className="absolute inset-0 bg-black/10 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
+          
           {/* <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
             <h2 className="text-3xl font-bold text-[#006D5B] mb-4 tracking-tight">
               Our Vision
             </h2>
             <p
-              className="text-lg text-[#fff] font-medium leading-relaxed"
+              className="text-lg text-[#fff] font-medium leading-relaxed whitespace-pre-line"
               dangerouslySetInnerHTML={{ __html: aboutData.vision_text }}
             />
           </div> */}
@@ -135,7 +136,7 @@ const Whowe = ({ isHomePage = false }) => {
               Our Mission
             </h2>
             <p
-              className="text-lg font-medium leading-relaxed text-[#fff]"
+              className="text-lg font-medium leading-relaxed text-[#fff] whitespace-pre-line"
               dangerouslySetInnerHTML={{ __html: aboutData.mission_text }}
             />
           </div> */}
