@@ -6,7 +6,9 @@ import { API_BASE_URL, getImageUrl } from "../apiConfig";
 const Whowe = ({ isHomePage = false }) => {
   const [aboutData, setAboutData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const mainOfficeImage = "hero/banner1.png";
+  
+  // FIXED: यहाँ आगे '/' लगाया है ताकि /about/ पेज पर भी इमेज गायब न हो
+  const mainOfficeImage = "/hero/banner1.png"; 
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/about_who_we_are.php`)
@@ -65,7 +67,7 @@ const Whowe = ({ isHomePage = false }) => {
 
       {aboutData.who_we_are_text && (
         <div className="max-w-7xl mb-12 flex flex-col">
-         
+          {/* whitespace-pre-line क्लास टेक्स्ट के लाइन ब्रेक को बनाये रखेगी */}
           <p
             className={`text-justify text-md md:text-xl text-[#2d2d2d] body-font leading-relaxed whitespace-pre-line ${
               isHomePage ? "line-clamp-4" : ""
@@ -87,6 +89,7 @@ const Whowe = ({ isHomePage = false }) => {
         </div>
       )}
 
+      {/* मुख्य बैनर इमेज सेक्शन */}
       <div className="relative w-full max-w-7xl h-[40vh] md:h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-[inset_0_0_80px_rgba(0,0,0,0.1)] border-4 border-gray-100">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -95,6 +98,7 @@ const Whowe = ({ isHomePage = false }) => {
         <div className="absolute inset-0 bg-black/5 shadow-[inset_0_0_120px_rgba(0,0,0,0.15)] rounded-2xl" />
       </div>
 
+      {/* Vision & Mission कार्ड्स सेक्शन */}
       <div
         id="approach"
         className="w-full max-w-7xl mt-[-8vh] md:mt-[-10vh] lg:mt-[-12vh] z-10 flex flex-col md:flex-row gap-8 px-4 md:px-0"
@@ -109,16 +113,6 @@ const Whowe = ({ isHomePage = false }) => {
             }}
           />
           <div className="absolute inset-0 bg-black/10 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
-          
-          {/* <div className="relative z-10 p-10 md:p-12 h-full flex flex-col justify-end">
-            <h2 className="text-3xl font-bold text-[#006D5B] mb-4 tracking-tight">
-              Our Vision
-            </h2>
-            <p
-              className="text-lg text-[#fff] font-medium leading-relaxed whitespace-pre-line"
-              dangerouslySetInnerHTML={{ __html: aboutData.vision_text }}
-            />
-          </div> */}
         </div>
 
         <div className="flex-1 rounded-3xl overflow-hidden shadow-xl border-4 border-gray-100 relative group transition-transform duration-300 hover:scale-[1.02] min-h-[400px]">
@@ -131,15 +125,6 @@ const Whowe = ({ isHomePage = false }) => {
             }}
           />
           <div className="absolute inset-0 bg-black/10 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]" />
-          {/* <div className="relative z-10 p-10 md:p-12 text-white h-full flex flex-col justify-end">
-            <h2 className="text-3xl text-[#006D5B] font-bold mb-4 tracking-tight">
-              Our Mission
-            </h2>
-            <p
-              className="text-lg font-medium leading-relaxed text-[#fff] whitespace-pre-line"
-              dangerouslySetInnerHTML={{ __html: aboutData.mission_text }}
-            />
-          </div> */}
         </div>
       </div>
     </section>
