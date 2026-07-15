@@ -21,7 +21,7 @@ const ProjectDetails = () => {
     const fetchProjectDetails = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${API_BASE_URL}/projects.php`);
+        const response = await fetch(`${API_BASE_URL}/projects.php?all=true`);
         const result = await response.json();
         if (result.status === "success") {
           const foundProject = result.data.find(
