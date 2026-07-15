@@ -20,7 +20,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/projects.php`);
+        const response = await fetch(`${API_BASE_URL}/projects.php?all=true`);
         const result = await response.json();
         
         if (result) {
