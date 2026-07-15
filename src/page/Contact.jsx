@@ -145,7 +145,7 @@ const Contact = () => {
                 height="100%"
                 title="SRNF Location Map"
                 className="border-0"
-                </iframe>
+                ></iframe>
             </div>
           </div>
 
