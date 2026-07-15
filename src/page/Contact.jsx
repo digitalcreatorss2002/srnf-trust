@@ -132,13 +132,20 @@ const Contact = () => {
             </div>
 
             <div className="w-full h-48 bg-gray-200 rounded-xl overflow-hidden shadow-inner border border-gray-300 relative">
-              <iframe
+              {/* <iframe
                 src="https://maps.google.com/maps?q=Dwarka%20Sector-15,%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 title="SRNF Location Map"
                 className="border-0"
-              ></iframe>
+              ></iframe> */}
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3502.358987155166!2d77.02859497550034!3d28.619001075672156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDM3JzA4LjQiTiA3N8KwMDEnNTIuMiJF!5e0!3m2!1sen!2sin!4v1784101095506!5m2!1sen!2sin" 
+                width="100%"
+                height="100%"
+                title="SRNF Location Map"
+                className="border-0"
+                </iframe>
             </div>
           </div>
 
