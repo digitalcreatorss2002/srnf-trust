@@ -130,7 +130,7 @@ const GetInvolved = () => {
                 <div className="flex flex-col md:flex-row gap-8 items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                   <div className="w-full md:w-1/2 rounded-xl overflow-hidden shadow-sm h-72 relative">
                     <img
-                      src="about/volunteer.jpeg"
+                      src="/about_new.png"
                       alt="Volunteer"
                       className="w-full h-full object-cover"
                       onError={(e) => {
