@@ -10,17 +10,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Robust function for casing and handling acronyms dynamically
   const formatLabel = (label) => {
     if (!label) return "";
     
-    // 1. Hyphens ko spaces se replace karein
     let formatted = label.replace(/-/g, " ").trim();
     
-    // 2. Har word ka first letter Capitalize karein (Title Case)
     formatted = formatted.replace(/\b\w/g, (l) => l.toUpperCase());
     
-    // 3. Exact word matching target for strict UPPERCASE acronyms
     formatted = formatted
       .split(/\s+/)
       .map((word) => {
@@ -31,7 +27,6 @@ const Navbar = () => {
       })
       .join(" ");
 
-    // 4. Special brackets matching edge case
     formatted = formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
     
     return formatted;
@@ -182,7 +177,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Menu - Center aligned */}
+          {/* Desktop Menu */}
           <div className="hidden xl:flex items-center justify-center flex-grow space-x-1 px-4">
             {menuItems.map((item) => {
               const active = isLinkActive(item.path, item.hasDropdown, item.dropdownItems);
@@ -219,8 +214,10 @@ const Navbar = () => {
                                   : "bg-transparent text-gray-700 hover:bg-teal-50 border-transparent hover:border-teal-100/50 hover:shadow-sm"
                               }`}
                             >
-                              {/* REMOVED normal-case TO ALLOW JS UPPERCASE RENDERING */}
-                              <span className={`text-sm font-bold transition-colors ${subActive ? "text-primary" : "text-gray-700 group-hover/link:text-primary"}`}>
+                              <span 
+                                className={`text-sm font-bold transition-colors ${subActive ? "text-primary" : "text-gray-700 group-hover/link:text-primary"}`}
+                                style={{ textTransform: 'none' }}
+                              >
                                 {subItem.label}
                               </span>
                             </button>
@@ -247,7 +244,6 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Button */}
             <div className="flex items-center xl:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -299,12 +295,12 @@ const Navbar = () => {
                         return (
                           <button
                             key={subItem.path + idx}
-                            {/* REMOVED normal-case TO PREVENT OVERRIDING UPPERCASE FOR CBO/WASH */}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 my-1 text-sm font-bold rounded-lg border transition-all text-left cursor-pointer ${
                               subActive
                                 ? "bg-white text-primary border-teal-100 shadow-sm"
                                 : "text-gray-600 hover:text-primary hover:bg-teal-50 border-transparent hover:border-teal-100/50 hover:shadow-sm"
                             }`}
+                            style={{ textTransform: 'none' }}
                             onClick={() => handleDropdownItemClick(subItem.path)}
                           >
                             {subItem.label}
