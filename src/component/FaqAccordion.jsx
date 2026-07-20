@@ -5,20 +5,20 @@ const FaqAccordion = () => {
 
   const faqData = [
     {
-      question: "What services do you provide?",
-      answer: "We offer top-notch digital solutions including web development, UI/UX design, custom software engineering, and cloud infrastructure optimization tailored to scale your business operations smoothly."
+      question: "How can I become a volunteer?",
+      answer: "You can complete the volunteer application form on our website, and our team will contact you regarding available opportunities."
     },
     {
-      question: "How long does a typical project take?",
-      answer: "Project timelines depend entirely on the complexity and scope. A standard website configuration can take anywhere from 2 to 4 weeks, while complex enterprise platforms might take 3 to 6 months."
+      question: "Do I need previous experience?",
+      answer: "No. Most volunteer opportunities are open to anyone who is passionate about making a difference. Training is provided when needed."
     },
     {
-      question: "Do you offer post-launch support and maintenance?",
-      answer: "Yes, we provide comprehensive post-launch support packages. This includes security updates, server monitoring, routine backups, and feature enhancements to keep your platform running flawlessly."
+      question: "Can students volunteer?",
+      answer: "Yes, students are welcome to volunteer and gain valuable experience while contributing to the community."
     },
     {
-      question: "Can I migrate my existing platform to your system?",
-      answer: "Absolutely! Our engineering team specializes in seamless data migration and platform integration, ensuring minimal downtime and absolute data integrity during the entire transition process."
+      question: "What types of programs do you organize?",
+      answer: "We organize awareness campaigns, educational workshops, health initiatives, environmental activities, fundraising events, and community development projects."
     }
   ];
 
