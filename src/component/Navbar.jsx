@@ -25,7 +25,7 @@ const Navbar = () => {
       .split(/\s+/)
       .map((word) => {
         const cleanWord = word.toUpperCase();
-        if (cleanWord === "Cbo") return "CBO";
+        if (cleanWord === "CBO") return "CBO";
         if (cleanWord === "WASH") return "WASH";
         return word;
       })
