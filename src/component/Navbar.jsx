@@ -12,12 +12,27 @@ const Navbar = () => {
 
   const formatLabel = (label) => {
     if (!label) return "";
-    
-    let formatted = label.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
-    
-    formatted = formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
-    formatted = formatted.replace(/\bcbo\b/gi, "CBO");
-    
+
+    // 1. Hyphens ko space se replace karein
+    let formatted = label.replace(/-/g, " ");
+
+    // 2. Har word ka first letter Capitalize karein (Title Case)
+    formatted = formatted.replace(/\b\w/g, (l) => l.toUpperCase());
+
+    // 3. Un words ki list jo hamesha PURE UPPERCASE mein hone chahiye
+    const uppercaseAcronyms = ["CBO", "WASH", "(EOI/RFQ)"];
+
+    // 4. Exact words ko match karke uppercase mein convert karein
+    formatted = formatted
+      .split(" ")
+      .map((word) => {
+        if (uppercaseAcronyms.includes(word.toUpperCase())) {
+          return word.toUpperCase();
+        }
+        return word;
+      })
+      .join(" ");
+
     return formatted;
   };
 
