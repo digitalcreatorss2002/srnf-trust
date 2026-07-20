@@ -10,26 +10,27 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Dynamic label formatter for acronyms and title casing
-  const formatLabel = (label) => {
+ const formatLabel = (label) => {
     if (!label) return "";
     
-    // 1. Hyphens ko spaces se replace karein
-    let formatted = label.replace(/-/g, " ");
+    // 1. Hyphens ko spaces se badlein aur clean karein
+    let formatted = label.replace(/-/g, " ").trim();
     
     // 2. Har word ka first letter Capitalize karein (Title Case)
     formatted = formatted.replace(/\b\w/g, (l) => l.toUpperCase());
     
-    // 3. Jo acronyms strictly capital letters me chahiye unhe array me target karein
-    const acronyms = ["CBO", "WASH"];
-    
-    // 4. Pure phrase ko update karein (Dynamic mapping)
+    // 3. Exact pure phrase ko split karke target karein (Safer than regex boundaries)
     formatted = formatted
-      .split(" ")
-      .map((word) => (acronyms.includes(word.toUpperCase()) ? word.toUpperCase() : word))
+      .split(/\s+/) // multiple spaces ko handle karne ke liye
+      .map((word) => {
+        const cleanWord = word.toUpperCase();
+        if (cleanWord === "CBO") return "CBO";
+        if (cleanWord === "WASH") return "WASH";
+        return word;
+      })
       .join(" ");
 
-    // 5. Special edge cases check karein
+    // 4. Special brackets case handle karein
     formatted = formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
     
     return formatted;
