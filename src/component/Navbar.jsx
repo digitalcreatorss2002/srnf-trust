@@ -8,15 +8,13 @@ const Navbar = () => {
   const [activeMobileMenu, setActiveMobileMenu] = useState(null);
   const [dynamicPrograms, setDynamicPrograms] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation(); // Current active route aur hash parameters track karne ke liye
+  const location = useLocation();
 
   const formatLabel = (label) => {
     if (!label) return "";
     
-    // Normalizing hyphens to spaces and title-casing words
     let formatted = label.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
     
-    // FIXED: Strict checking for standard acronyms like EOI/RFQ and CBO to ensure complete uppercase output formatting
     formatted = formatted.replace(/\(eoi\/rfq\)/gi, "(EOI/RFQ)");
     formatted = formatted.replace(/\bcbo\b/gi, "CBO");
     
